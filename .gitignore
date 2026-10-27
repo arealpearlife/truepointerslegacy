@@ -1,0 +1,44 @@
+# Dependencies and generated output
+node_modules/
+dist/
+build/
+coverage/
+.cache/
+.vite/
+
+# Environment variables and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.mobileprovision
+
+# Customer and confidential information
+data/customers/*
+!data/customers/README.md
+private/*
+!private/README.md
+
+# Local databases, exports, logs, and backups
+*.db
+*.sqlite
+*.sqlite3
+*.csv
+*.log
+*.bak
+*.backup
+
+# Operating-system and editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# Native build products
+ios/App/Pods/
+ios/App/App/public/
+DerivedData/
