@@ -21,17 +21,18 @@ Restart Cursor or Windows Terminal if `git` is not found, because the current se
 - Decide offline behavior, conflict resolution, backup retention, and disaster recovery.
 - Document privacy, refund, return, discount, and employee-access policies.
 
-### Recommended technical baseline
+### Approved technical baseline
 
-- TypeScript with React and Vite for the application.
-- npm lockfile committed to Git; use `npm ci` in automated builds.
-- Capacitor for packaging the web application as iOS.
-- A hosted API and managed relational database for shared business data.
-- Provider-hosted or tokenized payment capture; never handle raw card numbers.
+- TypeScript with Next.js for the web storefront.
+- Expo and React Native for the native mobile storefront.
+- npm workspaces with a committed lockfile; use `npm ci` in automated builds.
+- Shopify as the authoritative catalog, inventory, checkout, order, and administration system.
+- Shared packages for runtime-validated commerce contracts, domain logic, design tokens, analytics contracts, and tooling.
+- Shopify-hosted payment capture; never handle raw card numbers.
 - Automated formatting, linting, type checking, unit tests, integration tests, and production builds.
 - Separate development, test, and production environments.
 
-This baseline should be confirmed before generating app code so the repository is not locked into the wrong payment hardware or data model.
+Web and native user interfaces remain separate. They share safe domain code and connect to the same Shopify records.
 
 ### Install or activate
 
@@ -43,17 +44,15 @@ This baseline should be confirmed before generating app code so the repository i
 - CI workflow that runs `npm ci`, lint, type-check, tests, and `npm run build`.
 - Secret manager for deployment credentials.
 
-### iOS limitation
+### iOS requirements
 
-Windows can develop and test the web application and can prepare a Capacitor project, but it cannot produce or sign the final iOS binary. Apple requires:
+Windows can develop the Expo application. EAS can build and submit iOS binaries remotely, but Apple still requires:
 
-- A Mac with a supported macOS version
-- Xcode and CocoaPods/Swift Package Manager as required
 - An Apple Developer Program membership
-- App identifier, signing certificate, and provisioning profile
+- An approved app identifier and signing credentials
 - App Store Connect record, privacy disclosures, screenshots, and review metadata
 
-A local or cloud Mac build runner must therefore be part of the delivery plan.
+Some native debugging may still require access to macOS and Xcode. Expo updates may change compatible JavaScript and assets only; native changes require a new binary.
 
 ## Required outputs before feature work
 

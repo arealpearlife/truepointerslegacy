@@ -5,6 +5,10 @@ build/
 coverage/
 .cache/
 .vite/
+.next/
+.expo/
+.expo-shared/
+web-build/
 
 # Environment variables and credentials
 .env
@@ -38,7 +42,9 @@ Thumbs.db
 !.vscode/extensions.json
 !.vscode/settings.json
 
-# Native build products
-ios/App/Pods/
-ios/App/App/public/
+# Native build products and credentials
+apps/mobile/ios/
+apps/mobile/android/
+*.jks
+*.keystore
 DerivedData/

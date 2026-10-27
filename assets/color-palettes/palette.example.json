@@ -2,17 +2,39 @@
   "$schema": "https://design-tokens.github.io/community-group/format/",
   "color": {
     "brand": {
-      "primary": {
+      "pope-cherry": {
         "$type": "color",
-        "$value": "#000000"
+        "$value": "#B51232"
+      },
+      "blood-diamond-red": {
+        "$type": "color",
+        "$value": "#8E1029"
       }
     },
     "surface": {
-      "default": {
+      "crystal-white": {
         "$type": "color",
         "$value": "#FFFFFF"
+      },
+      "diamond-frost": {
+        "$type": "color",
+        "$value": "#F5FAFF"
+      },
+      "clear-crystal": {
+        "$type": "color",
+        "$value": "#E8F6FC"
+      }
+    },
+    "accent": {
+      "platinum-silver": {
+        "$type": "color",
+        "$value": "#C8D1DC"
+      },
+      "glacier-blue": {
+        "$type": "color",
+        "$value": "#BDEBFF"
       }
     }
   },
-  "status": "placeholder-requires-design-approval"
+  "status": "approved-brand-palette"
 }
