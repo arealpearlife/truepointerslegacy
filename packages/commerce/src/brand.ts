@@ -5,6 +5,8 @@ export const marketing = {
   flawlessName: "FLAWLESS TENNIS CHAIN",
   mottoLead: "A LEGACY.",
   motto: "THE ERA THAT LEFT A MARK.",
+  plateLead: "HITS",
+  plateMotto: "THAT LEAVE A MARK.",
   iceLine: "REIMAGINED IN ICE.",
   heroBody:
     "Stone set to stone, hung long. The extended silhouette that ran the block, the club, and the video set is back on your neck, built to be seen from across the room.",

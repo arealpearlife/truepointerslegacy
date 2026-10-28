@@ -21,6 +21,7 @@ describe("Legacy product experience", () => {
     );
 
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("LEGACY TENNIS CHAIN");
+    expect(screen.getByText("THAT LEAVE A MARK.")).toBeInTheDocument();
     fireEvent.click(screen.getByLabelText("3 mm"));
     fireEvent.click(screen.getByLabelText("40 inches"));
     expect(screen.getByRole("button", { name: "Add to cart" })).toBeEnabled();

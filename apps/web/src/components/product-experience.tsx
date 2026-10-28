@@ -79,7 +79,7 @@ export function ProductExperience({
           </h1>
           {edition === "legacy" ? (
             <>
-              <Motto className="on-plate" />
+              <Motto className="on-plate" lead={marketing.plateLead} shine={marketing.plateMotto} />
               <p className="statement accent">{marketing.iceLine}</p>
               <p>{marketing.heroBody}</p>
             </>

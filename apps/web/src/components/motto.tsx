@@ -8,11 +8,18 @@ const sparkles = [
   { top: "4%", left: "88%", delay: "0.9s" },
 ];
 
-export function Motto({ className = "" }: { className?: string }) {
+export function Motto({
+  className = "",
+  lead = marketing.mottoLead,
+  shine = marketing.motto,
+}: {
+  className?: string;
+  lead?: string;
+  shine?: string;
+}) {
   return (
     <p className={`motto ${className}`.trim()}>
-      <span className="motto-lead">{marketing.mottoLead}</span>{" "}
-      <span className="motto-shine">{marketing.motto}</span>
+      <span className="motto-lead">{lead}</span> <span className="motto-shine">{shine}</span>
       <span className="sparkles" aria-hidden="true">
         {sparkles.map((sparkle) => (
           <i
