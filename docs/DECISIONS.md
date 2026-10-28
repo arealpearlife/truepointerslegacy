@@ -68,7 +68,7 @@ Record decisions here before they become expensive to reverse.
 - **Status:** accepted
 - **Date:** 2026-10-27
 - **Decision:** The product page and landing page show a to-scale male torso fit guide instead of a Legacy and Flawless comparison table. Dotted chains show where 40, 44, and 48 inch lengths land, with drops of about 13, 15, and 17 inches below the neck notch on a 5'10" frame with a 15.5 inch neck. The guide follows the selected length, and selecting a length in the guide updates the purchase selection. "Explore Flawless" is now called "Flawless Upgrade". The Flawless window still never changes the variant or adds to the cart.
-- **Consequence:** Stone material disclosures stay in the product details and the Flawless window. Update the drop values if True Pointers measures the finished chains on a fit model.
+- **Consequence:** Public copy never names cubic zirconia or moissanite. Update the drop values if True Pointers measures the finished chains on a fit model. See ADR-012.
 
 ### ADR-009: Local preview media until Shopify publishes genuine shots
 
@@ -85,6 +85,24 @@ Record decisions here before they become expensive to reverse.
 - **Decision:** Compose the public site as a lookbook: off-center masthead, left-weighted copy, staggered collection cards with mixed aspect ratios, and slight static rotation. On a phone, the first, fourth, and ninth cards take a wider slot and the rest sit in an uneven pair. Safe-area insets and `viewport-fit=cover` are for the mobile web display, not a substitute for the later Expo app.
 - **Alternatives:** A uniform 2-up / 3-up catalog grid, or a horizontal snap carousel of identical tiles.
 - **Consequence:** Card hover scale stays small so the stagger remains readable. Reduced-motion visitors still see the static offsets because those are layout, not animation.
+
+### ADR-013: Buy now, pay later stays on Shopify checkout
+
+- **Status:** accepted
+- **Date:** 2026-10-28
+- **Context:** The Flawless Upgrade box needed a pay-later path without adding a custom payment processor.
+- **Decision:** The storefront shows Shop Pay, Klarna, and Afterpay as checkout options. Customers still pay on Shopify `checkoutUrl`. Enable those methods in Shopify Admin → Settings → Payments. The `/flawless` page is the buy-now-pay-later shop for Flawless.
+- **Alternatives:** A first-party Klarna or Afterpay SDK on the Next.js site.
+- **Consequence:** If the shop has not turned those methods on, the labels still appear and checkout only shows what Shopify actually offers.
+
+### ADR-012: No stone chemistry on the public storefront
+
+- **Status:** accepted
+- **Date:** 2026-10-28
+- **Context:** Naming the fill on the product page and in the Flawless window ("cubic zirconia", "moissanite") made the shop sound like a spec sheet and broke the sales story.
+- **Decision:** Customer-facing copy describes VVS shine, flawless clarity shine, hand-set stones, the extra-long custom mold, daily wear, and a replace-if-the-ice-fails promise. Flawless may add that it passes the diamond tester. The collection story is told once. Shopify can still store the real material internally.
+- **Alternatives:** Keep a required material disclosure on every product page.
+- **Consequence:** If Shopify returns a description that names the fill, the storefront replaces it with the public shine copy and does not put that description into JSON-LD.
 
 ### ADR-010: Public hostname vs Shopify shop hostname
 

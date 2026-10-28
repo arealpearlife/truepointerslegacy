@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { auditApprovedPrices } from "../src/approval";
-import { marketing, marketingViolations } from "../src/brand";
+import { PAY_LATER_METHODS, marketing, marketingViolations, publicDetails } from "../src/brand";
 import { loadStoreCatalog } from "../src/catalog";
-import { buildComparison, flawlessStartingOffer } from "../src/comparison";
+import { buildComparison, flawlessStartingOffer, materialStatement } from "../src/comparison";
 import { formatMoney, parseMoney } from "../src/money";
 import { isCartLineId, normalizeQuantity } from "../src/quantity";
 import { catalogProduct, variantId } from "../src/testing";
@@ -66,18 +66,31 @@ describe("commerce rules", () => {
   it("uses Hits Last Forever instead of the old era motto", () => {
     expect(`${marketing.mottoLead} ${marketing.motto}`).toBe("HITS LAST FOREVER.");
     expect(`${marketing.mottoLead} ${marketing.motto}`).not.toMatch(/era that left a mark/i);
+    expect(marketing.collectionTitle).toBe("THE LEGACY COLLECTION");
+    expect(marketing.collectionTitle).not.toMatch(/nine ways/i);
+    expect(PAY_LATER_METHODS.map((method) => method.label)).toEqual([
+      "Shop Pay",
+      "Klarna",
+      "Afterpay",
+    ]);
   });
 
-  it("keeps technical material labels out of marketing copy", () => {
+  it("keeps stone names off every customer-facing line", () => {
     expect(marketingViolations()).toEqual([]);
+    const tainted = catalogProduct("legacy");
+    tainted.description = "Stone material: cubic zirconia. Also moissanite.";
+    expect(materialStatement("legacy", tainted)).toBe(publicDetails.legacy);
+    expect(materialStatement("legacy", tainted)).not.toMatch(/cubic zirconia|moissanite|\bCZ\b/i);
+    expect(materialStatement("flawless", catalogProduct("flawless"))).toBe(publicDetails.flawless);
     const comparison = buildComparison(catalogProduct("legacy"), catalogProduct("flawless"), {
       stoneSize: "3 mm",
       chainLength: "40 inches",
     });
-    expect(comparison.map((row) => row.legacy).join(" ")).not.toMatch(/\bCZ\b/);
-    expect(comparison.find((row) => row.label === "Stone material")).toMatchObject({
-      legacy: "Cubic zirconia",
-      flawless: "Moissanite",
+    const copy = `${comparison.map((row) => `${row.legacy} ${row.flawless}`).join(" ")} ${publicDetails.legacy} ${publicDetails.flawless}`;
+    expect(copy).not.toMatch(/cubic zirconia|moissanite|\bCZ\b/i);
+    expect(comparison.find((row) => row.label === "Shine")).toMatchObject({
+      legacy: "VVS shine, hand-set",
+      flawless: "Flawless clarity shine. Passes the diamond tester.",
     });
   });
 

@@ -12,7 +12,6 @@ import {
   displayPrice,
   flawlessStartingOffer,
   marketing,
-  materialStatement,
   optionValues,
   resolveVariant,
   selectionMessage,
@@ -24,10 +23,10 @@ import type { ActionState } from "@/lib/action-state";
 import { idleActionState } from "@/lib/action-state";
 import { lengthLabel, stoneLabel } from "@/lib/labels";
 import { FitGuide } from "./fit-guide";
-import { FlawlessDialog } from "./flawless-dialog";
 import { previewVideo } from "@/lib/local-media";
 import { MediaPanel } from "./media-panel";
 import { Motto } from "./motto";
+import { PayLaterStrip } from "./pay-later-strip";
 import { ProductGallery } from "./product-gallery";
 import { Tape } from "./tape";
 
@@ -36,18 +35,17 @@ export function ProductExperience({
   product,
   flawless,
   initialSelection,
-  initialModalOpen,
   addToCart,
+  payLater = false,
 }: {
   edition: Edition;
   product: Product | null;
   flawless: Product | null;
   initialSelection: Selection;
-  initialModalOpen: boolean;
   addToCart: (state: ActionState, formData: FormData) => Promise<ActionState>;
+  payLater?: boolean;
 }) {
   const [selection, setSelection] = useState<Selection>(initialSelection);
-  const [modalOpen, setModalOpen] = useState(initialModalOpen && edition === "legacy");
   const [state, action, pending] = useActionState(addToCart, idleActionState);
   const resolution = product ? resolveVariant(product, selection) : null;
   const price = resolution ? displayPrice(resolution) : null;
@@ -72,10 +70,12 @@ export function ProductExperience({
           ]
             .filter(Boolean)
             .join(" × ")}
-          fallbackVideo={previewVideo(edition === "legacy" ? "legacy-gallery" : "flawless-gallery")}
+          fallbackVideo={previewVideo(
+            payLater ? "pay-later" : edition === "legacy" ? "legacy-gallery" : "flawless-gallery",
+          )}
         />
         <section className="buy-box">
-          <p className="eyebrow">{marketing.eyebrow}</p>
+          <p className="eyebrow">{payLater ? marketing.payLaterEyebrow : marketing.eyebrow}</p>
           <h1 className="poster product-name">
             {edition === "legacy" ? marketing.legacyName : marketing.flawlessName}
           </h1>
@@ -83,13 +83,16 @@ export function ProductExperience({
             <>
               <Motto className="on-plate" lead={marketing.plateLead} shine={marketing.plateMotto} />
               <p className="statement accent">{marketing.iceLine}</p>
-              <p>{marketing.heroBody}</p>
+              <p className="note">{marketing.craftLine}</p>
             </>
           ) : (
             <>
-              <p className="statement">{marketing.flawlessHeading}</p>
+              <p className="statement">
+                {payLater ? marketing.payLaterLine : marketing.flawlessHeading}
+              </p>
               <p className="statement accent">{marketing.flawlessLine}</p>
-              <p>{marketing.flawlessBody}</p>
+              <p>{payLater ? marketing.payLaterBody : marketing.flawlessBody}</p>
+              {payLater ? <PayLaterStrip /> : null}
               {offer ? <p>{marketing.fromPrice}</p> : null}
               <p>
                 <Link href={`/products/${HANDLES.legacy}`}>Shop Legacy</Link>
@@ -97,9 +100,7 @@ export function ProductExperience({
             </>
           )}
           {price ? <p className="price">{price}</p> : null}
-          {price ? (
-            <p className="note">Shipping and taxes are calculated at Shopify checkout.</p>
-          ) : null}
+          {price ? <p className="note">{marketing.payLaterCheckoutNote}</p> : null}
           <form action={action}>
             <fieldset className="choices">
               <legend>Stone size</legend>
@@ -139,38 +140,37 @@ export function ProductExperience({
             <button
               className="primary wide"
               type="submit"
+              name="intent"
+              value="cart"
               disabled={resolution?.status !== "available" || pending}
             >
               {pending ? "Adding" : marketing.addToCart}
             </button>
+            {payLater ? (
+              <button
+                className="ice wide"
+                type="submit"
+                name="intent"
+                value="pay-later"
+                disabled={resolution?.status !== "available" || pending}
+              >
+                {pending ? "Adding" : marketing.payLaterCta}
+              </button>
+            ) : null}
           </form>
           {edition === "legacy" ? (
-            <button className="ice wide" type="button" onClick={() => setModalOpen(true)}>
-              {marketing.flawlessUpgrade}
-            </button>
+            <Link className="button ice wide" href="/flawless">
+              {marketing.payLaterLine}
+            </Link>
           ) : null}
-          <section>
-            <h2>Product details</h2>
-            <p className="details">{materialStatement(edition, product)}</p>
-          </section>
         </section>
-        {edition === "legacy" ? (
-          <MediaPanel flawless={flawless} onExplore={() => setModalOpen(true)} />
-        ) : null}
+        {edition === "legacy" ? <MediaPanel flawless={flawless} /> : null}
       </div>
       <Tape tone="ice" />
       <FitGuide
         selected={selection.chainLength}
         onSelect={(chainLength) => setSelection((current) => ({ ...current, chainLength }))}
       />
-      {edition === "legacy" ? (
-        <FlawlessDialog
-          open={modalOpen}
-          flawless={flawless}
-          selection={selection}
-          onClose={() => setModalOpen(false)}
-        />
-      ) : null}
     </main>
   );
 }

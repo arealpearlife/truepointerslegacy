@@ -12,7 +12,6 @@ import {
   flawlessStartingOffer,
   formatMoney,
   marketing,
-  materialStatement,
   optionValues,
   orderedVariants,
   selectedOption,
@@ -68,7 +67,7 @@ export function FlawlessDialog({
         <p className="eyebrow">{marketing.flawlessUpgrade}</p>
         <h2 id="flawless-title">{marketing.modalTitle}</h2>
         <p>{marketing.modalBody}</p>
-        <p>{materialStatement("flawless", flawless)}</p>
+        <p>{marketing.flawlessBody}</p>
         {offer ? <p>{marketing.fromPrice}</p> : null}
         <p>
           Sizes: {sizes.join(", ")}. Lengths: {lengths.join(", ")}.

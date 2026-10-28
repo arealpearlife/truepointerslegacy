@@ -22,7 +22,12 @@ export const localChainVideos: readonly VideoAsset[] = [
 export const REPRESENTATIVE_CAPTION = "Representative Legacy footage";
 
 export type PreviewSlot =
-  "home-hero" | "flawless-band" | "legacy-gallery" | "flawless-gallery" | "upgrade-panel";
+  | "home-hero"
+  | "flawless-band"
+  | "legacy-gallery"
+  | "flawless-gallery"
+  | "upgrade-panel"
+  | "pay-later";
 
 // A fixed shuffle so server and client render the same clip in every slot.
 const slotVideos: Record<PreviewSlot, VideoAsset> = {
@@ -30,7 +35,8 @@ const slotVideos: Record<PreviewSlot, VideoAsset> = {
   "flawless-band": chain5,
   "legacy-gallery": legacyChainVideo,
   "flawless-gallery": chain2,
-  "upgrade-panel": legacyChainVideo,
+  "upgrade-panel": chain5,
+  "pay-later": chain2,
 };
 
 // Rows are stone sizes and columns are lengths; no clip repeats next to itself in the grid.

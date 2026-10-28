@@ -16,46 +16,65 @@ describe("Legacy product experience", () => {
         product={catalogProduct("legacy")}
         flawless={catalogProduct("flawless")}
         initialSelection={{ stoneSize: null, chainLength: null }}
-        initialModalOpen={false}
         addToCart={addToCart}
       />,
     );
 
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("LEGACY TENNIS CHAIN");
-    expect(screen.getByText("THAT LEAVE A MARK.")).toBeInTheDocument();
+    expect(screen.getByText("LAST FOREVER.")).toBeInTheDocument();
+    expect(screen.queryByText(/cubic zirconia/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/moissanite/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/product details/i)).not.toBeInTheDocument();
     fireEvent.click(screen.getByLabelText("3 mm"));
     fireEvent.click(screen.getByLabelText("40 inches"));
     expect(screen.getByRole("button", { name: "Add to cart" })).toBeEnabled();
     expect(screen.getByDisplayValue(variantId("legacy", "3 mm", "40 inches"))).toBeInTheDocument();
+    const upgradeLinks = screen.getAllByRole("link", { name: /flawless shine/i });
+    expect(upgradeLinks.length).toBeGreaterThan(0);
+    for (const link of upgradeLinks) {
+      expect(link).toHaveAttribute("href", "/flawless");
+    }
+  });
 
-    fireEvent.click(screen.getAllByRole("button", { name: marketing.flawlessUpgrade })[0]!);
-    const dialog = screen.getByRole("dialog");
-    expect(dialog).toHaveTextContent(marketing.modalTitle);
-    expect(dialog).toHaveTextContent(marketing.fromPrice);
-    expect(screen.queryByRole("button", { name: "Add to cart", hidden: true })).toBeInTheDocument();
-    expect(dialog.querySelector("button.primary, button[name='variantId']")).toBeNull();
-    expect(screen.getByDisplayValue(variantId("legacy", "3 mm", "40 inches"))).toBeInTheDocument();
-
-    fireEvent.click(screen.getByRole("button", { name: marketing.keepLegacy }));
-    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
-    expect(screen.getByDisplayValue(variantId("legacy", "3 mm", "40 inches"))).toBeInTheDocument();
+  it("never prints cubic zirconia or moissanite even when Shopify sends those words", () => {
+    const legacy = catalogProduct("legacy");
+    const flawless = catalogProduct("flawless");
+    legacy.description = "Stone material: cubic zirconia.";
+    flawless.description = "Stone material: moissanite. This is not a diamond product.";
+    render(
+      <ProductExperience
+        edition="flawless"
+        product={flawless}
+        flawless={flawless}
+        initialSelection={{ stoneSize: null, chainLength: null }}
+        addToCart={addToCart}
+        payLater
+      />,
+    );
+    expect(screen.queryByText(/cubic zirconia/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/moissanite/i)).not.toBeInTheDocument();
+    expect(screen.getByText(/diamond tester/i)).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: marketing.payLaterCta })).toHaveAttribute(
+      "value",
+      "pay-later",
+    );
   });
 
   it("does not advertise the Flawless starting price when that configuration is unavailable", () => {
     render(
       <ProductExperience
-        edition="legacy"
-        product={catalogProduct("legacy")}
+        edition="flawless"
+        product={catalogProduct("flawless", false)}
         flawless={catalogProduct("flawless", false)}
         initialSelection={{ stoneSize: null, chainLength: null }}
-        initialModalOpen
         addToCart={addToCart}
+        payLater
       />,
     );
-    expect(screen.getByRole("dialog")).not.toHaveTextContent(marketing.fromPrice);
+    expect(screen.queryByText(marketing.fromPrice)).not.toBeInTheDocument();
     fireEvent.click(screen.getByLabelText("3 mm"));
     fireEvent.click(screen.getByLabelText("40 inches"));
-    expect(screen.getByRole("button", { name: "Add to cart" })).toBeEnabled();
+    expect(screen.getByRole("button", { name: "Add to cart" })).toBeDisabled();
   });
 
   it("disables purchase when Shopify has not published the product", () => {
@@ -65,7 +84,6 @@ describe("Legacy product experience", () => {
         product={null}
         flawless={null}
         initialSelection={{ stoneSize: "3 mm", chainLength: "40 inches" }}
-        initialModalOpen={false}
         addToCart={addToCart}
       />,
     );
@@ -85,7 +103,6 @@ describe("Legacy product experience", () => {
         product={product}
         flawless={catalogProduct("flawless")}
         initialSelection={{ stoneSize: null, chainLength: null }}
-        initialModalOpen={false}
         addToCart={addToCart}
       />,
     );
@@ -102,16 +119,17 @@ describe("Legacy product experience", () => {
         product={null}
         flawless={null}
         initialSelection={{ stoneSize: null, chainLength: null }}
-        initialModalOpen={false}
         addToCart={addToCart}
       />,
     );
-    for (const selector of [".gallery video", ".panel video"]) {
-      const video = container.querySelector(selector) as HTMLVideoElement;
-      expect(video.querySelector("source")).toHaveAttribute("src", legacyChainVideo.url);
-      expect(video.muted).toBe(true);
-      expect(video.autoplay).toBe(false);
-    }
+    const gallery = container.querySelector(".gallery video") as HTMLVideoElement;
+    const panel = container.querySelector(".panel video") as HTMLVideoElement;
+    expect(gallery.querySelector("source")).toHaveAttribute("src", legacyChainVideo.url);
+    expect(panel.querySelector("source")).toHaveAttribute("src", previewVideo("upgrade-panel").url);
+    expect(gallery.muted).toBe(true);
+    expect(panel.muted).toBe(true);
+    expect(gallery.autoplay).toBe(false);
+    expect(panel.autoplay).toBe(false);
   });
 
   it("shows a representative local video in the Flawless image box until Shopify has media", () => {
@@ -121,7 +139,6 @@ describe("Legacy product experience", () => {
         product={null}
         flawless={null}
         initialSelection={{ stoneSize: null, chainLength: null }}
-        initialModalOpen={false}
         addToCart={addToCart}
       />,
     );
@@ -151,7 +168,6 @@ describe("Legacy product experience", () => {
         product={product}
         flawless={product}
         initialSelection={{ stoneSize: null, chainLength: null }}
-        initialModalOpen={false}
         addToCart={addToCart}
       />,
     );
@@ -167,7 +183,6 @@ describe("Legacy product experience", () => {
         product={catalogProduct("legacy")}
         flawless={catalogProduct("flawless")}
         initialSelection={{ stoneSize: "4 mm", chainLength: "40 inches" }}
-        initialModalOpen={false}
         addToCart={addToCart}
       />,
     );

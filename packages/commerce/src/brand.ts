@@ -6,41 +6,68 @@ export const marketing = {
   mottoLead: "HITS",
   motto: "LAST FOREVER.",
   plateLead: "HITS",
-  plateMotto: "THAT LEAVE A MARK.",
+  plateMotto: "LAST FOREVER.",
   iceLine: "REIMAGINED IN ICE.",
-  heroBody:
-    "Stone set to stone, low hang. The extended silhouette that ran the block, the club, and the video set is back on your neck, built to be seen from across the room.",
+  heroBody: "Stone set to stone, low hang. Extra long. Built to be seen from across the room.",
   shopLegacy: "SHOP LEGACY",
   flawlessUpgrade: "FLAWLESS UPGRADE",
   flawlessHeading: "GO FLAWLESS.",
   flawlessLine: "SAME LEGACY SHAPE. HARDER ICE.",
   flawlessBody:
-    "Same lengths, same drop, same Legacy silhouette. Upgraded stones for when you want to go all the way.",
+    "Same extra-long drop. Hand-set stones. Flawless clarity shine that passes the diamond tester.",
   modalTitle: "WANT TO GO FLAWLESS?",
-  modalBody:
-    "Same Legacy shape, same lengths, upgraded stones. Check the sizes below, or keep it Legacy. Your call.",
+  modalBody: "Same drop. Harder ice. VVS shine that passes the diamond tester. Your call.",
+  collectionTitle: "THE LEGACY COLLECTION",
+  collectionLede: "3 stone sizes. 3 lengths. One extra-long drop.",
+  collectionStory:
+    "Premium stones, hand-set, immaculate shine. Custom built on its own extended mold. If the ice fails, we replace it.",
+  collectionMeta: "3 sizes · 3 lengths",
+  craftLine: "Stone set by hand on a custom extra-long mold. Made to be worn every day.",
+  replacePromise: "If the ice fails, we replace it.",
   keepLegacy: "KEEP IT LEGACY",
   fromPrice: "FLAWLESS LEGACY CHAINS FROM $979.",
   addToCart: "Add to cart",
+  payLaterCta: "Pay later at checkout",
+  payLaterEyebrow: "BUY NOW, PAY LATER",
+  payLaterTitle: "FLAWLESS",
+  payLaterLine: "Flawless shine. Every wear.",
+  payLaterWhisper: "Buy now, pay later",
+  payLaterBody:
+    "Same extra-long drop. Hand-set ice with flawless clarity shine that passes the diamond tester. Shop Pay, Klarna, and Afterpay appear at Shopify checkout.",
+  payLaterCheckoutNote: "Pay later options appear at Shopify checkout.",
   close: "Close",
 } as const;
 
-export const disclosures = {
-  legacy: "Stone material: cubic zirconia.",
-  flawless: "Stone material: moissanite. This is not a diamond product.",
+export const PAY_LATER_METHODS = [
+  { id: "shop-pay", label: "Shop Pay" },
+  { id: "klarna", label: "Klarna" },
+  { id: "afterpay", label: "Afterpay" },
+] as const;
+
+export const publicDetails = {
+  legacy: "Hand-set VVS shine. Extra-long custom mold. If the ice fails, we replace it.",
+  flawless:
+    "Hand-set flawless clarity shine. Passes the diamond tester. Same extra-long drop. If the ice fails, we replace it.",
 } as const;
 
-const bannedMarketing = [
+export const disclosures = publicDetails;
+
+const bannedPublicLanguage = [
   /\bcz\b/i,
+  /cubic\s*zirconia/i,
   /moissanite/i,
   /\bstandard\b/i,
   /\bbudget\b/i,
   /\bbasic\b/i,
-  /\bdiamond\b/i,
+  /\bdiamond\b(?!\s+test)/i,
 ];
 
+export function hasBannedPublicLanguage(value: string): boolean {
+  return bannedPublicLanguage.some((pattern) => pattern.test(value));
+}
+
 export function marketingViolations(): string[] {
-  return Object.entries(marketing)
-    .filter(([, value]) => bannedMarketing.some((pattern) => pattern.test(value)))
+  return [...Object.entries(marketing), ...Object.entries(publicDetails)]
+    .filter(([, value]) => hasBannedPublicLanguage(value))
     .map(([key]) => key);
 }

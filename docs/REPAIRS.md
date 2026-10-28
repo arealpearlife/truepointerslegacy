@@ -2,6 +2,26 @@
 
 Use this changelog for defects corrected after development begins.
 
+## Flawless Upgrade box did not sell pay later
+
+- **Date:** 2026-10-28
+- **Area:** Legacy product page and new `/flawless` route
+- **Reported behavior:** The Flawless Upgrade box only expanded in place and had no buy-now-pay-later path.
+- **Root cause:** The panel was a local toggle, not a shop for Flawless, and payments only existed as a generic Shopify checkout redirect.
+- **Repair:** The box now says "Flawless shine. Every wear." with a quiet Shop Pay / Klarna / Afterpay line and links to `/flawless`. That page plays a necklace video and lets the customer add Flawless to cart or continue to Shopify checkout, where pay-later methods appear if the store has them on.
+- **Verification:** Panel, product-experience, and commerce tests.
+- **Release or commit:** Flawless pay-later page commit.
+
+## Stone names and a nine-ways headline sat on the shop
+
+- **Date:** 2026-10-28
+- **Area:** Home collection, product page, and Flawless window
+- **Reported behavior:** The shop said "Nine ways to wear it" and printed cubic zirconia and moissanite in product details.
+- **Root cause:** The collection used a catalog headline, and the storefront dumped Shopify material lines onto the page.
+- **Repair:** "The Legacy Collection" now sits over the 3-size / 3-length line with one short story. Public copy sells shine, craft, and a replace promise. Shopify fill names stay off the page.
+- **Verification:** Commerce and product-experience tests for banned stone language.
+- **Release or commit:** Public shine-copy commit.
+
 ## Hero still used the old era motto
 
 - **Date:** 2026-10-27

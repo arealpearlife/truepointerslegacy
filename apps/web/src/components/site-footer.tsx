@@ -18,7 +18,7 @@ export function SiteFooter() {
               <Link href={legacy}>Legacy</Link>
             </li>
             <li>
-              <Link href={`${legacy}?explore=flawless`}>Flawless Upgrade</Link>
+              <Link href="/flawless">Flawless Upgrade</Link>
             </li>
             <li>
               <Link href={`${legacy}#fit`}>Fit Guide</Link>

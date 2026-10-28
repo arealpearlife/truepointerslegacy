@@ -25,7 +25,7 @@ export function SiteHeader({ cartCount }: { cartCount: number }) {
           <Link href={`${legacy}#fit`}>Fit Guide</Link>
         </nav>
         <nav className="nav-group right" aria-label="Account">
-          <Link href={`${legacy}?explore=flawless`}>Flawless Upgrade</Link>
+          <Link href="/flawless">Flawless Upgrade</Link>
           <Link href="/support">Support</Link>
         </nav>
       </div>

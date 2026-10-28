@@ -7,7 +7,7 @@
 - Hero product: True Pointers Legacy Extended Tennis Chain
 - Premium product: True Pointers Flawless Extended Tennis Chain
 
-Legacy is never labeled Standard, budget, basic, or inferior. Flawless is an aspirational premium alternative. Customer-facing titles and primary marketing do not use CZ or moissanite, but accurate material disclosures must remain available before purchase.
+Legacy is never labeled Standard, budget, basic, or inferior. Flawless is an aspirational premium alternative. Customer-facing copy never uses CZ, cubic zirconia, or moissanite. Sell shine, drop, hand-set craft, and the replace promise. Flawless may say the ice passes the diamond tester. Keep stone chemistry in Shopify Admin and internal docs only.
 
 ## Shopify authority
 

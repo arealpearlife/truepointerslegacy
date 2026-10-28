@@ -11,7 +11,14 @@ export type {
   Selection,
   Variant,
 } from "./types";
-export { marketing, disclosures, marketingViolations } from "./brand";
+export {
+  PAY_LATER_METHODS,
+  disclosures,
+  hasBannedPublicLanguage,
+  marketing,
+  marketingViolations,
+  publicDetails,
+} from "./brand";
 export { formatMoney, parseMoney } from "./money";
 export {
   APPROVED_CHAIN_LENGTHS,

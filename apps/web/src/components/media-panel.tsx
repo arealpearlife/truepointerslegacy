@@ -1,43 +1,25 @@
-"use client";
-
-import { useState } from "react";
+import Link from "next/link";
 import { marketing, type Product } from "@truepointers/commerce";
 import { REPRESENTATIVE_CAPTION, previewVideo } from "@/lib/local-media";
+import { PayLaterStrip } from "./pay-later-strip";
 import { PreviewVideo } from "./preview-video";
 
-export function MediaPanel({
-  flawless,
-  onExplore,
-}: {
-  flawless: Product | null;
-  onExplore: () => void;
-}) {
-  const [expanded, setExpanded] = useState(false);
+export function MediaPanel({ flawless }: { flawless: Product | null }) {
   const video = flawless?.videos[0] ?? previewVideo("upgrade-panel");
 
   return (
-    <aside
-      className="panel"
-      data-expanded={expanded ? "true" : "false"}
-      aria-label="Flawless Upgrade"
-    >
-      <button
-        className="panel-toggle"
-        type="button"
-        aria-expanded={expanded}
-        onClick={() => setExpanded((value) => !value)}
-      >
-        {expanded ? "Hide the Flawless Upgrade" : "See the Flawless Upgrade"}
-      </button>
-      <div className="panel-body">
-        <p className="panel-label">{marketing.flawlessUpgrade}</p>
-        <PreviewVideo video={video} label="Flawless Upgrade video" eager controls />
-        {flawless?.videos[0] ? null : <p className="caption">{REPRESENTATIVE_CAPTION}</p>}
-        <p className="caption">Captions have not been provided for this video.</p>
-        <button className="ice wide" type="button" onClick={onExplore}>
-          {marketing.flawlessUpgrade}
-        </button>
-      </div>
+    <aside className="panel pay-later-card" aria-label={marketing.payLaterLine}>
+      <Link className="pay-later-hit" href="/flawless">
+        <p className="panel-label">{marketing.payLaterLine}</p>
+        <div className="pay-later-thumb">
+          <PreviewVideo video={video} label="Flawless necklace" />
+          {flawless?.videos[0] ? null : (
+            <span className="media-note">{REPRESENTATIVE_CAPTION}</span>
+          )}
+        </div>
+        <PayLaterStrip compact />
+        <span className="pay-later-go">{marketing.payLaterEyebrow}</span>
+      </Link>
     </aside>
   );
 }

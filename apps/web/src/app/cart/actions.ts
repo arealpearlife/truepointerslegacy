@@ -33,6 +33,12 @@ export async function addToCart(_state: ActionState, formData: FormData): Promis
     : await client.createCart(variantId, 1);
   if (!result.ok) return { error: result.message };
   await saveCartId(result.data.id);
+  if (
+    String(formData.get("intent")) === "pay-later" &&
+    isTrustedCheckoutUrl(result.data.checkoutUrl)
+  ) {
+    redirect(result.data.checkoutUrl);
+  }
   redirect("/cart");
 }
 

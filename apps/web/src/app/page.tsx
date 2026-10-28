@@ -36,7 +36,7 @@ export default async function HomePage() {
               <Link className="button solid-white" href={legacyHref}>
                 {marketing.shopLegacy}
               </Link>
-              <Link className="button ice" href={`${legacyHref}?explore=flawless`}>
+              <Link className="button ice" href="/flawless">
                 {marketing.flawlessUpgrade}
               </Link>
             </div>
@@ -60,18 +60,18 @@ export default async function HomePage() {
 
       <section className="container collection" aria-labelledby="collection-title">
         <header className="collection-head">
-          <p className="eyebrow">The Legacy collection</p>
           <h2 id="collection-title" className="poster">
-            Nine ways to wear it
+            {marketing.collectionTitle}
           </h2>
-          <p>Three stone sizes. Three drops. Pick your weight, pick your length, and put it on.</p>
+          <p>{marketing.collectionLede}</p>
+          <p className="collection-story">{marketing.collectionStory}</p>
         </header>
         <div className="assurance">
-          <h3>Checkout through Shopify</h3>
+          <h3>{marketing.replacePromise}</h3>
           <p>Prices and stock come live from the store. Shipping and tax are added at checkout.</p>
         </div>
         <div className="toolbar">
-          <span>9 configurations</span>
+          <span>{marketing.collectionMeta}</span>
           <Link href={legacyHref}>See the chain</Link>
         </div>
         <CollectionGrid product={legacy} />
@@ -100,7 +100,7 @@ export default async function HomePage() {
             />
           </div>
           <div className="actions">
-            <Link className="button ink" href={`${legacyHref}?explore=flawless`}>
+            <Link className="button ink" href="/flawless">
               {marketing.flawlessUpgrade}
             </Link>
             <Link className="button outline-ink" href={legacyHref}>

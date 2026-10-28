@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import {
   APPROVED_CHAIN_LENGTHS,
   APPROVED_STONE_SIZES,
   CHAIN_LENGTH,
   STONE_SIZE,
   editionFromHandle,
+  marketing,
   optionValues,
+  publicDetails,
   type Product,
   type Selection,
 } from "@truepointers/commerce";
@@ -31,6 +33,7 @@ export default async function ProductPage({ params, searchParams }: PageProps) {
   const [{ handle }, query] = await Promise.all([params, searchParams]);
   const edition = editionFromHandle(handle);
   if (!edition) notFound();
+  if (edition === "legacy" && query.explore === "flawless") redirect("/flawless");
   const catalog = await getCatalog();
   const legacy = catalog.state === "live" ? catalog.legacy : null;
   const flawless = catalog.state === "live" ? catalog.flawless : null;
@@ -49,7 +52,6 @@ export default async function ProductPage({ params, searchParams }: PageProps) {
         product={product}
         flawless={flawless}
         initialSelection={readSelection(query, product)}
-        initialModalOpen={query.explore === "flawless"}
         addToCart={addToCart}
       />
     </>
@@ -74,7 +76,8 @@ function productJsonLd(product: Product) {
     "@context": "https://schema.org",
     "@type": "Product",
     name: product.title,
-    description: product.description || undefined,
+    description:
+      publicDetails[editionFromHandle(product.handle) ?? "legacy"] || marketing.collectionStory,
     url: `${publicSiteOrigin()}/products/${product.handle}`,
     brand: { "@type": "Brand", name: "True Pointers" },
   };

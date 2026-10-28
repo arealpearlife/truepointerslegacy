@@ -1,4 +1,4 @@
-import { disclosures } from "./brand";
+import { hasBannedPublicLanguage, publicDetails } from "./brand";
 import { formatMoney } from "./money";
 import {
   APPROVED_CHAIN_LENGTHS,
@@ -36,9 +36,9 @@ export function orderedVariants(product: Product): Variant[] {
 }
 
 export function materialStatement(edition: Edition, product: Product | null): string {
-  const description = product?.description.trim();
-  if (description) return description;
-  return disclosures[edition];
+  const description = product?.description.trim() ?? "";
+  if (description && !hasBannedPublicLanguage(description)) return description;
+  return publicDetails[edition];
 }
 
 export function buildComparison(
@@ -63,9 +63,9 @@ export function buildComparison(
       flawless: selection.chainLength ?? "Select a length",
     },
     {
-      label: "Stone material",
-      legacy: shortMaterial("legacy", legacy),
-      flawless: shortMaterial("flawless", flawless),
+      label: "Shine",
+      legacy: "VVS shine, hand-set",
+      flawless: "Flawless clarity shine. Passes the diamond tester.",
     },
     {
       label: "Price",
@@ -91,14 +91,6 @@ export function configurationHref(handle: string, selection: Selection): string 
   if (selection.chainLength) params.set("length", selection.chainLength);
   const query = params.toString();
   return query ? `/products/${handle}?${query}` : `/products/${handle}`;
-}
-
-function shortMaterial(edition: Edition, product: Product | null): string {
-  const description = product?.description.toLowerCase() ?? "";
-  if (edition === "legacy" && description.includes("cubic zirconia")) return "Cubic zirconia";
-  if (edition === "flawless" && description.includes("moissanite")) return "Moissanite";
-  if (!description) return edition === "legacy" ? "Cubic zirconia" : "Moissanite";
-  return "See product details";
 }
 
 function priceLabel(product: Product | null, selection: Selection): string {

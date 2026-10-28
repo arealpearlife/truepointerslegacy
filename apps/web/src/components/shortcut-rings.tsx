@@ -17,7 +17,7 @@ const shortcuts = [
     label: `${lengthLabel(length)} length`,
   })),
   { href: `${legacy}#fit`, ring: "FIT", label: "Fit guide" },
-  { href: `${legacy}?explore=flawless`, ring: "F", label: "Flawless Upgrade", tone: "flawless" },
+  { href: "/flawless", ring: "F", label: "Flawless Upgrade", tone: "flawless" },
 ];
 
 export function ShortcutRings() {
