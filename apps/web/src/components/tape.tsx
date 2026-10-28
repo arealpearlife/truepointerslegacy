@@ -1,4 +1,4 @@
-const words = ["LEGACY", "TRUE POINTERS", "HUNG LONG", "ICE", "THE ERA THAT LEFT A MARK"];
+const words = ["LEGACY", "TRUE POINTERS", "LOW HANG", "ICE", "THE ERA THAT LEFT A MARK"];
 
 export function Tape({ tone = "cherry" }: { tone?: "cherry" | "ice" }) {
   const run = [...words, ...words, ...words];

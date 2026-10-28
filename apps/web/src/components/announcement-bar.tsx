@@ -2,7 +2,7 @@ const messages = [
   "Legacy Tennis Chain",
   "3MM · 4MM · 5MM stones",
   '40" · 44" · 48" drops',
-  "Hung long, worn loud",
+  "Low hang, worn loud",
   "Flawless Upgrade",
   "Checkout through Shopify",
 ];

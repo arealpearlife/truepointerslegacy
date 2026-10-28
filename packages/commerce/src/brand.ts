@@ -9,7 +9,7 @@ export const marketing = {
   plateMotto: "THAT LEAVE A MARK.",
   iceLine: "REIMAGINED IN ICE.",
   heroBody:
-    "Stone set to stone, hung long. The extended silhouette that ran the block, the club, and the video set is back on your neck, built to be seen from across the room.",
+    "Stone set to stone, low hang. The extended silhouette that ran the block, the club, and the video set is back on your neck, built to be seen from across the room.",
   shopLegacy: "SHOP LEGACY",
   flawlessUpgrade: "FLAWLESS UPGRADE",
   flawlessHeading: "GO FLAWLESS.",
