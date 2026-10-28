@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { ImageAsset, Product, Resolution, VideoAsset } from "@truepointers/commerce";
+import { REPRESENTATIVE_CAPTION } from "@/lib/local-media";
 import { Placeholder } from "./placeholder";
 
 type MediaItem = { kind: "image"; asset: ImageAsset } | { kind: "video"; asset: VideoAsset };
@@ -25,11 +26,13 @@ export function ProductGallery({
     resolution && (resolution.status === "available" || resolution.status === "unavailable")
       ? resolution.variant?.image
       : null;
-  const videos = product?.videos.length ? product.videos : fallbackVideo ? [fallbackVideo] : [];
-  const media: MediaItem[] = [
-    ...videos.map((asset) => ({ kind: "video" as const, asset })),
+  const shopifyMedia: MediaItem[] = [
+    ...(product?.videos ?? []).map((asset) => ({ kind: "video" as const, asset })),
     ...(product?.images ?? []).map((asset) => ({ kind: "image" as const, asset })),
   ];
+  const representative = shopifyMedia.length === 0 && !variantImage && Boolean(fallbackVideo);
+  const media: MediaItem[] =
+    representative && fallbackVideo ? [{ kind: "video", asset: fallbackVideo }] : shopifyMedia;
   const [selected, setSelected] = useState<MediaItem | null>(null);
   const active: MediaItem | null =
     selected ?? (variantImage ? { kind: "image", asset: variantImage } : (media[0] ?? null));
@@ -67,6 +70,7 @@ export function ProductGallery({
           height={active.asset.height ?? 1600}
         />
       )}
+      {representative ? <p className="caption">{REPRESENTATIVE_CAPTION}</p> : null}
       {media.length > 1 ? (
         <div className="thumbs">
           {media.map((item) => (

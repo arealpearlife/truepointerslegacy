@@ -1,14 +1,14 @@
-import Image from "next/image";
 import Link from "next/link";
 import { HANDLES, flawlessStartingOffer, marketing } from "@truepointers/commerce";
 import { CollectionGrid } from "@/components/collection-grid";
 import { FitGuide } from "@/components/fit-guide";
+import { MediaFill } from "@/components/media-fill";
 import { Motto } from "@/components/motto";
 import { Patch } from "@/components/patch";
-import { Placeholder } from "@/components/placeholder";
 import { ShortcutRings } from "@/components/shortcut-rings";
 import { Tape } from "@/components/tape";
 import { getCatalog } from "@/lib/catalog";
+import { displayMedia } from "@/lib/local-media";
 
 const legacyHref = `/products/${HANDLES.legacy}`;
 
@@ -17,8 +17,6 @@ export default async function HomePage() {
   const legacy = catalog.state === "live" ? catalog.legacy : null;
   const flawless = catalog.state === "live" ? catalog.flawless : null;
   const offer = flawlessStartingOffer(flawless);
-  const heroImage = legacy?.images[0] ?? null;
-
   return (
     <main id="main" className="home">
       <section className="hero">
@@ -45,21 +43,12 @@ export default async function HomePage() {
           </div>
           <div className="hero-visual-wrap">
             <div className="hero-visual">
-              {heroImage ? (
-                <Image
-                  src={heroImage.url}
-                  alt={heroImage.altText ?? marketing.legacyName}
-                  fill
-                  priority
-                  sizes="(min-width: 900px) 45vw, 100vw"
-                />
-              ) : (
-                <Placeholder
-                  headline="LEGACY"
-                  detail="Tennis chain"
-                  label="Legacy photography will appear here after it is uploaded in Shopify Admin."
-                />
-              )}
+              <MediaFill
+                media={displayMedia(legacy, "home-hero")}
+                label={marketing.legacyName}
+                sizes="(min-width: 900px) 45vw, 100vw"
+                priority
+              />
             </div>
             <Patch className="hero-patch" />
           </div>
@@ -102,6 +91,13 @@ export default async function HomePage() {
             <p className="hero-line">{marketing.flawlessLine}</p>
             <p>{marketing.flawlessBody}</p>
             {offer ? <p className="from-price">{marketing.fromPrice}</p> : null}
+          </div>
+          <div className="flawless-visual">
+            <MediaFill
+              media={displayMedia(flawless, "flawless-band")}
+              label={marketing.flawlessName}
+              sizes="(min-width: 900px) 25vw, 100vw"
+            />
           </div>
           <div className="actions">
             <Link className="button ink" href={`${legacyHref}?explore=flawless`}>

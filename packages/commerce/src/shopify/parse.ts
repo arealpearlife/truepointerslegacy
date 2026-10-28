@@ -1,5 +1,5 @@
 import { parseMoney } from "../money";
-import { STORE_DOMAIN } from "../store";
+import { PUBLIC_SITE_HOST, STORE_DOMAIN } from "../store";
 import type {
   Cart,
   CartLine,
@@ -38,13 +38,20 @@ export class CartRejectedError extends Error {
   }
 }
 
+export function trustedCheckoutHosts(storeDomain = STORE_DOMAIN): string[] {
+  return [
+    storeDomain,
+    PUBLIC_SITE_HOST,
+    `www.${PUBLIC_SITE_HOST}`,
+    `checkout.${PUBLIC_SITE_HOST}`,
+    "checkout.shopify.com",
+  ];
+}
+
 export function isTrustedCheckoutUrl(value: string, domain = STORE_DOMAIN): boolean {
   try {
     const url = new URL(value);
-    return (
-      url.protocol === "https:" &&
-      (url.hostname === domain || url.hostname === "checkout.shopify.com")
-    );
+    return url.protocol === "https:" && trustedCheckoutHosts(domain).includes(url.hostname);
   } catch {
     return false;
   }

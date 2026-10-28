@@ -13,6 +13,7 @@ import {
 import { ProductExperience } from "@/components/product-experience";
 import { addToCart } from "@/app/cart/actions";
 import { getCatalog } from "@/lib/catalog";
+import { publicSiteOrigin } from "@/lib/site";
 
 type PageProps = {
   params: Promise<{ handle: string }>;
@@ -74,6 +75,7 @@ function productJsonLd(product: Product) {
     "@type": "Product",
     name: product.title,
     description: product.description || undefined,
+    url: `${publicSiteOrigin()}/products/${product.handle}`,
     brand: { "@type": "Brand", name: "True Pointers" },
   };
   if (currencies.size !== 1 || product.variants.length === 0) return base;

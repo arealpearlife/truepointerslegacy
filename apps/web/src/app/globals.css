@@ -650,9 +650,60 @@ button:disabled {
   box-shadow: var(--glow-ice);
 }
 
+.card-media video {
+  transition: transform 0.4s ease;
+}
+
 .card a:hover .card-media img,
+.card a:hover .card-media video,
 .card a:hover .tile {
   transform: scale(1.04);
+}
+
+.hero-visual video,
+.card-media video,
+.flawless-visual video,
+.cart-line-media video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: var(--color-ink);
+}
+
+.media-note {
+  position: absolute;
+  bottom: 0.6rem;
+  left: 0.6rem;
+  z-index: 1;
+  padding: 0.25rem 0.5rem;
+  background: rgb(20 6 10 / 72%);
+  color: var(--color-crystal-white);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.flawless-visual {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border: 2px solid var(--color-crystal-white);
+  box-shadow: var(--glow-ice);
+}
+
+.flawless-visual img {
+  object-fit: cover;
+}
+
+.cart-line-media {
+  position: relative;
+  width: 160px;
+  aspect-ratio: 1;
+  overflow: hidden;
 }
 
 .badge {
@@ -736,7 +787,7 @@ button:disabled {
 
 @media (min-width: 900px) {
   .flawless-inner {
-    grid-template-columns: 1.3fr 0.7fr;
+    grid-template-columns: 1.2fr 0.8fr 0.6fr;
   }
   .flawless-inner .actions {
     justify-content: flex-end;

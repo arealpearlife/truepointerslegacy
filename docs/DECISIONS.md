@@ -46,7 +46,7 @@ Record decisions here before they become expensive to reverse.
 
 - **Status:** accepted
 - **Date:** 2026-10-27
-- **Decision:** The web storefront reads the Storefront API version `2026-10` for the `rcvvv5-tk.myshopify.com` shop. Tokens stay server-side. Cart creation and checkout use Shopify `checkoutUrl`. Browser code may display a price only after Shopify returns that variant.
+- **Decision:** The web storefront reads the Storefront API version `2026-10` for the `rcvvv5-tk.myshopify.com` shop. Tokens stay server-side. Cart creation and checkout use Shopify `checkoutUrl`. Browser code may display a price only after Shopify returns that variant. The customer-facing hostname is `legacybytp.com`; see ADR-010.
 - **Consequence:** Approved price matrices are audit checks, not a second price authority. Missing credentials, draft products, and unavailable variants cannot be purchased.
 
 ### ADR-006: Storefront typography
@@ -69,6 +69,21 @@ Record decisions here before they become expensive to reverse.
 - **Date:** 2026-10-27
 - **Decision:** The product page and landing page show a to-scale male torso fit guide instead of a Legacy and Flawless comparison table. Dotted chains show where 40, 44, and 48 inch lengths land, with drops of about 13, 15, and 17 inches below the neck notch on a 5'10" frame with a 15.5 inch neck. The guide follows the selected length, and selecting a length in the guide updates the purchase selection. "Explore Flawless" is now called "Flawless Upgrade". The Flawless window still never changes the variant or adds to the cart.
 - **Consequence:** Stone material disclosures stay in the product details and the Flawless window. Update the drop values if True Pointers measures the finished chains on a fit model.
+
+### ADR-009: Local preview media until Shopify publishes genuine shots
+
+- **Status:** accepted
+- **Date:** 2026-10-27
+- **Decision:** Serve a small pool of the owner's laptop videos from `apps/web/public/media` so every storefront slot shows a necklace while Shopify products are still drafts. Assignment is a fixed shuffle, not `Math.random` at render, so server and client stay in sync. Shopify images and videos replace the local clips the moment they exist. Decorative grid and hero clips play muted and only while on screen; they stay still when the visitor prefers reduced motion. Cards that are a specific stone and length caption the clip as representative footage.
+- **Consequence:** These files are stand-ins. After each configuration has its own Shopify media, remove the local copies from the public folder and keep Shopify as the only media source.
+
+### ADR-010: Public hostname vs Shopify shop hostname
+
+- **Status:** accepted
+- **Date:** 2026-10-27
+- **Context:** `legacybytp.com` was purchased and connected in Shopify. The public site is a Next.js storefront, not the Shopify Online Store theme.
+- **Decision:** Use `https://legacybytp.com` as the customer-facing origin for metadata, canonical URLs, env examples, and docs. Keep `rcvvv5-tk.myshopify.com` as the Storefront API host. Trust checkout URLs on the shop hostname, `legacybytp.com`, `www.legacybytp.com`, `checkout.legacybytp.com`, and `checkout.shopify.com`.
+- **Consequence:** Connecting the domain in Shopify does not host the Next.js app. Until that app is deployed, `legacybytp.com` currently serves Shopify's password-protected Online Store. Local development remains `http://localhost:3000`.
 
 ## Open decisions
 

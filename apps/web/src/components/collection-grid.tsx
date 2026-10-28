@@ -9,14 +9,18 @@ import {
   resolveVariant,
   type Product,
   type Selection,
+  type VideoAsset,
 } from "@truepointers/commerce";
 import { lengthLabel, stoneLabel } from "@/lib/labels";
+import { REPRESENTATIVE_CAPTION, configurationPreviewVideo } from "@/lib/local-media";
+import { PreviewVideo } from "./preview-video";
 
 type Card = {
   selection: Selection;
   price: string | null;
   available: boolean;
   image: { url: string; altText: string | null } | null;
+  video: VideoAsset | null;
 };
 
 export function collectionCards(product: Product | null): Card[] {
@@ -28,11 +32,13 @@ export function collectionCards(product: Product | null): Card[] {
         resolution?.status === "available" || resolution?.status === "unavailable"
           ? resolution.variant
           : null;
+      const image = variant?.image ?? product?.images[0] ?? null;
       return {
         selection,
         price: variant ? formatMoney(variant.price) : null,
         available: resolution?.status === "available",
-        image: variant?.image ?? product?.images[0] ?? null,
+        image,
+        video: image ? null : (product?.videos[0] ?? configurationPreviewVideo(selection)),
       };
     }),
   );
@@ -57,13 +63,12 @@ export function CollectionGrid({ product }: { product: Product | null }) {
                     fill
                     sizes="(min-width: 760px) 33vw, 50vw"
                   />
-                ) : (
-                  <div className="tile" aria-hidden="true">
-                    <span className="tile-headline poster">{stone}</span>
-                    <span className="tile-detail">{length} length</span>
-                    <span className="tile-note">Photo coming soon</span>
-                  </div>
-                )}
+                ) : card.video ? (
+                  <>
+                    <PreviewVideo video={card.video} />
+                    <span className="media-note">{REPRESENTATIVE_CAPTION}</span>
+                  </>
+                ) : null}
                 {card.available ? null : <span className="badge">Not yet available</span>}
               </div>
               <p className="card-title">{name}</p>

@@ -12,6 +12,26 @@ Use this changelog for defects corrected after development begins.
 - **Verification:**
 - **Release or commit:**
 
+## Localhost branding instead of the purchased domain
+
+- **Date:** 2026-10-27
+- **Area:** Web storefront metadata, footer, env example, and docs
+- **Reported behavior:** After buying a custom domain in Shopify, the project still read as localhost and used the myshopify shop hostname as if it were the public site.
+- **Root cause:** Customer-facing URLs were never set because the Next.js app has no production host yet.
+- **Repair:** Public URLs now use `https://legacybytp.com`. Shopify API calls stay on `rcvvv5-tk.myshopify.com`. Checkout URLs on the custom domain are trusted. Footer and docs name the purchased hostname.
+- **Verification:** Format, lint, typecheck, and tests for the public site origin and trusted checkout hosts.
+- **Release or commit:** Custom domain and preview media commit.
+
+## Placeholders across the storefront instead of necklace footage
+
+- **Date:** 2026-10-27
+- **Area:** Home, collection grid, product pages, Flawless Upgrade panel, and cart
+- **Reported behavior:** Only one local clip was wired, so most product slots still showed empty placeholders.
+- **Root cause:** The storefront had a single fallback video and Shopify still returns no published media.
+- **Repair:** All five owner videos are in `apps/web/public/media`. A fixed assignment puts a clip on the home hero, Flawless band, nine collection cards, both product galleries, the Flawless Upgrade panel, and cart lines that have no Shopify image. Shopify media still wins. Clips are muted and labeled as representative footage.
+- **Verification:** Format, lint, typecheck, and tests for the local media pool, collection grid, preview player, and product experience.
+- **Release or commit:** Uncommitted site-wide preview media work.
+
 ## Placeholder shown instead of the Legacy product video
 
 - **Date:** 2026-10-27

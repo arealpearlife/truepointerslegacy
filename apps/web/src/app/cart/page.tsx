@@ -2,7 +2,9 @@ import Link from "next/link";
 import { formatMoney, HANDLES, marketing } from "@truepointers/commerce";
 import { beginCheckout } from "@/app/cart/actions";
 import { CartLineControls, CheckoutForm } from "@/components/cart-controls";
+import { PreviewVideo } from "@/components/preview-video";
 import { getCart } from "@/lib/cart";
+import { REPRESENTATIVE_CAPTION, keyedPreviewVideo } from "@/lib/local-media";
 
 export const metadata = { title: "Cart" };
 
@@ -33,7 +35,12 @@ export default async function CartPage() {
                   width={160}
                   height={160}
                 />
-              ) : null}
+              ) : (
+                <div className="cart-line-media">
+                  <PreviewVideo video={keyedPreviewVideo(line.productTitle)} />
+                  <span className="media-note">{REPRESENTATIVE_CAPTION}</span>
+                </div>
+              )}
               <CartLineControls line={line} />
             </article>
           ))}

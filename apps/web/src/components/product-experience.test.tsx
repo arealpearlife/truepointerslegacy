@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { marketing } from "@truepointers/commerce";
 import { catalogProduct, variantId } from "@truepointers/commerce/testing";
 import { idleActionState } from "@/lib/action-state";
-import { legacyChainVideo } from "@/lib/local-media";
+import { REPRESENTATIVE_CAPTION, legacyChainVideo, previewVideo } from "@/lib/local-media";
 import { ProductExperience } from "./product-experience";
 
 const addToCart = async () => idleActionState;
@@ -112,6 +112,52 @@ describe("Legacy product experience", () => {
       expect(video.muted).toBe(true);
       expect(video.autoplay).toBe(false);
     }
+  });
+
+  it("shows a representative local video in the Flawless image box until Shopify has media", () => {
+    const { container } = render(
+      <ProductExperience
+        edition="flawless"
+        product={null}
+        flawless={null}
+        initialSelection={{ stoneSize: null, chainLength: null }}
+        initialModalOpen={false}
+        addToCart={addToCart}
+      />,
+    );
+    const video = container.querySelector(".gallery video") as HTMLVideoElement;
+    expect(video.querySelector("source")).toHaveAttribute(
+      "src",
+      previewVideo("flawless-gallery").url,
+    );
+    expect(video.muted).toBe(true);
+    expect(video.autoplay).toBe(false);
+    expect(screen.getByText(REPRESENTATIVE_CAPTION)).toBeInTheDocument();
+  });
+
+  it("shows the Shopify product image instead of the local video", () => {
+    const product = catalogProduct("flawless");
+    product.images = [
+      {
+        url: "https://cdn.shopify.com/s/flawless.jpg",
+        altText: "Flawless",
+        width: 800,
+        height: 800,
+      },
+    ];
+    const { container } = render(
+      <ProductExperience
+        edition="flawless"
+        product={product}
+        flawless={product}
+        initialSelection={{ stoneSize: null, chainLength: null }}
+        initialModalOpen={false}
+        addToCart={addToCart}
+      />,
+    );
+    expect(container.querySelector(".gallery video")).toBeNull();
+    expect(container.querySelector(".gallery img")).toHaveAttribute("src", product.images[0]!.url);
+    expect(screen.queryByText(REPRESENTATIVE_CAPTION)).not.toBeInTheDocument();
   });
 
   it("replaces the comparison table with a fit guide that follows the chosen length", () => {

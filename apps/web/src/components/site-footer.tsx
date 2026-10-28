@@ -61,7 +61,10 @@ export function SiteFooter() {
         </nav>
       </div>
       <div className="container footer-legal">
-        <p>Prices exclude shipping and applicable taxes. Checkout is completed with Shopify.</p>
+        <p>
+          legacybytp.com · Prices exclude shipping and applicable taxes. Checkout is completed with
+          Shopify.
+        </p>
       </div>
     </footer>
   );

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { marketing, type Product } from "@truepointers/commerce";
-import { legacyChainVideo } from "@/lib/local-media";
+import { REPRESENTATIVE_CAPTION, previewVideo } from "@/lib/local-media";
 
 export function MediaPanel({
   flawless,
@@ -12,7 +12,7 @@ export function MediaPanel({
   onExplore: () => void;
 }) {
   const [expanded, setExpanded] = useState(false);
-  const video = flawless?.videos[0] ?? legacyChainVideo;
+  const video = flawless?.videos[0] ?? previewVideo("upgrade-panel");
 
   return (
     <aside
@@ -41,6 +41,7 @@ export function MediaPanel({
         >
           <source src={video.url} type={video.mimeType ?? undefined} />
         </video>
+        {flawless?.videos[0] ? null : <p className="caption">{REPRESENTATIVE_CAPTION}</p>}
         <p className="caption">Captions have not been provided for this video.</p>
         <button className="ice wide" type="button" onClick={onExplore}>
           {marketing.flawlessUpgrade}

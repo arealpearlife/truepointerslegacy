@@ -155,6 +155,9 @@ describe("Shopify Storefront client", () => {
     expect(isTrustedCheckoutUrl("https://rcvvv5-tk.myshopify.com/cart/c/abc?key=secret")).toBe(
       true,
     );
+    expect(isTrustedCheckoutUrl("https://legacybytp.com/cart/c/abc?key=secret")).toBe(true);
+    expect(isTrustedCheckoutUrl("https://www.legacybytp.com/checkouts/abc")).toBe(true);
+    expect(isTrustedCheckoutUrl("https://checkout.legacybytp.com/pay")).toBe(true);
     expect(isTrustedCheckoutUrl("https://checkout.shopify.com/pay/abc")).toBe(true);
     expect(isTrustedCheckoutUrl("http://rcvvv5-tk.myshopify.com/cart/c/abc")).toBe(false);
     expect(isTrustedCheckoutUrl("https://evil.example/cart")).toBe(false);

@@ -5,6 +5,7 @@ import { AnnouncementBar } from "@/components/announcement-bar";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { getCart } from "@/lib/cart";
+import { publicSiteUrl } from "@/lib/site";
 import { stripCursorRefScript } from "@/lib/strip-cursor-refs";
 import "./globals.css";
 
@@ -34,9 +35,16 @@ const body = Lato({
 });
 
 export const metadata: Metadata = {
+  metadataBase: publicSiteUrl(),
   title: { default: "True Pointers Legacy", template: "%s · True Pointers" },
   description:
     "True Pointers presents Legacy, an extended tennis chain. Explore Flawless for the elevated version.",
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    url: "/",
+    siteName: "True Pointers Legacy",
+  },
   robots: { index: false, follow: false },
 };
 
