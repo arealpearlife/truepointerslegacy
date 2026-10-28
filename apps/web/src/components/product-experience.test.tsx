@@ -73,6 +73,27 @@ describe("Legacy product experience", () => {
     expect(screen.queryByText("$329")).not.toBeInTheDocument();
   });
 
+  it("plays the uploaded Shopify video in the product image box without autoplaying sound", () => {
+    const product = catalogProduct("legacy");
+    product.videos = [
+      { url: "https://cdn.shopify.com/v/legacy.mp4", mimeType: "video/mp4", previewImage: null },
+    ];
+    const { container } = render(
+      <ProductExperience
+        edition="legacy"
+        product={product}
+        flawless={catalogProduct("flawless")}
+        initialSelection={{ stoneSize: null, chainLength: null }}
+        initialModalOpen={false}
+        addToCart={addToCart}
+      />,
+    );
+    const video = container.querySelector(".gallery video") as HTMLVideoElement;
+    expect(video.querySelector("source")).toHaveAttribute("src", product.videos[0]!.url);
+    expect(video.muted).toBe(true);
+    expect(video.autoplay).toBe(false);
+  });
+
   it("replaces the comparison table with a fit guide that follows the chosen length", () => {
     render(
       <ProductExperience

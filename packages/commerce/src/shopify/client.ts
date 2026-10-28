@@ -49,7 +49,7 @@ const PRODUCT_QUERY = `
           alt
           ... on MediaImage { image { url altText width height } }
           ... on Video {
-            sources { url mimeType }
+            sources { url mimeType height }
             previewImage { url altText width height }
           }
         }

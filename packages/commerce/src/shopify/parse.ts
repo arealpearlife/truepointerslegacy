@@ -101,12 +101,14 @@ function parseMedia(value: unknown): { images: ImageAsset[]; videos: VideoAsset[
       if (image) images.push({ ...image, altText: image.altText ?? optionalText(record.alt) });
     }
     if (record.mediaContentType === "VIDEO" && Array.isArray(record.sources)) {
-      const source = record.sources.find((item) => {
-        const candidate = recordOf(item, "video source");
-        return typeof candidate.url === "string" && candidate.url.startsWith("https://");
-      });
-      if (!source) continue;
-      const sourceRecord = recordOf(source, "video source");
+      const playable = record.sources
+        .map((item) => recordOf(item, "video source"))
+        .filter((item) => typeof item.url === "string" && item.url.startsWith("https://"));
+      const mp4 = playable
+        .filter((item) => item.mimeType === "video/mp4")
+        .sort((a, b) => (Number(b.height) || 0) - (Number(a.height) || 0));
+      const sourceRecord = mp4.find((item) => (Number(item.height) || 0) <= 1080) ?? mp4[0];
+      if (!sourceRecord) continue;
       videos.push({
         url: text(sourceRecord.url, "video url"),
         mimeType: optionalText(sourceRecord.mimeType),

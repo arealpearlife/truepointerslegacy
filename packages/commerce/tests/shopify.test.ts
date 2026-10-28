@@ -86,6 +86,34 @@ describe("Shopify Storefront client", () => {
     expect(headers.get("Shopify-Storefront-Private-Token")).toBeNull();
   });
 
+  it("picks a browser-playable MP4 source for product videos", async () => {
+    const withVideo = structuredClone(productBody);
+    withVideo.data.product.media = {
+      nodes: [
+        {
+          mediaContentType: "VIDEO",
+          alt: null,
+          sources: [
+            { url: "https://cdn.shopify.com/v/stream.m3u8", mimeType: "application/x-mpegURL" },
+            { url: "https://cdn.shopify.com/v/480.mp4", mimeType: "video/mp4", height: 480 },
+            { url: "https://cdn.shopify.com/v/1080.mp4", mimeType: "video/mp4", height: 1080 },
+            { url: "https://cdn.shopify.com/v/2160.mp4", mimeType: "video/mp4", height: 2160 },
+          ],
+          previewImage: null,
+        },
+      ],
+    } as never;
+    const fetchImpl = vi.fn(async () => Response.json(withVideo));
+    const client = createStorefrontClient({
+      domain: "rcvvv5-tk.myshopify.com",
+      fetchImpl: fetchImpl as typeof fetch,
+    });
+    const result = await client.productByHandle("true-pointers-legacy-extended-tennis-chain");
+    expect(result.ok && result.data?.videos).toEqual([
+      { url: "https://cdn.shopify.com/v/1080.mp4", mimeType: "video/mp4", previewImage: null },
+    ]);
+  });
+
   it("sends the private token only as a server header", async () => {
     const fetchImpl = vi.fn(async () =>
       Response.json({ data: { cartCreate: { cart, userErrors: [] } } }),

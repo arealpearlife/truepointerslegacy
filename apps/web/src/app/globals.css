@@ -812,6 +812,33 @@ button:disabled {
   align-items: start;
 }
 
+.gallery > video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border: 1px solid var(--color-platinum-silver);
+  background: var(--color-ink);
+}
+
+.thumb-video {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 4.5rem;
+  height: 4.5rem;
+  background: var(--color-deep-blood);
+  color: var(--color-crystal-white);
+}
+
+.thumb-video b {
+  position: absolute;
+}
+
+.thumbs button[aria-pressed="true"] {
+  border-color: var(--color-ice-signal);
+}
+
 .gallery img {
   width: 100%;
   aspect-ratio: 1;

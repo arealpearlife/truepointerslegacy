@@ -4,6 +4,7 @@ export type {
   CatalogSnapshot,
   CommerceResult,
   ImageAsset,
+  VideoAsset,
   Money,
   Product,
   Resolution,
