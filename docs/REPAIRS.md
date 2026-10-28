@@ -12,6 +12,26 @@ Use this changelog for defects corrected after development begins.
 - **Verification:**
 - **Release or commit:**
 
+## Vercel Next.js deploy could not see the storefront
+
+- **Date:** 2026-10-27
+- **Area:** Production deploy
+- **Reported behavior:** Importing the GitHub repo into Vercel failed the build. `legacybytp.com` still showed Shopify's generic store.
+- **Root cause:** The Vercel project Root Directory is the repository root and the preset is Next.js. The App Router lives in `apps/web`, so the builder looked for `app/` and `.next` at the repo root and did not find them.
+- **Repair:** Install now runs `scripts/prepare-vercel-next.mjs`, which stages `apps/web` `src` and `public` at the repo root so `next build` matches the Vercel Next.js preset. Shopify stays the catalog and checkout host.
+- **Verification:** Local `npm ci && node scripts/prepare-vercel-next.mjs && next build`.
+- **Release or commit:** Vercel root-build staging commit.
+
+## Necklace videos spun on a black loading loop
+
+- **Date:** 2026-10-27
+- **Area:** Home, collection grid, product gallery, and Flawless Upgrade panel
+- **Reported behavior:** The Legacy jewelry video showed a black screen and a spinning loader instead of frames. Other clips on the page did the same.
+- **Root cause:** Eleven players asked the browser for metadata at once. `play()` also ran on every in-view card, so the files queued and never reached a first frame.
+- **Repair:** Grid clips use `preload="none"` and only the on-screen clip plays, muted. The hero and product gallery load one eager player with controls. Off-screen clips pause. Shopify media still replaces local files when present.
+- **Verification:** Format, lint, typecheck, tests, and a browser pass on localhost.
+- **Release or commit:** Video playback and public host commit.
+
 ## Localhost branding instead of the purchased domain
 
 - **Date:** 2026-10-27

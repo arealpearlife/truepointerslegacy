@@ -1,3 +1,7 @@
+# Staged only on Vercel so the Next.js builder can see apps/web at the repo root
+/src
+/public
+
 # Dependencies and generated output
 node_modules/
 dist/

@@ -14,7 +14,6 @@ export function requestMutedPlayback(element: HTMLVideoElement): Promise<void> {
 }
 
 export function releasePlayback(element: HTMLVideoElement): void {
-  playing.delete(element);
   try {
     element.pause();
   } catch {
