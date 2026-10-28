@@ -12,6 +12,16 @@ Use this changelog for defects corrected after development begins.
 - **Verification:**
 - **Release or commit:**
 
+## Placeholder shown instead of the Legacy product video
+
+- **Date:** 2026-10-27
+- **Area:** Web product gallery and Flawless Upgrade panel
+- **Reported behavior:** The owner's Legacy chain video sat on a laptop, and the Legacy image box and Flawless Upgrade panel showed placeholders.
+- **Root cause:** The site only played videos returned by the Shopify Storefront API, and the products are still unpublished drafts.
+- **Repair:** The owner's video is served from `apps/web/public/media/legacy-tennis-chain.mp4`. It plays muted, with controls and no autoplay, in the Legacy image box and the Flawless Upgrade panel. A Shopify product video replaces it once one is uploaded and published.
+- **Verification:** Format, lint, typecheck, tests, and build pass. Checked in the browser.
+- **Release or commit:** Local Legacy video commit.
+
 ## Hydration mismatch in local development
 
 - **Date:** 2026-10-27

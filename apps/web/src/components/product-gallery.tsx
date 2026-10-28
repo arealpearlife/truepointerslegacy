@@ -12,19 +12,22 @@ export function ProductGallery({
   title,
   headline,
   detail,
+  fallbackVideo,
 }: {
   product: Product | null;
   resolution: Resolution | null;
   title: string;
   headline: string;
   detail: string;
+  fallbackVideo?: VideoAsset;
 }) {
   const variantImage =
     resolution && (resolution.status === "available" || resolution.status === "unavailable")
       ? resolution.variant?.image
       : null;
+  const videos = product?.videos.length ? product.videos : fallbackVideo ? [fallbackVideo] : [];
   const media: MediaItem[] = [
-    ...(product?.videos ?? []).map((asset) => ({ kind: "video" as const, asset })),
+    ...videos.map((asset) => ({ kind: "video" as const, asset })),
     ...(product?.images ?? []).map((asset) => ({ kind: "image" as const, asset })),
   ];
   const [selected, setSelected] = useState<MediaItem | null>(null);

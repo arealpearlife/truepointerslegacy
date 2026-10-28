@@ -25,6 +25,7 @@ import { idleActionState } from "@/lib/action-state";
 import { lengthLabel, stoneLabel } from "@/lib/labels";
 import { FitGuide } from "./fit-guide";
 import { FlawlessDialog } from "./flawless-dialog";
+import { legacyChainVideo } from "@/lib/local-media";
 import { MediaPanel } from "./media-panel";
 import { Motto } from "./motto";
 import { ProductGallery } from "./product-gallery";
@@ -71,6 +72,7 @@ export function ProductExperience({
           ]
             .filter(Boolean)
             .join(" × ")}
+          fallbackVideo={edition === "legacy" ? legacyChainVideo : undefined}
         />
         <section className="buy-box">
           <p className="eyebrow">{marketing.eyebrow}</p>

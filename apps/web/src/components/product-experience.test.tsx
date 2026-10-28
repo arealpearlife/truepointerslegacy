@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import { marketing } from "@truepointers/commerce";
 import { catalogProduct, variantId } from "@truepointers/commerce/testing";
 import { idleActionState } from "@/lib/action-state";
+import { legacyChainVideo } from "@/lib/local-media";
 import { ProductExperience } from "./product-experience";
 
 const addToCart = async () => idleActionState;
@@ -92,6 +93,25 @@ describe("Legacy product experience", () => {
     expect(video.querySelector("source")).toHaveAttribute("src", product.videos[0]!.url);
     expect(video.muted).toBe(true);
     expect(video.autoplay).toBe(false);
+  });
+
+  it("shows the local Legacy video in the image box and Flawless Upgrade panel until Shopify has one", () => {
+    const { container } = render(
+      <ProductExperience
+        edition="legacy"
+        product={null}
+        flawless={null}
+        initialSelection={{ stoneSize: null, chainLength: null }}
+        initialModalOpen={false}
+        addToCart={addToCart}
+      />,
+    );
+    for (const selector of [".gallery video", ".panel video"]) {
+      const video = container.querySelector(selector) as HTMLVideoElement;
+      expect(video.querySelector("source")).toHaveAttribute("src", legacyChainVideo.url);
+      expect(video.muted).toBe(true);
+      expect(video.autoplay).toBe(false);
+    }
   });
 
   it("replaces the comparison table with a fit guide that follows the chosen length", () => {

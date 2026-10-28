@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { marketing, type Product } from "@truepointers/commerce";
-import { Placeholder } from "./placeholder";
+import { legacyChainVideo } from "@/lib/local-media";
 
 export function MediaPanel({
   flawless,
@@ -12,7 +12,7 @@ export function MediaPanel({
   onExplore: () => void;
 }) {
   const [expanded, setExpanded] = useState(false);
-  const video = flawless?.videos[0] ?? null;
+  const video = flawless?.videos[0] ?? legacyChainVideo;
 
   return (
     <aside
@@ -30,14 +30,18 @@ export function MediaPanel({
       </button>
       <div className="panel-body">
         <p className="panel-label">{marketing.flawlessUpgrade}</p>
-        {video ? (
-          <>
-            <video controls playsInline preload="metadata" src={video.url} />
-            <p className="caption">Captions have not been provided for this video.</p>
-          </>
-        ) : (
-          <Placeholder label="The Flawless product video will appear here after it is uploaded in Shopify Admin." />
-        )}
+        <video
+          key={video.url}
+          controls
+          muted
+          playsInline
+          loop
+          preload="metadata"
+          aria-label="Flawless Upgrade video"
+        >
+          <source src={video.url} type={video.mimeType ?? undefined} />
+        </video>
+        <p className="caption">Captions have not been provided for this video.</p>
         <button className="ice wide" type="button" onClick={onExplore}>
           {marketing.flawlessUpgrade}
         </button>
