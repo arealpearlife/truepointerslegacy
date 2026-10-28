@@ -2,9 +2,7 @@
 
 ## Current status
 
-The repository is a clean architecture foundation. The interrupted Vite, Capacitor, and Capawesome scaffold was removed because it conflicted with the approved Next.js and Expo architecture and contained no reusable Legacy functionality.
-
-Products and production policies will be added only after the applications and Shopify integration work in a controlled test environment.
+The npm workspace, shared commerce package, and Next.js storefront are now in the repository. Shopify Storefront API version 2026-10 is the sales integration. Purchase controls stay disabled until Shopify returns an available variant. The native Expo storefront has not been generated yet.
 
 ## Target system
 

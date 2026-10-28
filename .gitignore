@@ -6,6 +6,7 @@ coverage/
 .cache/
 .vite/
 .next/
+*.tsbuildinfo
 .expo/
 .expo-shared/
 web-build/

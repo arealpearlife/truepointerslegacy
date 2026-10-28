@@ -25,10 +25,10 @@ Every combination is a distinct Shopify variant. SKUs, inventory quantities, wei
 USD, excluding shipping and applicable taxes:
 
 | Stone size | 40 inches | 44 inches | 48 inches |
-| --- | ---: | ---: | ---: |
-| 3 mm | $329 | $369 | $375 |
-| 4 mm | $417 | $457 | $465 |
-| 5 mm | $421 | $458 | $488 |
+| ---------- | --------: | --------: | --------: |
+| 3 mm       |      $329 |      $369 |      $375 |
+| 4 mm       |      $417 |      $457 |      $465 |
+| 5 mm       |      $421 |      $458 |      $488 |
 
 Internal material: cubic zirconia. Public marketing title: Legacy.
 
@@ -37,10 +37,10 @@ Internal material: cubic zirconia. Public marketing title: Legacy.
 USD, excluding shipping and applicable taxes:
 
 | Stone size | 40 inches | 44 inches | 48 inches |
-| --- | ---: | ---: | ---: |
-| 3 mm | $979 | $1,122 | $1,499 |
-| 4 mm | $989 | $1,259 | $1,499 |
-| 5 mm | $1,199 | $1,399 | $1,699 |
+| ---------- | --------: | --------: | --------: |
+| 3 mm       |      $979 |    $1,122 |    $1,499 |
+| 4 mm       |      $989 |    $1,259 |    $1,499 |
+| 5 mm       |    $1,199 |    $1,399 |    $1,699 |
 
 Internal material: moissanite. Public marketing title: Flawless.
 
