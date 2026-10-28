@@ -38,12 +38,19 @@ describe("PreviewVideo", () => {
     const video = container.querySelector("video")!;
     expect(video.muted).toBe(true);
     expect(video.autoplay).toBe(false);
+    expect(video).toHaveAttribute("preload", "none");
     expect(play).not.toHaveBeenCalled();
 
     act(() => reportVisibility(true));
     expect(play).toHaveBeenCalledTimes(1);
     act(() => reportVisibility(false));
     expect(pause).toHaveBeenCalled();
+  });
+
+  it("preloads the hero clip so the first frame can appear", () => {
+    installBrowser(false);
+    const { container } = render(<PreviewVideo video={legacyChainVideo} eager />);
+    expect(container.querySelector("video")).toHaveAttribute("preload", "auto");
   });
 
   it("stays still with controls when the visitor prefers reduced motion", () => {
