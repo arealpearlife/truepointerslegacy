@@ -29,11 +29,11 @@ describe("Legacy product experience", () => {
     fireEvent.click(screen.getByLabelText("40 inches"));
     expect(screen.getByRole("button", { name: "Add to cart" })).toBeEnabled();
     expect(screen.getByDisplayValue(variantId("legacy", "3 mm", "40 inches"))).toBeInTheDocument();
-    const upgradeLinks = screen.getAllByRole("link", { name: /flawless shine/i });
-    expect(upgradeLinks.length).toBeGreaterThan(0);
-    for (const link of upgradeLinks) {
-      expect(link).toHaveAttribute("href", "/flawless");
-    }
+    expect(screen.getByRole("link", { name: marketing.flawlessUpgrade })).toHaveAttribute(
+      "href",
+      "/flawless",
+    );
+    expect(screen.getByRole("link", { name: /the upgrade/i })).toHaveAttribute("href", "/flawless");
   });
 
   it("never prints cubic zirconia or moissanite even when Shopify sends those words", () => {

@@ -31,6 +31,10 @@ export const marketing = {
   payLaterEyebrow: "BUY NOW, PAY LATER",
   payLaterTitle: "FLAWLESS",
   payLaterLine: "Flawless shine. Every wear.",
+  flawlessKicker: "THE UPGRADE",
+  flawlessHeat: "The one they ask for.",
+  flawlessPlateLead: "HARDER",
+  flawlessPlateShine: "ICE.",
   payLaterWhisper: "Buy now, pay later",
   payLaterBody:
     "Same extra-long drop. Hand-set ice with flawless clarity shine that passes the diamond tester. Shop Pay, Klarna, and Afterpay appear at Shopify checkout.",

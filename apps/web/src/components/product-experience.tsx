@@ -57,7 +57,7 @@ export function ProductExperience({
   const variantId = resolution?.status === "available" ? resolution.variant.id : "";
 
   return (
-    <main id="main">
+    <main id="main" data-surface={edition === "flawless" ? "flawless" : "legacy"}>
       <div className={edition === "legacy" ? "product-layout" : "product-layout without-panel"}>
         <ProductGallery
           product={product}
@@ -77,7 +77,7 @@ export function ProductExperience({
         <section className="buy-box">
           <p className="eyebrow">{payLater ? marketing.payLaterEyebrow : marketing.eyebrow}</p>
           <h1 className="poster product-name">
-            {edition === "legacy" ? marketing.legacyName : marketing.flawlessName}
+            {edition === "legacy" ? marketing.legacyName : marketing.payLaterTitle}
           </h1>
           {edition === "legacy" ? (
             <>
@@ -87,15 +87,17 @@ export function ProductExperience({
             </>
           ) : (
             <>
-              <p className="statement">
-                {payLater ? marketing.payLaterLine : marketing.flawlessHeading}
-              </p>
+              <Motto
+                className="on-plate on-ice"
+                lead={marketing.flawlessPlateLead}
+                shine={marketing.flawlessPlateShine}
+              />
               <p className="statement accent">{marketing.flawlessLine}</p>
               <p>{payLater ? marketing.payLaterBody : marketing.flawlessBody}</p>
               {payLater ? <PayLaterStrip /> : null}
-              {offer ? <p>{marketing.fromPrice}</p> : null}
+              {offer ? <p className="from-price">{marketing.fromPrice}</p> : null}
               <p>
-                <Link href={`/products/${HANDLES.legacy}`}>Shop Legacy</Link>
+                <Link href={`/products/${HANDLES.legacy}`}>{marketing.keepLegacy}</Link>
               </p>
             </>
           )}
@@ -160,7 +162,7 @@ export function ProductExperience({
           </form>
           {edition === "legacy" ? (
             <Link className="button ice wide" href="/flawless">
-              {marketing.payLaterLine}
+              {marketing.flawlessUpgrade}
             </Link>
           ) : null}
         </section>

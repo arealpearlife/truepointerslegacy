@@ -2,6 +2,16 @@
 
 Use this changelog for defects corrected after development begins.
 
+## Flawless box read as a second Legacy card
+
+- **Date:** 2026-10-28
+- **Area:** Legacy product page upgrade box and `/flawless`
+- **Reported behavior:** After the pay-later path landed, Flawless looked like a duplicate Legacy buy box with a pay-later line.
+- **Root cause:** The box reused the white product-card treatment and the Flawless page kept the Legacy tennis-chain heading pattern.
+- **Repair:** Flawless now sits on the ice side of the same palette: an upgrade ticket marked FLAWLESS, "the one they ask for," and a HARDER ICE plate on the pay-later page. Pay later stays a quiet checkout note.
+- **Verification:** Panel and product-experience tests.
+- **Release or commit:** Flawless ice-ticket commit.
+
 ## Flawless Upgrade box did not sell pay later
 
 - **Date:** 2026-10-28
