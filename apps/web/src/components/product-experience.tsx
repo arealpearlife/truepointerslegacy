@@ -23,15 +23,16 @@ import {
 import type { ActionState } from "@/lib/action-state";
 import { idleActionState } from "@/lib/action-state";
 import { lengthLabel, stoneLabel } from "@/lib/labels";
-import { ComparisonTable } from "./comparison-table";
+import { FitGuide } from "./fit-guide";
 import { FlawlessDialog } from "./flawless-dialog";
 import { MediaPanel } from "./media-panel";
+import { Motto } from "./motto";
 import { ProductGallery } from "./product-gallery";
+import { Tape } from "./tape";
 
 export function ProductExperience({
   edition,
   product,
-  legacy,
   flawless,
   initialSelection,
   initialModalOpen,
@@ -39,7 +40,6 @@ export function ProductExperience({
 }: {
   edition: Edition;
   product: Product | null;
-  legacy: Product | null;
   flawless: Product | null;
   initialSelection: Selection;
   initialModalOpen: boolean;
@@ -73,19 +73,20 @@ export function ProductExperience({
             .join(" × ")}
         />
         <section className="buy-box">
-          <p className="eyebrow">
-            {edition === "legacy" ? marketing.eyebrow : marketing.flawlessHeading}
-          </p>
-          <h1>{title}</h1>
+          <p className="eyebrow">{marketing.eyebrow}</p>
+          <h1 className="poster product-name">
+            {edition === "legacy" ? marketing.legacyName : marketing.flawlessName}
+          </h1>
           {edition === "legacy" ? (
             <>
-              <p className="statement">{marketing.heroLine}</p>
-              <p className="statement accent">{marketing.heroLineTwo}</p>
+              <Motto className="on-plate" />
+              <p className="statement accent">{marketing.iceLine}</p>
               <p>{marketing.heroBody}</p>
             </>
           ) : (
             <>
-              <p className="statement">{marketing.flawlessLine}</p>
+              <p className="statement">{marketing.flawlessHeading}</p>
+              <p className="statement accent">{marketing.flawlessLine}</p>
               <p>{marketing.flawlessBody}</p>
               {offer ? <p>{marketing.fromPrice}</p> : null}
               <p>
@@ -143,7 +144,7 @@ export function ProductExperience({
           </form>
           {edition === "legacy" ? (
             <button className="ice wide" type="button" onClick={() => setModalOpen(true)}>
-              {marketing.exploreFlawless}
+              {marketing.flawlessUpgrade}
             </button>
           ) : null}
           <section>
@@ -155,7 +156,11 @@ export function ProductExperience({
           <MediaPanel flawless={flawless} onExplore={() => setModalOpen(true)} />
         ) : null}
       </div>
-      <ComparisonTable legacy={legacy} flawless={flawless} selection={selection} />
+      <Tape tone="ice" />
+      <FitGuide
+        selected={selection.chainLength}
+        onSelect={(chainLength) => setSelection((current) => ({ ...current, chainLength }))}
+      />
       {edition === "legacy" ? (
         <FlawlessDialog
           open={modalOpen}

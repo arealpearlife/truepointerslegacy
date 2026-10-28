@@ -22,6 +22,16 @@ Use this changelog for defects corrected after development begins.
 - **Verification:** The policy and product pages load in the Cursor browser without hydration errors.
 - **Release or commit:** Storefront redesign commit.
 
+## Naming, voice, and fit guide revisions
+
+- **Date:** 2026-10-27
+- **Area:** Web storefront copy and product page
+- **Reported behavior:** "Explore Flawless" did not land as an upgrade. The product heading repeated "True Pointers Legacy Extended Tennis Chain". The motto and copy read as generic and machine-written. The comparison table felt like a widget, not a guide.
+- **Root cause:** The first copy pass used placeholder brand language and showed the Shopify product title as the heading.
+- **Repair:** The heading is now "Legacy Tennis Chain", with the extended silhouette described in the body copy. "Flawless Upgrade" replaces "Explore Flawless", and the header navigation reads "Legacy". The motto is now "A Legacy. The era that left a mark." with an animated ice shimmer and sparkles. The copy uses a streetwear voice. Varsity tape strips, a stitched TP patch, and outlined backdrop lettering were added. A to-scale torso fit guide replaces the comparison table.
+- **Verification:** Format, lint, typecheck, tests, and build pass. Checked in the browser.
+- **Release or commit:** Storefront voice and fit guide commit.
+
 ## Flat, unsaturated storefront presentation
 
 - **Date:** 2026-10-27

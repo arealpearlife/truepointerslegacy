@@ -65,7 +65,7 @@ export function FlawlessDialog({
         <button ref={closeRef} type="button" onClick={onClose}>
           {marketing.close}
         </button>
-        <p className="eyebrow">{marketing.exploreFlawless}</p>
+        <p className="eyebrow">{marketing.flawlessUpgrade}</p>
         <h2 id="flawless-title">{marketing.modalTitle}</h2>
         <p>{marketing.modalBody}</p>
         <p>{materialStatement("flawless", flawless)}</p>
@@ -97,7 +97,7 @@ export function FlawlessDialog({
         )}
         <div className="modal-actions">
           <Link className="button primary" href={configurationHref(HANDLES.flawless, selection)}>
-            {marketing.exploreFlawless}
+            {marketing.flawlessUpgrade}
           </Link>
           <button type="button" onClick={onClose}>
             {marketing.keepLegacy}

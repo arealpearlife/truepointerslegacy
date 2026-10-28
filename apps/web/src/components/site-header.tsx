@@ -14,15 +14,15 @@ export function SiteHeader({ cartCount }: { cartCount: number }) {
       <div className="container masthead">
         <nav className="nav-group" aria-label="Shop">
           <Link href="/">Home</Link>
-          <Link href={legacy}>Shop Legacy</Link>
-          <Link href={`${legacy}#compare`}>Compare</Link>
+          <Link href={legacy}>Legacy</Link>
+          <Link href={`${legacy}#fit`}>Fit Guide</Link>
         </nav>
         <Link className="wordmark" href="/" aria-label="True Pointers home">
           <span className="wordmark-main">TRUE POINTERS</span>
           <span className="wordmark-sub">LEGACY</span>
         </Link>
         <nav className="nav-group right" aria-label="Account and cart">
-          <Link href={`${legacy}?explore=flawless`}>Explore Flawless</Link>
+          <Link href={`${legacy}?explore=flawless`}>Flawless Upgrade</Link>
           <Link href="/support">Support</Link>
           <Link className="cart-link" href="/cart">
             Cart{cartCount > 0 ? <span className="cart-count">{cartCount}</span> : null}

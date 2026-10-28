@@ -9,7 +9,7 @@ export function SiteFooter() {
       <div className="container footer-grid">
         <div>
           <p className="footer-mark poster">TRUE POINTERS</p>
-          <p className="footer-tag">Legacy. The era that changed the game.</p>
+          <p className="footer-tag">A Legacy. The era that left a mark.</p>
         </div>
         <nav aria-label="Shop">
           <h2>Shop</h2>
@@ -18,10 +18,10 @@ export function SiteFooter() {
               <Link href={legacy}>Legacy</Link>
             </li>
             <li>
-              <Link href={`${legacy}?explore=flawless`}>Explore Flawless</Link>
+              <Link href={`${legacy}?explore=flawless`}>Flawless Upgrade</Link>
             </li>
             <li>
-              <Link href={`${legacy}#compare`}>Compare</Link>
+              <Link href={`${legacy}#fit`}>Fit Guide</Link>
             </li>
             <li>
               <Link href="/cart">Cart</Link>

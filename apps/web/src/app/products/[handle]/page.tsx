@@ -4,7 +4,6 @@ import {
   APPROVED_CHAIN_LENGTHS,
   APPROVED_STONE_SIZES,
   CHAIN_LENGTH,
-  PRODUCT_TITLES,
   STONE_SIZE,
   editionFromHandle,
   optionValues,
@@ -24,7 +23,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { handle } = await params;
   const edition = editionFromHandle(handle);
   if (!edition) return { title: "Product" };
-  return { title: PRODUCT_TITLES[edition] };
+  return { title: edition === "legacy" ? "Legacy Tennis Chain" : "Flawless Tennis Chain" };
 }
 
 export default async function ProductPage({ params, searchParams }: PageProps) {
@@ -47,7 +46,6 @@ export default async function ProductPage({ params, searchParams }: PageProps) {
       <ProductExperience
         edition={edition}
         product={product}
-        legacy={legacy}
         flawless={flawless}
         initialSelection={readSelection(query, product)}
         initialModalOpen={query.explore === "flawless"}

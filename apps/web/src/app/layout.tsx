@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Anton, Lato, Tenor_Sans } from "next/font/google";
+import { Anton, Graduate, Lato, Tenor_Sans } from "next/font/google";
 import { cssVariables } from "@truepointers/tokens";
 import { AnnouncementBar } from "@/components/announcement-bar";
 import { SiteFooter } from "@/components/site-footer";
@@ -12,6 +12,12 @@ const poster = Anton({
   subsets: ["latin"],
   weight: "400",
   variable: "--font-poster",
+  display: "swap",
+});
+const varsity = Graduate({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-varsity",
   display: "swap",
 });
 const display = Tenor_Sans({
@@ -43,7 +49,9 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
       <head>
         <style>{cssVariables}</style>
       </head>
-      <body className={`${poster.variable} ${display.variable} ${body.variable}`}>
+      <body
+        className={`${poster.variable} ${varsity.variable} ${display.variable} ${body.variable}`}
+      >
         <a className="skip-link" href="#main">
           Skip to content
         </a>

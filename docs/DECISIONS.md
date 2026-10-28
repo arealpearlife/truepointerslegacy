@@ -53,7 +53,7 @@ Record decisions here before they become expensive to reverse.
 
 - **Status:** accepted
 - **Date:** 2026-10-27
-- **Decision:** Use a streetwear-luxury type system through `next/font`: Anton for poster headlines and prices, Tenor Sans for uppercase section headings, and Lato with wide tracking for navigation and body text. All three are SIL Open Font License families. This replaces Fraunces and Source Sans 3, which read as generic presentation type.
+- **Decision:** Use a streetwear-luxury type system through `next/font`: Anton for poster headlines and prices, Tenor Sans for uppercase section headings, Graduate for varsity-style patches, tape strips, and shortcut numbers, and Lato with wide tracking for navigation and body text. All three are SIL Open Font License families. This replaces Fraunces and Source Sans 3, which read as generic presentation type.
 - **Consequence:** These fonts remain until a licensed brand typeface is supplied.
 
 ### ADR-007: Saturated signal colors
@@ -62,6 +62,13 @@ Record decisions here before they become expensive to reverse.
 - **Date:** 2026-10-27
 - **Decision:** Keep the seven approved palette values unchanged and add derived signal tokens in `@truepointers/tokens` so red and blue read loudly on screen: Cherry Signal `#E5002B`, Ice Signal `#00B4FF`, Ice Glow `#6FD8FF`, Deep Blood `#4A0414`, and Ink `#14060A` for text. The layout follows familiar hip-hop jewelry storefront patterns (announcement marquee, centered wordmark, ring shortcuts, product tile grid), but uses red and ice-blue bands on a bright base instead of a black theme.
 - **Consequence:** Text on Ice Signal must use Ink, and white text is allowed on Cherry Signal and Deep Blood. A token test enforces at least 4.5:1 contrast for those pairings.
+
+### ADR-008: Fit guide replaces the comparison table
+
+- **Status:** accepted
+- **Date:** 2026-10-27
+- **Decision:** The product page and landing page show a to-scale male torso fit guide instead of a Legacy and Flawless comparison table. Dotted chains show where 40, 44, and 48 inch lengths land, with drops of about 13, 15, and 17 inches below the neck notch on a 5'10" frame with a 15.5 inch neck. The guide follows the selected length, and selecting a length in the guide updates the purchase selection. "Explore Flawless" is now called "Flawless Upgrade". The Flawless window still never changes the variant or adds to the cart.
+- **Consequence:** Stone material disclosures stay in the product details and the Flawless window. Update the drop values if True Pointers measures the finished chains on a fit model.
 
 ## Open decisions
 

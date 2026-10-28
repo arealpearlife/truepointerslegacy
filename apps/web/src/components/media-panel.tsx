@@ -18,7 +18,7 @@ export function MediaPanel({
     <aside
       className="panel"
       data-expanded={expanded ? "true" : "false"}
-      aria-label="Explore Flawless"
+      aria-label="Flawless Upgrade"
     >
       <button
         className="panel-toggle"
@@ -26,10 +26,10 @@ export function MediaPanel({
         aria-expanded={expanded}
         onClick={() => setExpanded((value) => !value)}
       >
-        {expanded ? "Hide Flawless preview" : "Show Flawless preview"}
+        {expanded ? "Hide the Flawless Upgrade" : "See the Flawless Upgrade"}
       </button>
       <div className="panel-body">
-        <p className="panel-label">{marketing.exploreFlawless}</p>
+        <p className="panel-label">{marketing.flawlessUpgrade}</p>
         {video ? (
           <>
             <video controls playsInline preload="metadata" src={video.url} />
@@ -39,7 +39,7 @@ export function MediaPanel({
           <Placeholder label="The Flawless product video will appear here after it is uploaded in Shopify Admin." />
         )}
         <button className="ice wide" type="button" onClick={onExplore}>
-          {marketing.exploreFlawless}
+          {marketing.flawlessUpgrade}
         </button>
       </div>
     </aside>

@@ -16,8 +16,8 @@ const shortcuts = [
     ring: lengthLabel(length),
     label: `${lengthLabel(length)} length`,
   })),
-  { href: `${legacy}#compare`, ring: "VS", label: "Compare" },
-  { href: `${legacy}?explore=flawless`, ring: "F", label: "Flawless", tone: "flawless" },
+  { href: `${legacy}#fit`, ring: "FIT", label: "Fit guide" },
+  { href: `${legacy}?explore=flawless`, ring: "F", label: "Flawless Upgrade", tone: "flawless" },
 ];
 
 export function ShortcutRings() {

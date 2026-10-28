@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { marketing } from "@truepointers/commerce";
 import { catalogProduct, variantId } from "@truepointers/commerce/testing";
@@ -13,7 +13,6 @@ describe("Legacy product experience", () => {
       <ProductExperience
         edition="legacy"
         product={catalogProduct("legacy")}
-        legacy={catalogProduct("legacy")}
         flawless={catalogProduct("flawless")}
         initialSelection={{ stoneSize: null, chainLength: null }}
         initialModalOpen={false}
@@ -21,12 +20,13 @@ describe("Legacy product experience", () => {
       />,
     );
 
+    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("LEGACY TENNIS CHAIN");
     fireEvent.click(screen.getByLabelText("3 mm"));
     fireEvent.click(screen.getByLabelText("40 inches"));
     expect(screen.getByRole("button", { name: "Add to cart" })).toBeEnabled();
     expect(screen.getByDisplayValue(variantId("legacy", "3 mm", "40 inches"))).toBeInTheDocument();
 
-    fireEvent.click(screen.getAllByRole("button", { name: marketing.exploreFlawless })[0]!);
+    fireEvent.click(screen.getAllByRole("button", { name: marketing.flawlessUpgrade })[0]!);
     const dialog = screen.getByRole("dialog");
     expect(dialog).toHaveTextContent(marketing.modalTitle);
     expect(dialog).toHaveTextContent(marketing.fromPrice);
@@ -44,7 +44,6 @@ describe("Legacy product experience", () => {
       <ProductExperience
         edition="legacy"
         product={catalogProduct("legacy")}
-        legacy={catalogProduct("legacy")}
         flawless={catalogProduct("flawless", false)}
         initialSelection={{ stoneSize: null, chainLength: null }}
         initialModalOpen
@@ -62,7 +61,6 @@ describe("Legacy product experience", () => {
       <ProductExperience
         edition="legacy"
         product={null}
-        legacy={null}
         flawless={null}
         initialSelection={{ stoneSize: "3 mm", chainLength: "40 inches" }}
         initialModalOpen={false}
@@ -72,5 +70,29 @@ describe("Legacy product experience", () => {
     expect(screen.getByRole("button", { name: "Add to cart" })).toBeDisabled();
     expect(screen.getByText("This piece is not available to purchase yet.")).toBeInTheDocument();
     expect(screen.queryByText("$329")).not.toBeInTheDocument();
+  });
+
+  it("replaces the comparison table with a fit guide that follows the chosen length", () => {
+    render(
+      <ProductExperience
+        edition="legacy"
+        product={catalogProduct("legacy")}
+        flawless={catalogProduct("flawless")}
+        initialSelection={{ stoneSize: "4 mm", chainLength: "40 inches" }}
+        initialModalOpen={false}
+        addToCart={addToCart}
+      />,
+    );
+    expect(screen.queryByRole("table")).not.toBeInTheDocument();
+    const guide = screen.getByRole("region", { name: /where it hits/i });
+    expect(within(guide).getByRole("img")).toHaveAccessibleName(/40, 44, and 48 inch/);
+    expect(within(guide).getByRole("button", { name: /40" Mid-abs/ })).toHaveAttribute(
+      "aria-pressed",
+      "true",
+    );
+
+    fireEvent.click(within(guide).getByRole("button", { name: /48" Toward the waistband/ }));
+    expect(screen.getByLabelText("48 inches")).toBeChecked();
+    expect(screen.getByDisplayValue(variantId("legacy", "4 mm", "48 inches"))).toBeInTheDocument();
   });
 });

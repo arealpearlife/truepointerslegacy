@@ -1,9 +1,10 @@
 const messages = [
-  "The Legacy Extended Tennis Chain",
+  "Legacy Tennis Chain",
   "3MM · 4MM · 5MM stones",
-  '40" · 44" · 48" lengths',
-  "Checkout powered by Shopify",
-  "Explore Flawless — the Legacy look, elevated",
+  '40" · 44" · 48" drops',
+  "Hung long, worn loud",
+  "Flawless Upgrade",
+  "Checkout through Shopify",
 ];
 
 export function AnnouncementBar() {
