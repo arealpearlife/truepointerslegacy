@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { auditApprovedPrices } from "../src/approval";
-import { marketingViolations } from "../src/brand";
+import { marketing, marketingViolations } from "../src/brand";
 import { loadStoreCatalog } from "../src/catalog";
 import { buildComparison, flawlessStartingOffer } from "../src/comparison";
 import { formatMoney, parseMoney } from "../src/money";
@@ -61,6 +61,11 @@ describe("commerce rules", () => {
     const repriced = catalogProduct("flawless");
     repriced.variants[0] = { ...repriced.variants[0]!, price: parseMoney("980.00", "USD") };
     expect(flawlessStartingOffer(repriced)).toBeNull();
+  });
+
+  it("uses Hits Last Forever instead of the old era motto", () => {
+    expect(`${marketing.mottoLead} ${marketing.motto}`).toBe("HITS LAST FOREVER.");
+    expect(`${marketing.mottoLead} ${marketing.motto}`).not.toMatch(/era that left a mark/i);
   });
 
   it("keeps technical material labels out of marketing copy", () => {

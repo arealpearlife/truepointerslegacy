@@ -2,6 +2,16 @@
 
 Use this changelog for defects corrected after development begins.
 
+## Hero still used the old era motto
+
+- **Date:** 2026-10-27
+- **Area:** Web hero motto and tape
+- **Reported behavior:** The phone hero still read "A Legacy. The era that left a mark."
+- **Root cause:** That line was still the shared marketing motto.
+- **Repair:** The motto and tape now say "Hits Last Forever."
+- **Verification:** Motto and commerce copy tests.
+- **Release or commit:** Hits Last Forever motto commit.
+
 ## Footer still used the old era line
 
 - **Date:** 2026-10-27
