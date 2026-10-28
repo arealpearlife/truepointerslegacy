@@ -2,6 +2,16 @@
 
 Use this changelog for defects corrected after development begins.
 
+## Product-page Legacy and Flawless clips were reversed
+
+- **Date:** 2026-10-28
+- **Area:** Legacy product gallery and Flawless upgrade box
+- **Reported behavior:** On the live product page the gallery beside Legacy Tennis Chain played the colorful sparkle necklace, and the Flawless ice-ticket played the flatter necklace.
+- **Root cause:** The home-page slot swap left `legacy-gallery` and `upgrade-panel` on the opposite clips. Those two slots drive the product page; Shopify had no videos on the Flawless product, so the local map was what customers saw.
+- **Repair:** `legacy-gallery` now uses the flatter Legacy clip (`legacy-chain-5.mp4`, same as `home-hero`). `upgrade-panel`, `flawless-gallery`, and `pay-later` use the sparkle clip (`legacy-tennis-chain.mp4`). Home `home-hero` / `flawless-band` stayed as they were. Files were not renamed.
+- **Verification:** Local-media slot test, product-experience gallery vs panel sources, and media-panel clip test.
+- **Release or commit:** Product-page clip swap commit.
+
 ## Home Legacy and Flawless clips were reversed
 
 - **Date:** 2026-10-28

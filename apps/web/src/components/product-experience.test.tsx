@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { marketing } from "@truepointers/commerce";
 import { catalogProduct, variantId } from "@truepointers/commerce/testing";
 import { idleActionState } from "@/lib/action-state";
-import { REPRESENTATIVE_CAPTION, legacyChainVideo, previewVideo } from "@/lib/local-media";
+import { REPRESENTATIVE_CAPTION, previewVideo } from "@/lib/local-media";
 import { ProductExperience } from "./product-experience";
 
 const addToCart = async () => idleActionState;
@@ -124,7 +124,12 @@ describe("Legacy product experience", () => {
     );
     const gallery = container.querySelector(".gallery video") as HTMLVideoElement;
     const panel = container.querySelector(".panel video") as HTMLVideoElement;
-    expect(gallery.querySelector("source")).toHaveAttribute("src", legacyChainVideo.url);
+    expect(gallery.querySelector("source")).toHaveAttribute("src", "/media/legacy-chain-5.mp4");
+    expect(panel.querySelector("source")).toHaveAttribute("src", "/media/legacy-tennis-chain.mp4");
+    expect(gallery.querySelector("source")).toHaveAttribute(
+      "src",
+      previewVideo("legacy-gallery").url,
+    );
     expect(panel.querySelector("source")).toHaveAttribute("src", previewVideo("upgrade-panel").url);
     expect(gallery.muted).toBe(true);
     expect(panel.muted).toBe(true);
@@ -143,6 +148,7 @@ describe("Legacy product experience", () => {
       />,
     );
     const video = container.querySelector(".gallery video") as HTMLVideoElement;
+    expect(video.querySelector("source")).toHaveAttribute("src", "/media/legacy-tennis-chain.mp4");
     expect(video.querySelector("source")).toHaveAttribute(
       "src",
       previewVideo("flawless-gallery").url,
@@ -150,6 +156,22 @@ describe("Legacy product experience", () => {
     expect(video.muted).toBe(true);
     expect(video.autoplay).toBe(false);
     expect(screen.getByText(REPRESENTATIVE_CAPTION)).toBeInTheDocument();
+  });
+
+  it("plays the sparkle clip on the pay-later Flawless page until Shopify has media", () => {
+    const { container } = render(
+      <ProductExperience
+        edition="flawless"
+        product={null}
+        flawless={null}
+        initialSelection={{ stoneSize: null, chainLength: null }}
+        addToCart={addToCart}
+        payLater
+      />,
+    );
+    const video = container.querySelector(".gallery video") as HTMLVideoElement;
+    expect(video.querySelector("source")).toHaveAttribute("src", "/media/legacy-tennis-chain.mp4");
+    expect(video.querySelector("source")).toHaveAttribute("src", previewVideo("pay-later").url);
   });
 
   it("shows the Shopify product image instead of the local video", () => {

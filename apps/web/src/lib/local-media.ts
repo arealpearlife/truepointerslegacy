@@ -33,10 +33,10 @@ export type PreviewSlot =
 const slotVideos: Record<PreviewSlot, VideoAsset> = {
   "home-hero": chain5,
   "flawless-band": chain4,
-  "legacy-gallery": legacyChainVideo,
-  "flawless-gallery": chain2,
-  "upgrade-panel": chain5,
-  "pay-later": chain2,
+  "legacy-gallery": chain5,
+  "flawless-gallery": legacyChainVideo,
+  "upgrade-panel": legacyChainVideo,
+  "pay-later": legacyChainVideo,
 };
 
 // Rows are stone sizes and columns are lengths; no clip repeats next to itself in the grid.

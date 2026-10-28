@@ -35,6 +35,15 @@ describe("local preview media", () => {
     expect(previewVideo("home-hero").url).not.toBe(previewVideo("flawless-band").url);
   });
 
+  it("puts the sparkle clip on product-page Flawless and the flatter clip beside Legacy", () => {
+    expect(previewVideo("legacy-gallery").url).toBe("/media/legacy-chain-5.mp4");
+    expect(previewVideo("upgrade-panel").url).toBe("/media/legacy-tennis-chain.mp4");
+    expect(previewVideo("flawless-gallery").url).toBe("/media/legacy-tennis-chain.mp4");
+    expect(previewVideo("pay-later").url).toBe("/media/legacy-tennis-chain.mp4");
+    expect(previewVideo("legacy-gallery").url).toBe(previewVideo("home-hero").url);
+    expect(previewVideo("legacy-gallery").url).not.toBe(previewVideo("upgrade-panel").url);
+  });
+
   it("prefers Shopify images, then Shopify videos, over the local clip", () => {
     expect(displayMedia(null, "home-hero")).toMatchObject({ kind: "video", representative: true });
 
