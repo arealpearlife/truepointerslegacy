@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { marketing, type Product } from "@truepointers/commerce";
 import { REPRESENTATIVE_CAPTION, previewVideo } from "@/lib/local-media";
+import { PreviewVideo } from "./preview-video";
 
 export function MediaPanel({
   flawless,
@@ -30,17 +31,7 @@ export function MediaPanel({
       </button>
       <div className="panel-body">
         <p className="panel-label">{marketing.flawlessUpgrade}</p>
-        <video
-          key={video.url}
-          controls
-          muted
-          playsInline
-          loop
-          preload="metadata"
-          aria-label="Flawless Upgrade video"
-        >
-          <source src={video.url} type={video.mimeType ?? undefined} />
-        </video>
+        <PreviewVideo video={video} label="Flawless Upgrade video" eager controls />
         {flawless?.videos[0] ? null : <p className="caption">{REPRESENTATIVE_CAPTION}</p>}
         <p className="caption">Captions have not been provided for this video.</p>
         <button className="ice wide" type="button" onClick={onExplore}>

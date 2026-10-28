@@ -5,6 +5,22 @@ import { REPRESENTATIVE_CAPTION, localChainVideos } from "@/lib/local-media";
 import { CollectionGrid, collectionCards } from "./collection-grid";
 
 describe("Legacy collection grid", () => {
+  it("lays the nine configurations out as a lookbook instead of a uniform catalog grid", () => {
+    const { container } = render(<CollectionGrid product={null} />);
+    expect(container.querySelector("ul.lookbook")).not.toBeNull();
+    expect(screen.getAllByRole("listitem").map((item) => item.getAttribute("data-slot"))).toEqual([
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+    ]);
+  });
+
   it("shows no prices when Shopify has not published the catalog", () => {
     render(<CollectionGrid product={null} />);
     expect(screen.getAllByRole("listitem")).toHaveLength(9);
@@ -43,7 +59,7 @@ describe("Legacy collection grid", () => {
       expect(pool).toContain(video.querySelector("source")?.getAttribute("src"));
       expect(video.muted).toBe(true);
       expect(video.autoplay).toBe(false);
-      expect(video).toHaveAttribute("preload", "metadata");
+      expect(video).toHaveAttribute("preload", "none");
     }
     const used = new Set(videos.map((video) => video.querySelector("source")?.getAttribute("src")));
     expect(used.size).toBe(pool.length);

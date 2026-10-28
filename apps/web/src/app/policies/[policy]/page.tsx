@@ -3,10 +3,10 @@ import { notFound } from "next/navigation";
 const policies = {
   shipping: "Shipping",
   returns: "Returns and refunds",
+  care: "Care",
   privacy: "Privacy",
   terms: "Terms",
   warranty: "Warranty",
-  care: "Care",
 } as const;
 
 export function generateStaticParams() {

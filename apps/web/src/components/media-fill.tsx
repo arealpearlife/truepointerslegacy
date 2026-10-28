@@ -26,7 +26,12 @@ export function MediaFill({
   }
   return (
     <>
-      <PreviewVideo video={media.asset} label={`${label} video`} controlsWhenStill />
+      <PreviewVideo
+        video={media.asset}
+        label={`${label} video`}
+        eager={priority}
+        controlsWhenStill
+      />
       {media.representative ? <span className="media-note">{REPRESENTATIVE_CAPTION}</span> : null}
     </>
   );

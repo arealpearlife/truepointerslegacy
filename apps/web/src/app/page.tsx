@@ -26,7 +26,7 @@ export default async function HomePage() {
           <span>LEGACY</span>
         </div>
         <div className="container hero-inner">
-          <div>
+          <div className="hero-copy-block">
             <p className="eyebrow">{marketing.eyebrow}</p>
             <h1 className="hero-title poster">{marketing.heroTitle}</h1>
             <Motto />

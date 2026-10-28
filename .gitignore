@@ -53,3 +53,6 @@ apps/mobile/android/
 *.jks
 *.keystore
 DerivedData/
+
+.vercel
+.env*

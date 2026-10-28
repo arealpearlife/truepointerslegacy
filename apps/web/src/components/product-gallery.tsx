@@ -4,6 +4,7 @@ import { useState } from "react";
 import type { ImageAsset, Product, Resolution, VideoAsset } from "@truepointers/commerce";
 import { REPRESENTATIVE_CAPTION } from "@/lib/local-media";
 import { Placeholder } from "./placeholder";
+import { PreviewVideo } from "./preview-video";
 
 type MediaItem = { kind: "image"; asset: ImageAsset } | { kind: "video"; asset: VideoAsset };
 
@@ -50,18 +51,7 @@ export function ProductGallery({
   return (
     <div className="gallery">
       {active.kind === "video" ? (
-        <video
-          key={active.asset.url}
-          controls
-          muted
-          playsInline
-          loop
-          preload="metadata"
-          poster={active.asset.previewImage?.url}
-          aria-label={`${title} product video`}
-        >
-          <source src={active.asset.url} type={active.asset.mimeType ?? undefined} />
-        </video>
+        <PreviewVideo video={active.asset} label={`${title} product video`} eager controls />
       ) : (
         <img
           src={active.asset.url}

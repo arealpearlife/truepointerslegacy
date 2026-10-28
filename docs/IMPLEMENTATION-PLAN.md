@@ -2,7 +2,7 @@
 
 ## Current status
 
-The npm workspace, shared commerce package, and Next.js storefront are now in the repository. Shopify Storefront API version 2026-10 is the sales integration. Purchase controls stay disabled until Shopify returns an available variant. The native Expo storefront has not been generated yet.
+The npm workspace, shared commerce package, and Next.js storefront are in the repository. `www.legacybytp.com` is the Shopify primary domain and is Connected. Purchase controls stay disabled until Shopify returns an available variant. The catalog is still unpublished. The Next.js app is not deployed to that domain yet, so the live hostname currently shows Shopify's password page. Sales and ads readiness is tracked in `docs/LAUNCH.md`. Phase 2 is the Expo native storefront in `apps/mobile`, which has not been generated yet.
 
 ## Target system
 

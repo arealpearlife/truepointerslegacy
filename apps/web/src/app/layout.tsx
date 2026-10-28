@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Anton, Graduate, Lato, Tenor_Sans } from "next/font/google";
 import { cssVariables } from "@truepointers/tokens";
 import { AnnouncementBar } from "@/components/announcement-bar";
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   metadataBase: publicSiteUrl(),
   title: { default: "True Pointers Legacy", template: "%s · True Pointers" },
   description:
-    "True Pointers presents Legacy, an extended tennis chain. Explore Flawless for the elevated version.",
+    "True Pointers presents Legacy, an extended tennis chain. Flawless Upgrade for the elevated version.",
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
@@ -46,6 +46,13 @@ export const metadata: Metadata = {
     siteName: "True Pointers Legacy",
   },
   robots: { index: false, follow: false },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#B51232",
 };
 
 export const dynamic = "force-dynamic";

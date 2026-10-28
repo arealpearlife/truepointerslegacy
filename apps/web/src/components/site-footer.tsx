@@ -9,7 +9,7 @@ export function SiteFooter() {
       <div className="container footer-grid">
         <div>
           <p className="footer-mark poster">TRUE POINTERS</p>
-          <p className="footer-tag">A Legacy. The era that left a mark.</p>
+          <p className="footer-tag">Hits that leave a mark.</p>
         </div>
         <nav aria-label="Shop">
           <h2>Shop</h2>

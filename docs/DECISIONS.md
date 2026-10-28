@@ -60,7 +60,7 @@ Record decisions here before they become expensive to reverse.
 
 - **Status:** accepted
 - **Date:** 2026-10-27
-- **Decision:** Keep the seven approved palette values unchanged and add derived signal tokens in `@truepointers/tokens` so red and blue read loudly on screen: Cherry Signal `#E5002B`, Ice Signal `#00B4FF`, Ice Glow `#6FD8FF`, Deep Blood `#4A0414`, and Ink `#14060A` for text. The layout follows familiar hip-hop jewelry storefront patterns (announcement marquee, centered wordmark, ring shortcuts, product tile grid), but uses red and ice-blue bands on a bright base instead of a black theme.
+- **Decision:** Keep the seven approved palette values unchanged and add derived signal tokens in `@truepointers/tokens` so red and blue read loudly on screen: Cherry Signal `#E5002B`, Ice Signal `#00B4FF`, Ice Glow `#6FD8FF`, Deep Blood `#4A0414`, and Ink `#14060A` for text. The layout still uses jewelry-storefront signals (announcement marquee, wordmark, ring shortcuts, product tiles) on a bright red and ice-blue base, but the composition is editorial rather than a centered catalog. See ADR-011.
 - **Consequence:** Text on Ice Signal must use Ink, and white text is allowed on Cherry Signal and Deep Blood. A token test enforces at least 4.5:1 contrast for those pairings.
 
 ### ADR-008: Fit guide replaces the comparison table
@@ -77,13 +77,22 @@ Record decisions here before they become expensive to reverse.
 - **Decision:** Serve a small pool of the owner's laptop videos from `apps/web/public/media` so every storefront slot shows a necklace while Shopify products are still drafts. Assignment is a fixed shuffle, not `Math.random` at render, so server and client stay in sync. Shopify images and videos replace the local clips the moment they exist. Decorative grid and hero clips play muted and only while on screen; they stay still when the visitor prefers reduced motion. Cards that are a specific stone and length caption the clip as representative footage.
 - **Consequence:** These files are stand-ins. After each configuration has its own Shopify media, remove the local copies from the public folder and keep Shopify as the only media source.
 
+### ADR-011: Editorial lookbook instead of a textbook grid
+
+- **Status:** accepted
+- **Date:** 2026-10-27
+- **Context:** The first storefront pass was readable but sat too perfectly centered, so phone and desktop both felt like a generic catalog template.
+- **Decision:** Compose the public site as a lookbook: off-center masthead, left-weighted copy, staggered collection cards with mixed aspect ratios, and slight static rotation. On a phone, the first, fourth, and ninth cards take a wider slot and the rest sit in an uneven pair. Safe-area insets and `viewport-fit=cover` are for the mobile web display, not a substitute for the later Expo app.
+- **Alternatives:** A uniform 2-up / 3-up catalog grid, or a horizontal snap carousel of identical tiles.
+- **Consequence:** Card hover scale stays small so the stagger remains readable. Reduced-motion visitors still see the static offsets because those are layout, not animation.
+
 ### ADR-010: Public hostname vs Shopify shop hostname
 
 - **Status:** accepted
 - **Date:** 2026-10-27
 - **Context:** `legacybytp.com` was purchased and connected in Shopify. The public site is a Next.js storefront, not the Shopify Online Store theme.
 - **Decision:** Use `https://legacybytp.com` as the customer-facing origin for metadata, canonical URLs, env examples, and docs. Keep `rcvvv5-tk.myshopify.com` as the Storefront API host. Trust checkout URLs on the shop hostname, `legacybytp.com`, `www.legacybytp.com`, `checkout.legacybytp.com`, and `checkout.shopify.com`.
-- **Consequence:** Connecting the domain in Shopify does not host the Next.js app. Until that app is deployed, `legacybytp.com` currently serves Shopify's password-protected Online Store. Local development remains `http://localhost:3000`.
+- **Consequence:** Connecting the domain in Shopify does not host the Next.js app. Shopify now lists `www.legacybytp.com` as the Online Store primary and `account.legacybytp.com` as the customer-account primary. Until the Next.js app is deployed, those hostnames serve Shopify's password-protected Online Store. Local development remains `http://localhost:3000`. This development store is a non-transferable developer preview; the domain can be moved to a regular paid store from the Domains page.
 
 ## Open decisions
 

@@ -2,6 +2,26 @@
 
 Use this changelog for defects corrected after development begins.
 
+## Footer still used the old era line
+
+- **Date:** 2026-10-27
+- **Area:** Web footer
+- **Reported behavior:** The footer under TRUE POINTERS read "A Legacy. The era that left a mark."
+- **Root cause:** That line was left over from the first motto pass.
+- **Repair:** The footer now says "Hits that leave a mark."
+- **Verification:** Footer test.
+- **Release or commit:** Footer copy commit.
+
+## Storefront read as a centered catalog template
+
+- **Date:** 2026-10-27
+- **Area:** Web storefront layout on phone and desktop
+- **Reported behavior:** The shop felt generic: everything sat dead-center in a textbook two- and three-column grid, especially on a phone-sized screen.
+- **Root cause:** The first visual pass copied a standard jewelry catalog: centered wordmark, centered collection copy, and equal product tiles.
+- **Repair:** The masthead sits off-center with the cart on its own control. Collection cards use a staggered lookbook with mixed sizes and slight rotation. Hero, fit guide, Flawless band, and footer follow that uneven composition, with safe-area padding for phones.
+- **Verification:** Collection and header tests plus format, lint, typecheck, and a desktop and mobile browser pass.
+- **Release or commit:** Editorial lookbook layout commit.
+
 ## Entry template
 
 - **Date:**

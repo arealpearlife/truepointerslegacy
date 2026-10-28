@@ -47,13 +47,13 @@ export function collectionCards(product: Product | null): Card[] {
 export function CollectionGrid({ product }: { product: Product | null }) {
   const cards = collectionCards(product);
   return (
-    <ul className="product-grid">
-      {cards.map((card) => {
+    <ul className="product-grid lookbook">
+      {cards.map((card, index) => {
         const stone = stoneLabel(card.selection.stoneSize ?? "");
         const length = lengthLabel(card.selection.chainLength ?? "");
         const name = `Legacy Tennis Chain — ${stone} × ${length}`;
         return (
-          <li className="card" key={`${stone}-${length}`}>
+          <li className="card" data-slot={index + 1} key={`${stone}-${length}`}>
             <Link href={configurationHref(HANDLES.legacy, card.selection)}>
               <div className="card-media">
                 {card.image ? (
@@ -61,7 +61,7 @@ export function CollectionGrid({ product }: { product: Product | null }) {
                     src={card.image.url}
                     alt={card.image.altText ?? name}
                     fill
-                    sizes="(min-width: 760px) 33vw, 50vw"
+                    sizes="(min-width: 900px) 28vw, (min-width: 760px) 40vw, 72vw"
                   />
                 ) : card.video ? (
                   <>
