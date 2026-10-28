@@ -2,6 +2,16 @@
 
 Use this changelog for defects corrected after development begins.
 
+## Home Legacy and Flawless clips were reversed
+
+- **Date:** 2026-10-28
+- **Area:** Home hero and Flawless band
+- **Reported behavior:** The necklace in the Flawless card was the clip that belonged on Legacy, and the other way around.
+- **Root cause:** Local preview slots were assigned without the owner naming which file sat in which card.
+- **Repair:** `home-hero` and `flawless-band` swapped files. The mp4s stayed put; only the slot map changed, so Shopify media still wins when it exists.
+- **Verification:** Local-media slot test and a home-page check that both players are muted and sourced correctly.
+- **Release or commit:** Home clip swap commit.
+
 ## Flawless box read as a second Legacy card
 
 - **Date:** 2026-10-28

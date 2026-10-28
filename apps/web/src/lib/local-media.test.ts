@@ -8,6 +8,7 @@ import {
   displayMedia,
   keyedPreviewVideo,
   localChainVideos,
+  previewVideo,
 } from "./local-media";
 
 describe("local preview media", () => {
@@ -26,6 +27,12 @@ describe("local preview media", () => {
     );
     expect(new Set(urls)).toEqual(new Set(localChainVideos.map((video) => video.url)));
     expect(keyedPreviewVideo("Legacy")).toBe(keyedPreviewVideo("Legacy"));
+  });
+
+  it("swaps the home Legacy clip with the Flawless band clip", () => {
+    expect(previewVideo("home-hero").url).toBe("/media/legacy-chain-5.mp4");
+    expect(previewVideo("flawless-band").url).toBe("/media/legacy-chain-4.mp4");
+    expect(previewVideo("home-hero").url).not.toBe(previewVideo("flawless-band").url);
   });
 
   it("prefers Shopify images, then Shopify videos, over the local clip", () => {

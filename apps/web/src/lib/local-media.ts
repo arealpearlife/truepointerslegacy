@@ -31,8 +31,8 @@ export type PreviewSlot =
 
 // A fixed shuffle so server and client render the same clip in every slot.
 const slotVideos: Record<PreviewSlot, VideoAsset> = {
-  "home-hero": chain4,
-  "flawless-band": chain5,
+  "home-hero": chain5,
+  "flawless-band": chain4,
   "legacy-gallery": legacyChainVideo,
   "flawless-gallery": chain2,
   "upgrade-panel": chain5,
