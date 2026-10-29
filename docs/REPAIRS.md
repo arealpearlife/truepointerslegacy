@@ -2,6 +2,16 @@
 
 Use this changelog for defects corrected after development begins.
 
+## Shopify Admin apex DNS saved; www stays the public hostname until the zone publishes
+
+- **Date:** 2026-10-28
+- **Area:** Apex `legacybytp.com` DNS
+- **Reported behavior:** After Admin DNS edits, no-www still sent visitors to the Shopify shop.
+- **Root cause:** Shopify Admin can show apex `@` → `216.198.79.1` and no AAAA while Google Cloud nameservers still answer Shopify `A 23.227.38.36` and `AAAA 2620:127:f00f:4::`.
+- **Repair:** Record the Admin-side cutover: A `@` `216.198.79.1`, AAAA removed, `www` CNAME to Vercel, `account` left on Shopify. Vercel verify reports `legacybytp.com` configured correctly by A and `www` already serves Next.js with live prices. Do not switch nameservers. Keep sharing `https://www.legacybytp.com` until public NS answers Vercel IPs and apex 308s to www.
+- **Verification:** `npx vercel domains verify legacybytp.com` → `configured_correctly`, `aValues: 216.198.79.1`. `nslookup` against `ns-cloud-d1` / `8.8.8.8` still `23.227.38.36`. `https://legacybytp.com/` still 301s to `https://rcvvv5-tk.myshopify.com/`. `https://www.legacybytp.com/` remains `server: Vercel`.
+- **Release or commit:** Apex Admin DNS docs commit.
+
 ## www.legacybytp.com now serves the Vercel storefront with live prices
 
 - **Date:** 2026-10-28
