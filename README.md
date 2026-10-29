@@ -4,7 +4,7 @@ Foundation for the True Pointers Legacy commerce ecosystem.
 
 ## Current phase
 
-The web storefront is in progress in `apps/web`. The customer-facing origin is `https://www.legacybytp.com` (apex `legacybytp.com` is meant to 308 there). Local development still runs at `http://localhost:3000`. Shopify remains authoritative for price, inventory, and checkout on `rcvvv5-tk.myshopify.com`. Unpublished products keep the storefront in an unavailable purchase state until Shopify returns a sellable variant. The Next.js app is deployed on Vercel; the purchased domain still needs Shopify DNS pointed at that project.
+The web storefront is in `apps/web`. The customer-facing origin is live at `https://www.legacybytp.com` (Vercel Next.js). Local development still runs at `http://localhost:3000`. Shopify remains authoritative for price, inventory, and checkout on `rcvvv5-tk.myshopify.com`. Bare `https://legacybytp.com` is meant to 308 to www once Shopify's published apex A/AAAA records leave Shopify's IPs; until then share www.
 
 ## Structure
 

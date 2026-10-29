@@ -2,6 +2,16 @@
 
 Use this changelog for defects corrected after development begins.
 
+## www.legacybytp.com now serves the Vercel storefront with live prices
+
+- **Date:** 2026-10-28
+- **Area:** Custom domain DNS and catalog visibility
+- **Reported behavior:** The purchased domain showed Shopify's theme, and collection cards said "Price set at launch."
+- **Root cause:** `www` still CNAMEd to Shopify, products were unpublished, and the Shopify DNS editor can show Vercel A records that the Google Cloud zone has not published yet.
+- **Repair:** `www.legacybytp.com` CNAMEs to Vercel and returns Next.js (`TRUE POINTERS`, live Legacy/Flawless prices). Canonical origin and indexing already pointed at www. Apex `legacybytp.com` is attached on Vercel with a 308 to www; the published zone still has Shopify `A 23.227.38.36` and a Shopify AAAA, so the no-www URL can keep redirecting to `rcvvv5-tk.myshopify.com` until that zone updates. `account.legacybytp.com` stays on Shopify customer accounts.
+- **Verification:** `https://www.legacybytp.com/` `server: Vercel`, `x-powered-by: Next.js`, catalog-status `{"state":"live","legacy":true,"flawless":true}`, prices `$329` / `$979`. Authoritative NS still answer apex `A 23.227.38.36`.
+- **Release or commit:** Custom-domain live docs commit.
+
 ## Public origin and indexing prepared for www.legacybytp.com
 
 - **Date:** 2026-10-28
