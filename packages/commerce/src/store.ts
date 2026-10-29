@@ -1,6 +1,6 @@
 export const STORE_DOMAIN = "rcvvv5-tk.myshopify.com";
 export const PUBLIC_SITE_HOST = "legacybytp.com";
-export const PUBLIC_SITE_URL = "https://legacybytp.com";
+export const PUBLIC_SITE_URL = "https://www.legacybytp.com";
 export const STOREFRONT_API_VERSION = "2026-10";
 
 export const HANDLES = {

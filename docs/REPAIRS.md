@@ -2,6 +2,16 @@
 
 Use this changelog for defects corrected after development begins.
 
+## Public origin and indexing prepared for www.legacybytp.com
+
+- **Date:** 2026-10-28
+- **Area:** Web storefront canonical host, robots, and catalog visibility
+- **Reported behavior:** The Next.js shop on Vercel used the apex as its canonical origin and told crawlers not to index. `www.legacybytp.com` still showed Shopify's Liquid store. Collection cards said "Price set at launch" because Shopify returned no published products.
+- **Root cause:** Launch-privacy noindex was still on. Live DNS for the purchased domain still points at Shopify (`A 23.227.38.36`, `www` CNAME `shops.myshopify.com`) on Shopify's Google Cloud nameservers, so Vercel's www assignment and apex 308 cannot take effect yet. Storefront API tokenless access sees the shop but an empty product list.
+- **Repair:** Canonical public origin is now `https://www.legacybytp.com`. `robots.txt` and metadata allow indexing. Apex `legacybytp.com` remains the trusted checkout host and is already set on Vercel to 308 to www. Prices are not invented; they appear only after Shopify products are Active and published to the Headless/Storefront channel. Authoritative DNS still has to be edited in Shopify Admin.
+- **Verification:** Lint, typecheck, and origin/robots tests. `https://truepointerslegacy.vercel.app/` returns Next.js (`TRUE POINTERS`, `server: Vercel`). Live `https://www.legacybytp.com/` still returns Shopify Liquid until DNS is changed.
+- **Release or commit:** Public www origin and indexing commit.
+
 ## Product-page Legacy and Flawless clips were reversed
 
 - **Date:** 2026-10-28

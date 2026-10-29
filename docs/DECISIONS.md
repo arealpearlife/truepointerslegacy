@@ -46,7 +46,7 @@ Record decisions here before they become expensive to reverse.
 
 - **Status:** accepted
 - **Date:** 2026-10-27
-- **Decision:** The web storefront reads the Storefront API version `2026-10` for the `rcvvv5-tk.myshopify.com` shop. Tokens stay server-side. Cart creation and checkout use Shopify `checkoutUrl`. Browser code may display a price only after Shopify returns that variant. The customer-facing hostname is `legacybytp.com`; see ADR-010.
+- **Decision:** The web storefront reads the Storefront API version `2026-10` for the `rcvvv5-tk.myshopify.com` shop. Tokens stay server-side. Cart creation and checkout use Shopify `checkoutUrl`. Browser code may display a price only after Shopify returns that variant. The customer-facing origin is `https://www.legacybytp.com`; see ADR-010.
 - **Consequence:** Approved price matrices are audit checks, not a second price authority. Missing credentials, draft products, and unavailable variants cannot be purchased.
 
 ### ADR-006: Storefront typography
@@ -107,10 +107,10 @@ Record decisions here before they become expensive to reverse.
 ### ADR-010: Public hostname vs Shopify shop hostname
 
 - **Status:** accepted
-- **Date:** 2026-10-27
-- **Context:** `legacybytp.com` was purchased and connected in Shopify. The public site is a Next.js storefront, not the Shopify Online Store theme.
-- **Decision:** Use `https://legacybytp.com` as the customer-facing origin for metadata, canonical URLs, env examples, and docs. Keep `rcvvv5-tk.myshopify.com` as the Storefront API host. Trust checkout URLs on the shop hostname, `legacybytp.com`, `www.legacybytp.com`, `checkout.legacybytp.com`, and `checkout.shopify.com`.
-- **Consequence:** Connecting the domain in Shopify does not host the Next.js app. Shopify now lists `www.legacybytp.com` as the Online Store primary and `account.legacybytp.com` as the customer-account primary. Until the Next.js app is deployed, those hostnames serve Shopify's password-protected Online Store. Local development remains `http://localhost:3000`. This development store is a non-transferable developer preview; the domain can be moved to a regular paid store from the Domains page.
+- **Date:** 2026-10-28
+- **Context:** `legacybytp.com` was purchased through Shopify/Tucows. The public site is the Next.js storefront on Vercel project `truepointerslegacy` (team `tp-0f39`), not the Shopify Online Store theme. Authoritative DNS remains Shopify-managed Google Cloud nameservers (`ns-cloud-d1` through `d4.googledomains.com`) until those records are edited.
+- **Decision:** Use `https://www.legacybytp.com` as the customer-facing origin for metadata, canonical URLs, env examples, and docs. On Vercel, apex `legacybytp.com` 308-redirects to `www.legacybytp.com`. Keep `rcvvv5-tk.myshopify.com` as the Storefront API host and Shopify as checkout authority. Trust checkout URLs on the shop hostname, `legacybytp.com`, `www.legacybytp.com`, `checkout.legacybytp.com`, and `checkout.shopify.com`. Keep `account.legacybytp.com` on Shopify customer accounts. Do not move nameservers to Vercel unless MX and the account CNAME are copied first.
+- **Consequence:** Connecting the domain in Shopify Admin does not host the Next.js app. Until Shopify DNS for www is a CNAME to Vercel (`f065d95d9ec4dd3e.vercel-dns-017.com.`) and the apex uses Vercel's A records (`216.198.79.1` and `64.29.17.1`), public visitors still get Liquid. Local development remains `http://localhost:3000`. This development store is a non-transferable developer preview.
 
 ## Open decisions
 

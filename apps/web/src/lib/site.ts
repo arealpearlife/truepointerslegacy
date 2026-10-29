@@ -1,5 +1,7 @@
 import { PUBLIC_SITE_URL } from "@truepointers/commerce";
 
+export const PUBLIC_INDEXING = { index: true, follow: true } as const;
+
 export function publicSiteOrigin(value = process.env.NEXT_PUBLIC_SITE_URL): string {
   const candidate = value?.trim() || PUBLIC_SITE_URL;
   try {

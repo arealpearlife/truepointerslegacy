@@ -5,7 +5,7 @@ import { AnnouncementBar } from "@/components/announcement-bar";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { getCart } from "@/lib/cart";
-import { publicSiteUrl } from "@/lib/site";
+import { PUBLIC_INDEXING, publicSiteUrl } from "@/lib/site";
 import { stripCursorRefScript } from "@/lib/strip-cursor-refs";
 import "./globals.css";
 
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     url: "/",
     siteName: "True Pointers Legacy",
   },
-  robots: { index: false, follow: false },
+  robots: PUBLIC_INDEXING,
 };
 
 export const viewport: Viewport = {

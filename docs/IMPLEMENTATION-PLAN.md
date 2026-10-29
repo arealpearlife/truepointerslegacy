@@ -2,7 +2,7 @@
 
 ## Current status
 
-The npm workspace, shared commerce package, and Next.js storefront are in the repository. `www.legacybytp.com` is the Shopify primary domain and is Connected. Purchase controls stay disabled until Shopify returns an available variant. The catalog is still unpublished. The Next.js app is not deployed to that domain yet, so the live hostname currently shows Shopify's password page. Sales and ads readiness is tracked in `docs/LAUNCH.md`. Phase 2 is the Expo native storefront in `apps/mobile`, which has not been generated yet.
+The npm workspace, shared commerce package, and Next.js storefront are in the repository. The public origin is `https://www.legacybytp.com` on Vercel; Shopify still owns live DNS, so that hostname currently shows the Online Store theme. Purchase controls stay disabled until Shopify returns an available variant. The catalog is still unpublished. Phase 2 is the Expo native storefront in `apps/mobile`, which has not been generated yet.
 
 ## Target system
 
