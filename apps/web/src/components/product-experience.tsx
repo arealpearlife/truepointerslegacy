@@ -11,6 +11,7 @@ import {
   STONE_SIZE,
   displayPrice,
   flawlessStartingOffer,
+  legacyKitOffer,
   marketing,
   optionValues,
   resolveVariant,
@@ -23,6 +24,8 @@ import type { ActionState } from "@/lib/action-state";
 import { idleActionState } from "@/lib/action-state";
 import { lengthLabel, stoneLabel } from "@/lib/labels";
 import { FitGuide } from "./fit-guide";
+import { IncentiveBanners } from "./incentive-banners";
+import { KitOffer } from "./kit-offer";
 import { previewVideo } from "@/lib/local-media";
 import { MediaPanel } from "./media-panel";
 import { Motto } from "./motto";
@@ -55,6 +58,7 @@ export function ProductExperience({
   const offer = edition === "flawless" ? flawlessStartingOffer(product) : null;
   const title = product?.title ?? PRODUCT_TITLES[edition];
   const variantId = resolution?.status === "available" ? resolution.variant.id : "";
+  const kit = edition === "legacy" ? legacyKitOffer(product, selection.stoneSize) : null;
 
   return (
     <main id="main" data-surface={edition === "flawless" ? "flawless" : "legacy"}>
@@ -94,7 +98,6 @@ export function ProductExperience({
               />
               <p className="statement accent">{marketing.flawlessLine}</p>
               <p>{payLater ? marketing.payLaterBody : marketing.flawlessBody}</p>
-              {payLater ? <PayLaterStrip /> : null}
               {offer ? <p className="from-price">{marketing.fromPrice}</p> : null}
               <p>
                 <Link href={`/products/${HANDLES.legacy}`}>{marketing.keepLegacy}</Link>
@@ -102,7 +105,9 @@ export function ProductExperience({
             </>
           )}
           {price ? <p className="price">{price}</p> : null}
-          {price ? <p className="note">{marketing.payLaterCheckoutNote}</p> : null}
+          <PayLaterStrip compact />
+          <p className="note">{marketing.payLaterEase}</p>
+          <IncentiveBanners layout="notes" />
           <form action={action}>
             <fieldset className="choices">
               <legend>Stone size</legend>
@@ -148,17 +153,16 @@ export function ProductExperience({
             >
               {pending ? "Adding" : marketing.addToCart}
             </button>
-            {payLater ? (
-              <button
-                className="ice wide"
-                type="submit"
-                name="intent"
-                value="pay-later"
-                disabled={resolution?.status !== "available" || pending}
-              >
-                {pending ? "Adding" : marketing.payLaterCta}
-              </button>
-            ) : null}
+            <button
+              className="ice wide"
+              type="submit"
+              name="intent"
+              value="pay-later"
+              disabled={resolution?.status !== "available" || pending}
+            >
+              {pending ? "Adding" : marketing.payLaterCta}
+            </button>
+            {kit ? <KitOffer kit={kit} pending={pending} /> : null}
           </form>
           {edition === "legacy" ? (
             <Link className="button ice wide" href="/flawless">

@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
-import { formatMoney, type CartLine } from "@truepointers/commerce";
+import { formatMoney, marketing, type CartLine } from "@truepointers/commerce";
 import { idleActionState, type ActionState } from "@/lib/action-state";
 import { removeLine, updateLine } from "@/app/cart/actions";
 
@@ -50,7 +50,7 @@ export function CheckoutForm({
     <form action={formAction}>
       {state.error ? <p role="alert">{state.error}</p> : null}
       <button className="primary" type="submit" disabled={pending}>
-        {pending ? "Opening checkout" : "Checkout"}
+        {pending ? "Opening checkout" : marketing.checkoutPayLater}
       </button>
     </form>
   );

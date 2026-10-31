@@ -1,35 +1,31 @@
 import { notFound } from "next/navigation";
-
-const policies = {
-  shipping: "Shipping",
-  returns: "Returns and refunds",
-  care: "Care",
-  privacy: "Privacy",
-  terms: "Terms",
-  warranty: "Warranty",
-} as const;
+import { policyBySlug, storePolicies } from "@truepointers/commerce";
 
 export function generateStaticParams() {
-  return Object.keys(policies).map((policy) => ({ policy }));
+  return Object.keys(storePolicies).map((policy) => ({ policy }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ policy: string }> }) {
   const { policy } = await params;
-  const title = policies[policy as keyof typeof policies];
-  return { title: title ?? "Policy" };
+  const page = policyBySlug(policy);
+  return { title: page?.title ?? "Policy" };
 }
 
 export default async function PolicyPage({ params }: { params: Promise<{ policy: string }> }) {
   const { policy } = await params;
-  const title = policies[policy as keyof typeof policies];
-  if (!title) notFound();
+  const page = policyBySlug(policy);
+  if (!page) notFound();
   return (
     <main id="main" className="policy">
-      <h1>{title}</h1>
-      <p>
-        This policy has not been published yet. True Pointers will post the approved policy before
-        orders open.
-      </p>
+      <h1>{page.title}</h1>
+      {page.sections.map((section) => (
+        <section key={section.heading ?? section.paragraphs[0]}>
+          {section.heading ? <h2>{section.heading}</h2> : null}
+          {section.paragraphs.map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
+        </section>
+      ))}
     </main>
   );
 }

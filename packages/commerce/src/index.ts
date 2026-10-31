@@ -26,6 +26,7 @@ export {
   CHAIN_LENGTH,
   CUSTOMER_CART_ERROR,
   CUSTOMER_CHECKOUT_ERROR,
+  CUSTOMER_KIT_UNAVAILABLE,
   CUSTOMER_CONFIGURATION_UNAVAILABLE,
   CUSTOMER_SELECT_CONFIGURATION,
   CUSTOMER_UNAVAILABLE,
@@ -58,3 +59,31 @@ export {
 } from "./comparison";
 export { loadStoreCatalog } from "./catalog";
 export { isCartLineId, normalizeQuantity } from "./quantity";
+export {
+  CARE_COVERAGE_YEARS,
+  FREE_SHIPPING_THRESHOLD,
+  INTERNATIONAL_FREE_SHIPPING_THRESHOLD,
+  RETURN_WINDOW_DAYS,
+  SHIPPING_ORIGIN,
+  SHIPPING_ZONES,
+  US_GIFT_NECKLACE_THRESHOLD,
+  allPolicyText,
+  policyBySlug,
+  policyPlainText,
+  shippingRateForState,
+  shopifyPolicyHtml,
+  storePolicies,
+} from "./policies";
+export type { PolicySection, PolicySlug, ShippingZone, StorePolicy } from "./policies";
+export { announcementIncentives, conversionIncentives, incentiveCopy } from "./incentives";
+export type { ConversionIncentive } from "./incentives";
+export {
+  KIT_DEFAULT_STONE,
+  TARGET_ORDER_AMOUNT,
+  expectedKitTotal,
+  legacyKitOffer,
+  offerCopy,
+  spendProgress,
+  sumMoney,
+} from "./offers";
+export type { LegacyKitOffer, SpendProgress } from "./offers";

@@ -86,6 +86,33 @@ Record decisions here before they become expensive to reverse.
 - **Alternatives:** A uniform 2-up / 3-up catalog grid, or a horizontal snap carousel of identical tiles.
 - **Consequence:** Card hover scale stays small so the stagger remains readable. Reduced-motion visitors still see the static offsets because those are layout, not animation.
 
+### ADR-016: $1,000 is the look; $500 stays a safe one-chain buy
+
+- **Status:** accepted
+- **Date:** 2026-10-30
+- **Context:** The owner wants average orders at $1,000 (one Flawless or three Legacy lengths) and wants pay later used to get there, without scaring off a $500 sale.
+- **Decision:** The storefront leads with two spends: Flawless from $979 or the 3 mm three-length Legacy kit at $1,073, with Shop Pay / Klarna / Afterpay named as the easy way to take that look today. A one-chain path stays visible and calm: US shipping is free at $500, and one chain is still a full chain. No fake urgency, no published conversion-rate claim, and checkout stays on Shopify.
+- **Alternatives:** Hide the $500 path, force a Shopify bundle SKU, or invent installment math on the site.
+- **Consequence:** Home, product, cart, and nav share the same kit math and spend-progress copy. Kit add uses three live Legacy variants, not a duplicate catalog product.
+
+### ADR-015: $1,000 international shipping, US gift necklace, and 5-year care
+
+- **Status:** accepted
+- **Date:** 2026-10-30
+- **Context:** The owner added order incentives after US $500 free shipping was already live.
+- **Decision:** Keep US free shipping at $500. International orders of $1,000 or more ship free. US orders of $1,000 or more include a free Legacy necklace. Every order includes free replacements, cleaning, and repair for up to 5 years from delivery. The site advertises only these real offers. Shopify checkout must apply the shipping thresholds; the gift necklace is fulfilled with the order and is not a published SKU.
+- **Alternatives:** Replace the $500 US threshold with $1,000, or invent a specific gift variant.
+- **Consequence:** Policy pages, announcement copy, and conversion banners share the same commerce constants. Do not publish a “90% more conversions” claim.
+
+### ADR-014: Returns inspect in 15 days; shipping is distance from Richmond
+
+- **Status:** accepted
+- **Date:** 2026-10-30
+- **Context:** The owner set the return and shipping rules. Shopify has no native “miles from Richmond” rate. All chains weigh the same.
+- **Decision:** A return must start within 15 days of delivery. If the chain passes inspection, refund the item price. If it fails inspection or cannot be sold again, True Pointers keeps the chain and issues a partial refund after inspection. US shipping uses flat Shopify rates by state distance from Richmond, VA, starting at $10. Weight is not used. US orders of $500 or more ship free. International orders of $1,000 or more ship free.
+- **Alternatives:** One US flat rate, carrier-calculated weight rates, or a custom distance app.
+- **Consequence:** Next.js policy pages and Shopify legal/shipping must stay in sync. Partial refund amounts are set after inspection, not as a published percentage.
+
 ### ADR-013: Buy now, pay later stays on Shopify checkout
 
 - **Status:** accepted

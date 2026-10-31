@@ -1,8 +1,10 @@
-import Link from "next/link";
-import { formatMoney, HANDLES, marketing } from "@truepointers/commerce";
+import { expectedKitTotal } from "@truepointers/commerce";
 import { beginCheckout } from "@/app/cart/actions";
 import { CartLineControls, CheckoutForm } from "@/components/cart-controls";
+import { IncentiveBanners } from "@/components/incentive-banners";
 import { PreviewVideo } from "@/components/preview-video";
+import { SpendLadder } from "@/components/spend-ladder";
+import { SpendPaths } from "@/components/spend-paths";
 import { getCart } from "@/lib/cart";
 import { REPRESENTATIVE_CAPTION, keyedPreviewVideo } from "@/lib/local-media";
 
@@ -14,10 +16,13 @@ export default async function CartPage() {
     <main id="main">
       <h1>Cart</h1>
       {!cart || cart.lines.length === 0 ? (
-        <p>
-          Your cart is empty.{" "}
-          <Link href={`/products/${HANDLES.legacy}`}>{marketing.shopLegacy}</Link>
-        </p>
+        <>
+          <p>
+            Your cart is empty. One Flawless chain or the three-length kit is the $1,000 look. One
+            chain still ships free in the US at $500.
+          </p>
+          <SpendPaths kitTotal={expectedKitTotal("3 mm")} flawlessFrom={null} />
+        </>
       ) : (
         <>
           {cart.lines.map((line) => (
@@ -44,8 +49,9 @@ export default async function CartPage() {
               <CartLineControls line={line} />
             </article>
           ))}
-          <p className="price">Subtotal {formatMoney(cart.subtotal)}</p>
+          <SpendLadder subtotal={cart.subtotal} />
           <p className="note">Shipping and taxes are calculated at Shopify checkout.</p>
+          <IncentiveBanners layout="notes" />
           <CheckoutForm action={beginCheckout} />
         </>
       )}

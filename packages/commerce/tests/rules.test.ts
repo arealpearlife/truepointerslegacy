@@ -1,6 +1,25 @@
 import { describe, expect, it } from "vitest";
 import { auditApprovedPrices } from "../src/approval";
-import { PAY_LATER_METHODS, marketing, marketingViolations, publicDetails } from "../src/brand";
+import {
+  PAY_LATER_METHODS,
+  hasBannedPublicLanguage,
+  marketing,
+  marketingViolations,
+  publicDetails,
+} from "../src/brand";
+import {
+  CARE_COVERAGE_YEARS,
+  FREE_SHIPPING_THRESHOLD,
+  INTERNATIONAL_FREE_SHIPPING_THRESHOLD,
+  RETURN_WINDOW_DAYS,
+  SHIPPING_ZONES,
+  US_GIFT_NECKLACE_THRESHOLD,
+  allPolicyText,
+  shippingRateForState,
+  shopifyPolicyHtml,
+} from "../src/policies";
+import { incentiveCopy } from "../src/incentives";
+import { expectedKitTotal, legacyKitOffer, spendProgress } from "../src/offers";
 import { loadStoreCatalog } from "../src/catalog";
 import { buildComparison, flawlessStartingOffer, materialStatement } from "../src/comparison";
 import { formatMoney, parseMoney } from "../src/money";
@@ -73,6 +92,46 @@ describe("commerce rules", () => {
       "Klarna",
       "Afterpay",
     ]);
+  });
+
+  it("returns in 15 days and ships from Richmond by distance", () => {
+    expect(RETURN_WINDOW_DAYS).toBe(15);
+    expect(shippingRateForState("VA")).toBe("10.00");
+    expect(shippingRateForState("CA")).toBe("34.00");
+    expect(shippingRateForState("AK")).toBe("40.00");
+    expect(SHIPPING_ZONES.flatMap((zone) => [...zone.states])).toHaveLength(51);
+    expect(allPolicyText()).toMatch(/15 days from delivery/);
+    expect(allPolicyText()).toMatch(/keep the chain and issue a partial refund/);
+    expect(allPolicyText()).toMatch(/not priced by weight/);
+    expect(FREE_SHIPPING_THRESHOLD).toBe("500.00");
+    expect(INTERNATIONAL_FREE_SHIPPING_THRESHOLD).toBe("1000.00");
+    expect(US_GIFT_NECKLACE_THRESHOLD).toBe("1000.00");
+    expect(CARE_COVERAGE_YEARS).toBe(5);
+    expect(allPolicyText()).toMatch(/US orders of \$500 or more ship free/);
+    expect(allPolicyText()).toMatch(/International orders of \$1,000 or more ship free/);
+    expect(allPolicyText()).toMatch(/US orders of \$1,000 or more include a free Legacy necklace/);
+    expect(allPolicyText()).toMatch(/Free replacements, cleaning, and repair for up to 5 years/);
+    expect(allPolicyText()).not.toMatch(/We do not ship outside the United States/);
+    expect(hasBannedPublicLanguage(allPolicyText())).toBe(false);
+    expect(hasBannedPublicLanguage(incentiveCopy())).toBe(false);
+    expect(shopifyPolicyHtml("returns")).toMatch(/<p>You have 15 days from delivery/);
+    expect(shopifyPolicyHtml("shipping")).toMatch(/International orders of \$1,000/);
+    expect(shopifyPolicyHtml("warranty")).toMatch(/up to 5 years from delivery/);
+  });
+
+  it("prices the 3-length Legacy kit at the $1,000 look without shaming a $500 order", () => {
+    expect(expectedKitTotal("3 mm")?.amount).toBe("1073.00");
+    const kit = legacyKitOffer(catalogProduct("legacy"), "3 mm");
+    expect(kit.ready).toBe(true);
+    expect(kit.variants).toHaveLength(3);
+    expect(kit.total?.amount).toBe("1073.00");
+    expect(spendProgress(0).message).toMatch(/One chain still ships free/);
+    expect(spendProgress(32900).reachedFreeUsShipping).toBe(false);
+    expect(spendProgress(50000).reachedFreeUsShipping).toBe(true);
+    expect(spendProgress(50000).reachedThousand).toBe(false);
+    expect(spendProgress(50000).message).toMatch(/US shipping is free/);
+    expect(spendProgress(107300).reachedThousand).toBe(true);
+    expect(hasBannedPublicLanguage(spendProgress(0).message)).toBe(false);
   });
 
   it("keeps stone names off every customer-facing line", () => {

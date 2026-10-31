@@ -2,6 +2,32 @@
 
 Use this changelog for defects corrected after development begins.
 
+## Home, product, and cart now lead with the $1,000 look and a safe $500 path
+
+- **Date:** 2026-10-30
+- **Area:** Home, product, cart, header
+- **Symptom:** The site advertised incentives but still asked for a single chain with no path to a $1,000 order.
+- **Fix:** Hero and home cards offer Flawless pay later or the three-length Legacy kit. Product pages can add the kit or pay later on one chain. Cart shows progress to $500 free US shipping and the $1,000 look without shaming a smaller bag.
+- **Verification:** Format, lint, typecheck, tests, and build pass. Browser and localhost checks skipped at owner request.
+- **Release or commit:** $1,000 look conversion commit.
+
+## $1,000 incentives and conversion banners are on the storefront
+
+- **Date:** 2026-10-30
+- **Area:** Policies, home, product, cart, announcement
+- **Symptom:** The store still said it did not ship internationally, and the $1,000 gift necklace and 5-year care were not published.
+- **Fix:** Shared commerce now ships internationally with free shipping at $1,000, keeps US free shipping at $500, includes a free Legacy necklace on US orders of $1,000 or more, and covers replacements, cleaning, and repair for 5 years. Announcement, header strip, home cards, product notes, and cart notes advertise those offers only.
+- **Verification:** Commerce policy tests, web policy tests, and incentive banner tests. Shopify Admin still needs a fulfillment process for the US gift necklace.
+- **Release or commit:** $1,000 look conversion commit.
+
+## Return and shipping policies are published; shipping is distance from Richmond
+
+- **Date:** 2026-10-30
+- **Area:** Policy pages and Shopify shipping
+- **Symptom:** Policy routes still said they were unpublished. Checkout used generic US shipping instead of a Richmond-distance rate.
+- **Fix:** Shared `storePolicies` and `SHIPPING_ZONES` now render on `/policies/*`. Returns are 15 days with inspection. Failed inspection keeps the chain and pays a partial refund. Shopify US rates start at $10 near Richmond and rise by state distance, not weight. Orders of $500 or more ship free.
+- **Verification:** Commerce and web policy tests. Shopify Admin shipping profile after the zone rates are saved.
+
 ## Shopify Payments is live so checkout can take cards and payouts
 
 - **Date:** 2026-10-30

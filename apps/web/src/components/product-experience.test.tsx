@@ -29,6 +29,8 @@ describe("Legacy product experience", () => {
     fireEvent.click(screen.getByLabelText("40 inches"));
     expect(screen.getByRole("button", { name: "Add to cart" })).toBeEnabled();
     expect(screen.getByDisplayValue(variantId("legacy", "3 mm", "40 inches"))).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: marketing.payLaterCta })).toBeEnabled();
+    expect(screen.getByRole("button", { name: marketing.kitCta })).toBeEnabled();
     expect(screen.getByRole("link", { name: marketing.flawlessUpgrade })).toHaveAttribute(
       "href",
       "/flawless",

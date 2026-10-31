@@ -36,3 +36,4 @@ export const CUSTOMER_CONFIGURATION_UNAVAILABLE = "This configuration is not ava
 export const CUSTOMER_SELECT_CONFIGURATION = "Select a stone size and chain length.";
 export const CUSTOMER_CHECKOUT_ERROR = "We could not reach checkout. Please try again.";
 export const CUSTOMER_CART_ERROR = "Shopify could not update the cart.";
+export const CUSTOMER_KIT_UNAVAILABLE = "The three-length kit is not available to add yet.";

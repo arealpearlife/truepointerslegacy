@@ -22,6 +22,7 @@ export function SiteHeader({ cartCount }: { cartCount: number }) {
         <nav className="nav-group" aria-label="Shop">
           <Link href="/">Home</Link>
           <Link href={legacy}>Legacy</Link>
+          <Link href={`${legacy}?stone=3%20mm#kit`}>Kit</Link>
           <Link href={`${legacy}#fit`}>Fit Guide</Link>
         </nav>
         <nav className="nav-group right" aria-label="Account">
