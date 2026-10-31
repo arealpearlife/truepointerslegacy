@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { HANDLES } from "@truepointers/commerce";
+import { HANDLES, marketing } from "@truepointers/commerce";
 
 const legacy = `/products/${HANDLES.legacy}`;
 
@@ -9,22 +9,22 @@ export function SiteFooter() {
       <div className="container footer-grid">
         <div>
           <p className="footer-mark poster">TRUE POINTERS</p>
-          <p className="footer-tag">Hits that leave a mark.</p>
+          <p className="footer-tag">{marketing.footerTag}</p>
         </div>
         <nav aria-label="Shop">
           <h2>Shop</h2>
           <ul>
             <li>
-              <Link href={legacy}>Legacy</Link>
+              <Link href={legacy}>{marketing.navChain}</Link>
             </li>
             <li>
               <Link href="/flawless">Flawless Upgrade</Link>
             </li>
             <li>
-              <Link href={`${legacy}#fit`}>Fit Guide</Link>
+              <Link href={`${legacy}#fit`}>{marketing.navDrop}</Link>
             </li>
             <li>
-              <Link href="/cart">Cart</Link>
+              <Link href="/cart">{marketing.navTray}</Link>
             </li>
           </ul>
         </nav>

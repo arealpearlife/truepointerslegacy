@@ -3,8 +3,15 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { marketing } from "@truepointers/commerce";
 import { HouseCourtesy } from "./house-courtesy";
 
+const path = vi.hoisted(() => ({ current: "/" }));
+
+vi.mock("next/navigation", () => ({
+  usePathname: () => path.current,
+}));
+
 describe("House courtesy", () => {
   beforeEach(() => {
+    path.current = "/";
     sessionStorage.clear();
     vi.useFakeTimers();
     Object.defineProperty(window, "matchMedia", {
@@ -36,5 +43,15 @@ describe("House courtesy", () => {
     expect(screen.getByRole("dialog", { name: marketing.houseCourtesyLead })).toBeInTheDocument();
     expect(screen.getByText(/5 years of care/i)).toBeInTheDocument();
     expect(screen.getByText(/A Legacy chain, chosen by you/i)).toBeInTheDocument();
+  });
+
+  it("stays off the product and cart so it never interrupts a sale", () => {
+    path.current = "/cart";
+    const { rerender } = render(<HouseCourtesy />);
+    expect(screen.queryByLabelText("House courtesies")).not.toBeInTheDocument();
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+    path.current = "/products/true-pointers-legacy-extended-tennis-chain";
+    rerender(<HouseCourtesy />);
+    expect(screen.queryByLabelText("House courtesies")).not.toBeInTheDocument();
   });
 });

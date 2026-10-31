@@ -88,6 +88,11 @@ describe("commerce rules", () => {
     expect(`${marketing.mottoLead} ${marketing.motto}`).not.toMatch(/era that left a mark/i);
     expect(marketing.collectionTitle).toBe("THE LEGACY COLLECTION");
     expect(marketing.collectionTitle).not.toMatch(/nine ways/i);
+    expect(marketing.desireCollection).toMatch(/THE ROOM NOTICES/);
+    expect(marketing.navChain).toBe("The Chain");
+    expect(`${marketing.desireWear} ${marketing.trayTitle} ${marketing.fitLead}`).not.toMatch(
+      /\$1,000 look|full chain/i,
+    );
     expect(PAY_LATER_METHODS.map((method) => method.label)).toEqual([
       "Shop Pay",
       "Klarna",

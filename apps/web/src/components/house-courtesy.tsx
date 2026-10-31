@@ -2,15 +2,23 @@
 
 import { useEffect, useId, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { housePrivileges, marketing } from "@truepointers/commerce";
 
 const COURTESY_KEY = "legacy-house-courtesy";
 
+function isSellingPath(path: string): boolean {
+  return path.startsWith("/cart") || path.startsWith("/products") || path.startsWith("/flawless");
+}
+
 export function HouseCourtesy() {
+  const path = usePathname() ?? "/";
   const titleId = useId();
   const [face, setFace] = useState(0);
   const [surprise, setSurprise] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
+  const selling = isSellingPath(path);
+  const home = path === "/";
 
   useEffect(() => {
     if (typeof window.matchMedia !== "function") return;
@@ -22,10 +30,10 @@ export function HouseCourtesy() {
   }, []);
 
   useEffect(() => {
-    if (sessionStorage.getItem(COURTESY_KEY)) return;
+    if (!home || sessionStorage.getItem(COURTESY_KEY)) return;
     const wait = window.setTimeout(() => setSurprise(true), 4500);
     return () => window.clearTimeout(wait);
-  }, []);
+  }, [home]);
 
   useEffect(() => {
     if (reducedMotion) return;
@@ -39,6 +47,8 @@ export function HouseCourtesy() {
     sessionStorage.setItem(COURTESY_KEY, "1");
     setSurprise(false);
   }
+
+  if (selling) return null;
 
   const privilege = housePrivileges[face] ?? housePrivileges[0]!;
 

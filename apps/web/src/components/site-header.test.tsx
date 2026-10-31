@@ -10,5 +10,13 @@ describe("Site header", () => {
     expect(cart.closest("nav")).toBeNull();
     expect(cart).toHaveTextContent("2");
     expect(screen.getByLabelText("True Pointers home")).toHaveClass("wordmark");
+    expect(screen.getByRole("link", { name: "The Chain" })).toHaveAttribute(
+      "href",
+      "/products/true-pointers-legacy-extended-tennis-chain",
+    );
+    expect(screen.getByRole("link", { name: "The Drop" })).toHaveAttribute(
+      "href",
+      "/products/true-pointers-legacy-extended-tennis-chain#fit",
+    );
   });
 });

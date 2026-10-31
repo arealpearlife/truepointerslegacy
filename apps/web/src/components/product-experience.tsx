@@ -104,6 +104,9 @@ export function ProductExperience({
             </>
           )}
           {price ? <p className="price">{price}</p> : null}
+          <p className="desire-whisper">
+            {edition === "legacy" ? marketing.desireWear : marketing.flawlessHeat}
+          </p>
           <PayLaterStrip compact />
           <form action={action}>
             <fieldset className="choices">

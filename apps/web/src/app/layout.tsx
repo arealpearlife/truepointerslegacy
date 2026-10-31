@@ -66,7 +66,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         <style>{cssVariables}</style>
       </head>
       <body
-        className={`${poster.variable} ${varsity.variable} ${display.variable} ${body.variable}`}
+        className={`ice-house ${poster.variable} ${varsity.variable} ${display.variable} ${body.variable}`}
       >
         <a className="skip-link" href="#main">
           Skip to content

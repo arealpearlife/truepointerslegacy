@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { HANDLES, flawlessStartingOffer, marketing } from "@truepointers/commerce";
 import { CollectionGrid } from "@/components/collection-grid";
+import { DesireBeat } from "@/components/desire-beat";
 import { FitGuide } from "@/components/fit-guide";
 import { MediaFill } from "@/components/media-fill";
 import { Motto } from "@/components/motto";
 import { Patch } from "@/components/patch";
+import { Reveal } from "@/components/reveal";
 import { ShortcutRings } from "@/components/shortcut-rings";
 import { Tape } from "@/components/tape";
 import { getCatalog } from "@/lib/catalog";
@@ -20,6 +22,13 @@ export default async function HomePage() {
   return (
     <main id="main" className="home">
       <section className="hero">
+        <div className="ice-field" aria-hidden="true">
+          <i />
+          <i />
+          <i />
+          <i />
+          <i />
+        </div>
         <div className="hero-backdrop" aria-hidden="true">
           <span>LEGACY</span>
           <span>LEGACY</span>
@@ -42,7 +51,7 @@ export default async function HomePage() {
             </div>
           </div>
           <div className="hero-visual-wrap">
-            <div className="hero-visual">
+            <div className="hero-visual vitrine">
               <MediaFill
                 media={displayMedia(legacy, "home-hero")}
                 label={marketing.legacyName}
@@ -57,53 +66,63 @@ export default async function HomePage() {
 
       <Tape />
       <ShortcutRings />
+      <DesireBeat line={marketing.desireCollection} />
 
-      <section className="container collection" aria-labelledby="collection-title">
-        <header className="collection-head">
-          <h2 id="collection-title" className="poster">
-            {marketing.collectionTitle}
-          </h2>
-          <p>{marketing.collectionLede}</p>
-        </header>
-        <div className="toolbar">
-          <span>{marketing.collectionMeta}</span>
-          <Link href={legacyHref}>See the chain</Link>
+      <Reveal>
+        <section className="container collection" aria-labelledby="collection-title">
+          <header className="collection-head">
+            <h2 id="collection-title" className="poster">
+              {marketing.collectionTitle}
+            </h2>
+            <p>{marketing.collectionLede}</p>
+          </header>
+          <div className="toolbar">
+            <span>{marketing.collectionMeta}</span>
+            <Link href={legacyHref}>{marketing.wearThisIce}</Link>
+          </div>
+          <CollectionGrid product={legacy} />
+        </section>
+      </Reveal>
+
+      <DesireBeat line={marketing.desireFit} />
+
+      <Reveal>
+        <div className="container">
+          <FitGuide selected={null} />
         </div>
-        <CollectionGrid product={legacy} />
-      </section>
-
-      <div className="container">
-        <FitGuide selected={null} />
-      </div>
+      </Reveal>
 
       <Tape tone="ice" />
+      <DesireBeat line={marketing.desireFlawless} />
 
-      <section className="flawless-band" aria-labelledby="flawless-band-title">
-        <div className="container flawless-inner">
-          <div>
-            <p className="eyebrow">{marketing.flawlessUpgrade}</p>
-            <h2 id="flawless-band-title">{marketing.flawlessHeading}</h2>
-            <p className="hero-line">{marketing.flawlessLine}</p>
-            <p>{marketing.flawlessBody}</p>
-            {offer ? <p className="from-price">{marketing.fromPrice}</p> : null}
+      <Reveal>
+        <section className="flawless-band" aria-labelledby="flawless-band-title">
+          <div className="container flawless-inner">
+            <div>
+              <p className="eyebrow">{marketing.flawlessUpgrade}</p>
+              <h2 id="flawless-band-title">{marketing.flawlessHeading}</h2>
+              <p className="hero-line">{marketing.flawlessLine}</p>
+              <p>{marketing.flawlessBody}</p>
+              {offer ? <p className="from-price">{marketing.fromPrice}</p> : null}
+            </div>
+            <div className="flawless-visual vitrine">
+              <MediaFill
+                media={displayMedia(flawless, "flawless-band")}
+                label={marketing.flawlessName}
+                sizes="(min-width: 900px) 25vw, 100vw"
+              />
+            </div>
+            <div className="actions">
+              <Link className="button ice" href="/flawless">
+                {marketing.payLaterFlawless}
+              </Link>
+              <Link className="button outline-ink" href={legacyHref}>
+                {marketing.keepLegacy}
+              </Link>
+            </div>
           </div>
-          <div className="flawless-visual">
-            <MediaFill
-              media={displayMedia(flawless, "flawless-band")}
-              label={marketing.flawlessName}
-              sizes="(min-width: 900px) 25vw, 100vw"
-            />
-          </div>
-          <div className="actions">
-            <Link className="button ice" href="/flawless">
-              {marketing.payLaterFlawless}
-            </Link>
-            <Link className="button outline-ink" href={legacyHref}>
-              {marketing.keepLegacy}
-            </Link>
-          </div>
-        </div>
-      </section>
+        </section>
+      </Reveal>
     </main>
   );
 }

@@ -2,6 +2,15 @@
 
 Use this changelog for defects corrected after development begins.
 
+## Storefront sold explanation instead of desire
+
+- **Date:** 2026-10-31
+- **Area:** Home, product, cart, header, surface
+- **Symptom:** Navigation and section copy read as a catalog. The ice did not feel like a jewelry house, and courtesy widgets could sit on a sale.
+- **Fix:** Ice light, vitrines, scroll reveals, and desire beats sell wanting the piece. Nav is The Chain / The Set / The Drop / Flawless / Tray. House courtesy stays off product and cart. Cart is the tray.
+- **Verification:** Format, lint, typecheck, tests, and build. Browser and localhost skipped at owner request.
+- **Release or commit:** Desire storefront commit.
+
 ## Deal cards and “$1,000 look” copy buried the jewelry
 
 - **Date:** 2026-10-31

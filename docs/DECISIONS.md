@@ -15,6 +15,15 @@ Record decisions here before they become expensive to reverse.
 
 ## Accepted decisions
 
+### ADR-018: Desire at every move, never an interrupt
+
+- **Status:** accepted
+- **Date:** 2026-10-31
+- **Context:** Conversion scales when the storefront sells wanting the ice, not when it explains deals. Interruptions on the product and cart kill the sale.
+- **Decision:** Ten storefront moves, all live: (1) ice vitrine light across the house, (2) scroll reveals that discover jewelry, (3) light-catch on hover and tap, (4) desire navigation — The Chain, The Set, The Drop, Flawless, Tray, (5) short desire beats between sections, (6) selection and price as ritual, (7) fit as how it hits on you, (8) house courtesy stays off product and cart, (9) cart as the tray before checkout, (10) ice motion that stills when the visitor prefers reduced motion. No fake scarcity, no countdown, no invented discount, no deal cards over the jewelry.
+- **Alternatives:** Popups on every page, or a louder $1,000 look lecture.
+- **Consequence:** Home is the only courtesy popup. Checkout stays on Shopify. Public copy stays inside the banned-language scanner.
+
 ### ADR-001: Commerce authority
 
 - **Status:** accepted

@@ -12,8 +12,8 @@ export const metadata = { title: "Cart" };
 export default async function CartPage() {
   const cart = await getCart();
   return (
-    <main id="main">
-      <h1>Cart</h1>
+    <main id="main" className="tray">
+      <h1>{marketing.trayTitle}</h1>
       {!cart || cart.lines.length === 0 ? (
         <>
           <p>{marketing.emptyCart}</p>

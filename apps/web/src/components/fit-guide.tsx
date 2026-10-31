@@ -1,4 +1,4 @@
-import { APPROVED_CHAIN_LENGTHS } from "@truepointers/commerce";
+import { APPROVED_CHAIN_LENGTHS, marketing } from "@truepointers/commerce";
 import { lengthLabel } from "@/lib/labels";
 
 const SCALE = 16;
@@ -55,14 +55,11 @@ export function FitGuide({
   return (
     <section id="fit" className="fit" aria-labelledby="fit-title">
       <header className="fit-head">
-        <p className="eyebrow">Fit guide</p>
+        <p className="eyebrow">{marketing.fitEyebrow}</p>
         <h2 id="fit-title" className="poster">
-          Where it hits
+          {marketing.fitTitle}
         </h2>
-        <p>
-          Every Legacy length is built to hang long. Here is where each one lands on the body, so
-          you know your drop before you buy.
-        </p>
+        <p>{marketing.fitLead}</p>
       </header>
       <div className="fit-body">
         <svg

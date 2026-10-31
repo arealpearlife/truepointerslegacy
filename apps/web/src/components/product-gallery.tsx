@@ -49,7 +49,7 @@ export function ProductGallery({
   }
 
   return (
-    <div className="gallery">
+    <div className="gallery vitrine">
       {active.kind === "video" ? (
         <PreviewVideo video={active.asset} label={`${title} product video`} eager controls />
       ) : (
