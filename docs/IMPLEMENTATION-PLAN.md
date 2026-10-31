@@ -2,7 +2,7 @@
 
 ## Current status
 
-The npm workspace, shared commerce package, and Next.js storefront are in the repository. The public origin `https://www.legacybytp.com` serves the Vercel Next.js shop with live Shopify prices. Shopify Admin DNS now shows apex `@` → `216.198.79.1` and no AAAA; Vercel reports `legacybytp.com` configured correctly by A record. Google Cloud nameservers can still answer Shopify `A 23.227.38.36` and a Shopify AAAA, so bare `legacybytp.com` may keep 301ing to `rcvvv5-tk.myshopify.com` until that zone publishes. Phase 2 is the Expo native storefront in `apps/mobile`, which has not been generated yet.
+The npm workspace, shared commerce package, and Next.js storefront are in the repository. The public origin `https://www.legacybytp.com` serves the Vercel Next.js shop with live Shopify prices. Shopify Payments is on (cards, Shop Pay, Apple Pay, Google Pay). Shopify Admin DNS now shows apex `@` → `216.198.79.1` and no AAAA; Vercel reports `legacybytp.com` configured correctly by A record. Google Cloud nameservers can still answer Shopify `A 23.227.38.36` and a Shopify AAAA, so bare `legacybytp.com` may keep 301ing to `rcvvv5-tk.myshopify.com` until that zone publishes. Phase 2 is the Expo native storefront in `apps/mobile`, which has not been generated yet.
 
 ## Target system
 

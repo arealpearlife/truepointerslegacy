@@ -93,7 +93,7 @@ Record decisions here before they become expensive to reverse.
 - **Context:** The Flawless Upgrade box needed a pay-later path without adding a custom payment processor.
 - **Decision:** The storefront shows Shop Pay, Klarna, and Afterpay as checkout options. Customers still pay on Shopify `checkoutUrl`. Enable those methods in Shopify Admin → Settings → Payments. The `/flawless` page is the buy-now-pay-later shop for Flawless.
 - **Alternatives:** A first-party Klarna or Afterpay SDK on the Next.js site.
-- **Consequence:** If the shop has not turned those methods on, the labels still appear and checkout only shows what Shopify actually offers.
+- **Consequence:** Checkout only shows methods Shopify actually offers. Shop Pay and Shop Pay installments are on; Klarna and Afterpay still appear on the storefront only if the owner enables them in Payments.
 
 ### ADR-012: No stone chemistry on the public storefront
 

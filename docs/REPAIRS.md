@@ -2,6 +2,16 @@
 
 Use this changelog for defects corrected after development begins.
 
+## Shopify Payments is live so checkout can take cards and payouts
+
+- **Date:** 2026-10-30
+- **Area:** Shopify checkout and payouts
+- **Reported behavior:** Shopify emailed that sales could be halted. The storefront showed prices but checkout had no card brands.
+- **Root cause:** Shopify Payments setup was incomplete. The Next.js cart already redirected to Shopify `checkoutUrl`; it could not invent a processor.
+- **Repair:** The owner finished Shopify Payments and payouts in Admin. Storefront now reports Visa, Mastercard, American Express, Discover, Diners Club, Shop Pay, Apple Pay, and Google Pay. Shop Pay installments are on. Checkout stays on Shopify.
+- **Verification:** `meta.json` `shopify_pay_enabled_card_brands` is populated and `offers_shop_pay_installments` is true. Storefront `acceptedCardBrands` matches. `https://www.legacybytp.com/api/catalog-status` is `live` for Legacy and Flawless.
+- **Release or commit:** Shopify Payments live docs commit.
+
 ## Shopify Admin apex DNS saved; www stays the public hostname until the zone publishes
 
 - **Date:** 2026-10-28

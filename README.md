@@ -4,7 +4,7 @@ Foundation for the True Pointers Legacy commerce ecosystem.
 
 ## Current phase
 
-The web storefront is in `apps/web`. The customer-facing origin is live at `https://www.legacybytp.com` (Vercel Next.js, live Shopify prices). Local development still runs at `http://localhost:3000`. Shopify remains authoritative for price, inventory, and checkout on `rcvvv5-tk.myshopify.com`. Shopify Admin DNS lists apex `@` as `216.198.79.1` with no AAAA; Vercel marks `legacybytp.com` verified. Public nameservers can still answer Shopify `A 23.227.38.36` until that zone publishes, so share www for the no-www hostname.
+The web storefront is in `apps/web`. The customer-facing origin is live at `https://www.legacybytp.com` (Vercel Next.js, live Shopify prices). Local development still runs at `http://localhost:3000`. Shopify remains authoritative for price, inventory, checkout, and payouts on `rcvvv5-tk.myshopify.com`. Shopify Payments accepts Visa, Mastercard, American Express, Discover, Shop Pay, Apple Pay, and Google Pay. Shopify Admin DNS lists apex `@` as `216.198.79.1` with no AAAA; Vercel marks `legacybytp.com` verified. Public nameservers can still answer Shopify `A 23.227.38.36` until that zone publishes, so share www for the no-www hostname.
 
 ## Structure
 
