@@ -61,6 +61,7 @@ export { loadStoreCatalog } from "./catalog";
 export { isCartLineId, normalizeQuantity } from "./quantity";
 export {
   CARE_COVERAGE_YEARS,
+  CARE_THRESHOLD,
   FREE_SHIPPING_THRESHOLD,
   INTERNATIONAL_FREE_SHIPPING_THRESHOLD,
   RETURN_WINDOW_DAYS,
@@ -75,8 +76,8 @@ export {
   storePolicies,
 } from "./policies";
 export type { PolicySection, PolicySlug, ShippingZone, StorePolicy } from "./policies";
-export { announcementIncentives, conversionIncentives, incentiveCopy } from "./incentives";
-export type { ConversionIncentive } from "./incentives";
+export { announcementIncentives, housePrivileges, incentiveCopy } from "./incentives";
+export type { HousePrivilege } from "./incentives";
 export {
   KIT_DEFAULT_STONE,
   TARGET_ORDER_AMOUNT,

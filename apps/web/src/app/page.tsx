@@ -1,18 +1,11 @@
 import Link from "next/link";
-import {
-  HANDLES,
-  expectedKitTotal,
-  flawlessStartingOffer,
-  marketing,
-} from "@truepointers/commerce";
+import { HANDLES, flawlessStartingOffer, marketing } from "@truepointers/commerce";
 import { CollectionGrid } from "@/components/collection-grid";
 import { FitGuide } from "@/components/fit-guide";
-import { IncentiveBanners } from "@/components/incentive-banners";
 import { MediaFill } from "@/components/media-fill";
 import { Motto } from "@/components/motto";
 import { Patch } from "@/components/patch";
 import { ShortcutRings } from "@/components/shortcut-rings";
-import { SpendPaths } from "@/components/spend-paths";
 import { Tape } from "@/components/tape";
 import { getCatalog } from "@/lib/catalog";
 import { displayMedia } from "@/lib/local-media";
@@ -40,14 +33,11 @@ export default async function HomePage() {
             <p className="hero-line ice">{marketing.iceLine}</p>
             <p className="hero-copy">{marketing.heroBody}</p>
             <div className="actions">
-              <Link className="button ice" href="/flawless">
-                {marketing.payLaterFlawless}
-              </Link>
-              <Link className="button solid-white" href={`${legacyHref}?stone=3%20mm#kit`}>
-                {marketing.shopKit}
-              </Link>
-              <Link className="button outline-light" href={legacyHref}>
+              <Link className="button ice" href={legacyHref}>
                 {marketing.shopLegacy}
+              </Link>
+              <Link className="button outline-light" href="/flawless">
+                {marketing.flawlessUpgrade}
               </Link>
             </div>
           </div>
@@ -65,11 +55,6 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <div className="container incentive-home">
-        <SpendPaths kitTotal={expectedKitTotal("3 mm")} flawlessFrom={offer} />
-        <IncentiveBanners />
-      </div>
-
       <Tape />
       <ShortcutRings />
 
@@ -79,14 +64,7 @@ export default async function HomePage() {
             {marketing.collectionTitle}
           </h2>
           <p>{marketing.collectionLede}</p>
-          <p className="collection-story">{marketing.collectionStory}</p>
         </header>
-        <div className="assurance">
-          <h3>{marketing.replacePromise}</h3>
-          <p>
-            {marketing.intlShipLine} {marketing.usGiftLine} {marketing.usShipLine}
-          </p>
-        </div>
         <div className="toolbar">
           <span>{marketing.collectionMeta}</span>
           <Link href={legacyHref}>See the chain</Link>
@@ -108,7 +86,6 @@ export default async function HomePage() {
             <p className="hero-line">{marketing.flawlessLine}</p>
             <p>{marketing.flawlessBody}</p>
             {offer ? <p className="from-price">{marketing.fromPrice}</p> : null}
-            <p>{marketing.payLaterEase}</p>
           </div>
           <div className="flawless-visual">
             <MediaFill
@@ -122,7 +99,7 @@ export default async function HomePage() {
               {marketing.payLaterFlawless}
             </Link>
             <Link className="button outline-ink" href={legacyHref}>
-              Keep it Legacy
+              {marketing.keepLegacy}
             </Link>
           </div>
         </div>

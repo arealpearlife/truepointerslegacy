@@ -9,6 +9,7 @@ import {
 } from "../src/brand";
 import {
   CARE_COVERAGE_YEARS,
+  CARE_THRESHOLD,
   FREE_SHIPPING_THRESHOLD,
   INTERNATIONAL_FREE_SHIPPING_THRESHOLD,
   RETURN_WINDOW_DAYS,
@@ -106,32 +107,42 @@ describe("commerce rules", () => {
     expect(FREE_SHIPPING_THRESHOLD).toBe("500.00");
     expect(INTERNATIONAL_FREE_SHIPPING_THRESHOLD).toBe("1000.00");
     expect(US_GIFT_NECKLACE_THRESHOLD).toBe("1000.00");
+    expect(CARE_THRESHOLD).toBe("500.00");
     expect(CARE_COVERAGE_YEARS).toBe(5);
     expect(allPolicyText()).toMatch(/US orders of \$500 or more ship free/);
     expect(allPolicyText()).toMatch(/International orders of \$1,000 or more ship free/);
-    expect(allPolicyText()).toMatch(/US orders of \$1,000 or more include a free Legacy necklace/);
-    expect(allPolicyText()).toMatch(/Free replacements, cleaning, and repair for up to 5 years/);
+    expect(allPolicyText()).toMatch(
+      /Orders of \$1,000 or more include a complimentary Legacy chain of your choice/,
+    );
+    expect(allPolicyText()).toMatch(
+      /Orders of \$500 or more include 5 years of replacements, cleaning, and repair/,
+    );
     expect(allPolicyText()).not.toMatch(/We do not ship outside the United States/);
     expect(hasBannedPublicLanguage(allPolicyText())).toBe(false);
     expect(hasBannedPublicLanguage(incentiveCopy())).toBe(false);
     expect(shopifyPolicyHtml("returns")).toMatch(/<p>You have 15 days from delivery/);
     expect(shopifyPolicyHtml("shipping")).toMatch(/International orders of \$1,000/);
-    expect(shopifyPolicyHtml("warranty")).toMatch(/up to 5 years from delivery/);
+    expect(shopifyPolicyHtml("warranty")).toMatch(/Orders of \$500 or more include 5 years/);
   });
 
-  it("prices the 3-length Legacy kit at the $1,000 look without shaming a $500 order", () => {
+  it("prices the Legacy set and sells $500 care plus a $1,000 complimentary chain", () => {
     expect(expectedKitTotal("3 mm")?.amount).toBe("1073.00");
     const kit = legacyKitOffer(catalogProduct("legacy"), "3 mm");
     expect(kit.ready).toBe(true);
     expect(kit.variants).toHaveLength(3);
     expect(kit.total?.amount).toBe("1073.00");
-    expect(spendProgress(0).message).toMatch(/One chain still ships free/);
-    expect(spendProgress(32900).reachedFreeUsShipping).toBe(false);
-    expect(spendProgress(50000).reachedFreeUsShipping).toBe(true);
-    expect(spendProgress(50000).reachedThousand).toBe(false);
-    expect(spendProgress(50000).message).toMatch(/US shipping is free/);
-    expect(spendProgress(107300).reachedThousand).toBe(true);
+    expect(spendProgress(0).message).toMatch(/five years of care/);
+    expect(spendProgress(0).message).toMatch(/complimentary Legacy chain of your choice/);
+    expect(spendProgress(0).message).not.toMatch(/\$1,000 look|full chain/i);
+    expect(spendProgress(32900).reachedCare).toBe(false);
+    expect(spendProgress(50000).reachedCare).toBe(true);
+    expect(spendProgress(50000).reachedGift).toBe(false);
+    expect(spendProgress(50000).message).toMatch(/Five years of care is with you/);
+    expect(spendProgress(107300).reachedGift).toBe(true);
     expect(hasBannedPublicLanguage(spendProgress(0).message)).toBe(false);
+    expect(`${Object.values(marketing).join(" ")} ${incentiveCopy()}`).not.toMatch(
+      /\$1,000 look|full chain/i,
+    );
   });
 
   it("keeps stone names off every customer-facing line", () => {

@@ -24,7 +24,6 @@ import type { ActionState } from "@/lib/action-state";
 import { idleActionState } from "@/lib/action-state";
 import { lengthLabel, stoneLabel } from "@/lib/labels";
 import { FitGuide } from "./fit-guide";
-import { IncentiveBanners } from "./incentive-banners";
 import { KitOffer } from "./kit-offer";
 import { previewVideo } from "@/lib/local-media";
 import { MediaPanel } from "./media-panel";
@@ -106,8 +105,6 @@ export function ProductExperience({
           )}
           {price ? <p className="price">{price}</p> : null}
           <PayLaterStrip compact />
-          <p className="note">{marketing.payLaterEase}</p>
-          <IncentiveBanners layout="notes" />
           <form action={action}>
             <fieldset className="choices">
               <legend>Stone size</legend>

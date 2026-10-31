@@ -24,7 +24,9 @@ describe("Policy pages", () => {
       screen.getByText(/International orders of \$1,000 or more ship free/i),
     ).toBeInTheDocument();
     expect(
-      screen.getByText(/US orders of \$1,000 or more include a free Legacy necklace/i),
+      screen.getByText(
+        /Orders of \$1,000 or more include a complimentary Legacy chain of your choice/i,
+      ),
     ).toBeInTheDocument();
     expect(screen.getByText(/\$10 — Closest to Richmond: VA, DC, MD/i)).toBeInTheDocument();
     expect(screen.getByText(/\$40 — Alaska: AK/i)).toBeInTheDocument();
@@ -35,7 +37,9 @@ describe("Policy pages", () => {
     const page = await PolicyPage({ params: Promise.resolve({ policy: "warranty" }) });
     render(page);
     expect(
-      screen.getByText(/Free replacements, cleaning, and repair for up to 5 years/i),
+      screen.getByText(
+        /Orders of \$500 or more include 5 years of replacements, cleaning, and repair/i,
+      ),
     ).toBeInTheDocument();
   });
 });

@@ -1,6 +1,7 @@
 import { LEGACY_PRICES } from "./approval";
 import { formatMoney, parseMoney } from "./money";
 import {
+  CARE_THRESHOLD,
   FREE_SHIPPING_THRESHOLD,
   INTERNATIONAL_FREE_SHIPPING_THRESHOLD,
   US_GIFT_NECKLACE_THRESHOLD,
@@ -60,36 +61,41 @@ export function legacyKitOffer(product: Product | null, stoneSize: string | null
 
 export type SpendProgress = {
   cents: number;
+  reachedCare: boolean;
   reachedFreeUsShipping: boolean;
-  reachedThousand: boolean;
-  toFreeUsShipping: Money;
-  toThousand: Money;
+  reachedGift: boolean;
+  toCare: Money;
+  toGift: Money;
   message: string;
 };
 
 export function spendProgress(cents: number): SpendProgress {
+  const care = parseMoney(CARE_THRESHOLD, "USD");
+  const gift = parseMoney(US_GIFT_NECKLACE_THRESHOLD, "USD");
   const freeShip = parseMoney(FREE_SHIPPING_THRESHOLD, "USD");
-  const thousand = parseMoney(TARGET_ORDER_AMOUNT, "USD");
+  const reachedCare = cents >= care.cents;
+  const reachedGift = cents >= gift.cents;
   const reachedFreeUsShipping = cents >= freeShip.cents;
-  const reachedThousand = cents >= thousand.cents;
-  const toFree = Math.max(0, freeShip.cents - cents);
-  const toThousand = Math.max(0, thousand.cents - cents);
+  const toCareCents = Math.max(0, care.cents - cents);
+  const toGiftCents = Math.max(0, gift.cents - cents);
   let message: string;
   if (cents <= 0) {
-    message = `One Flawless chain or the three-length Legacy kit is the $${dollars(TARGET_ORDER_AMOUNT)} look. One chain still ships free in the US at $${dollars(FREE_SHIPPING_THRESHOLD)}.`;
-  } else if (!reachedFreeUsShipping) {
-    message = `${formatMoney(parseMoney((toFree / 100).toFixed(2), "USD"))} more and US shipping is free. One chain is still a full chain.`;
-  } else if (!reachedThousand) {
-    message = `US shipping is free. Pay later at checkout if you want the $${dollars(TARGET_ORDER_AMOUNT)} look today — the kit or Flawless.`;
+    message = `From $${dollars(CARE_THRESHOLD)}, five years of care. From $${dollars(US_GIFT_NECKLACE_THRESHOLD)}, a complimentary Legacy chain of your choice.`;
+  } else if (!reachedCare) {
+    message = `${formatMoney(parseMoney((toCareCents / 100).toFixed(2), "USD"))} more includes five years of care.`;
+  } else if (!reachedGift) {
+    message = `Five years of care is with you. ${formatMoney(parseMoney((toGiftCents / 100).toFixed(2), "USD"))} more includes a complimentary Legacy chain of your choice.`;
   } else {
-    message = `That is the $${dollars(TARGET_ORDER_AMOUNT)} look. US orders include a free Legacy necklace. Pay later stays at checkout.`;
+    message =
+      "A complimentary Legacy chain of your choice is with the order. Tell us the size and length.";
   }
   return {
     cents,
+    reachedCare,
     reachedFreeUsShipping,
-    reachedThousand,
-    toFreeUsShipping: parseMoney((toFree / 100).toFixed(2), "USD"),
-    toThousand: parseMoney((toThousand / 100).toFixed(2), "USD"),
+    reachedGift,
+    toCare: parseMoney((toCareCents / 100).toFixed(2), "USD"),
+    toGift: parseMoney((toGiftCents / 100).toFixed(2), "USD"),
     message,
   };
 }
@@ -97,6 +103,7 @@ export function spendProgress(cents: number): SpendProgress {
 export function offerCopy(): string {
   return [
     TARGET_ORDER_AMOUNT,
+    CARE_THRESHOLD,
     FREE_SHIPPING_THRESHOLD,
     INTERNATIONAL_FREE_SHIPPING_THRESHOLD,
     US_GIFT_NECKLACE_THRESHOLD,

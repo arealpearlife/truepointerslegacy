@@ -3,9 +3,8 @@ import { formatMoney, marketing, type LegacyKitOffer } from "@truepointers/comme
 export function KitOffer({ kit, pending }: { kit: LegacyKitOffer; pending: boolean }) {
   return (
     <div className="kit-offer" id="kit">
-      <p className="incentive-kicker">{marketing.kitTitle}</p>
-      <h2>{marketing.kitLine}</h2>
-      <p>{marketing.kitBody}</p>
+      <p className="house-kicker">{marketing.kitTitle}</p>
+      <p className="kit-line">{marketing.kitLine}</p>
       <p className="spend-price">
         {kit.stoneSize} · {kit.lengths.join(" · ")}
         {kit.total ? ` · ${formatMoney(kit.total)}` : ""}

@@ -2,6 +2,15 @@
 
 Use this changelog for defects corrected after development begins.
 
+## Deal cards and “$1,000 look” copy buried the jewelry
+
+- **Date:** 2026-10-31
+- **Area:** Home, product, cart, announcement, house widgets
+- **Symptom:** Long incentive cards sat above the collection. Copy called a $1,000 order a look and said $500 was still a full chain.
+- **Fix:** Jewelry leads. A delayed courtesy popup and a rotating rail advertise five years of care from $500 and a complimentary Legacy chain from $1,000. The three-length add is the Legacy set. Cart shows a compact privilege mark instead of a lecture.
+- **Verification:** Commerce, house-courtesy, privilege-mark, announcement, and policy tests. Format, lint, typecheck, and build run after the change.
+- **Release or commit:** House courtesy storefront commit.
+
 ## Home, product, and cart now lead with the $1,000 look and a safe $500 path
 
 - **Date:** 2026-10-30

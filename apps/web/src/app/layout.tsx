@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Anton, Graduate, Lato, Tenor_Sans } from "next/font/google";
 import { cssVariables } from "@truepointers/tokens";
 import { AnnouncementBar } from "@/components/announcement-bar";
-import { IncentiveBanners } from "@/components/incentive-banners";
+import { HouseCourtesy } from "@/components/house-courtesy";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { getCart } from "@/lib/cart";
@@ -73,8 +73,8 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         </a>
         <AnnouncementBar />
         <SiteHeader cartCount={cart?.totalQuantity ?? 0} />
-        <IncentiveBanners layout="strip" />
         {children}
+        <HouseCourtesy />
         <SiteFooter />
         {process.env.NODE_ENV === "development" ? (
           <script dangerouslySetInnerHTML={{ __html: stripCursorRefScript }} />

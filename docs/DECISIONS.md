@@ -86,21 +86,30 @@ Record decisions here before they become expensive to reverse.
 - **Alternatives:** A uniform 2-up / 3-up catalog grid, or a horizontal snap carousel of identical tiles.
 - **Consequence:** Card hover scale stays small so the stagger remains readable. Reduced-motion visitors still see the static offsets because those are layout, not animation.
 
-### ADR-016: $1,000 is the look; $500 stays a safe one-chain buy
+### ADR-017: Jewelry leads; house courtesies arrive as a surprise
 
 - **Status:** accepted
+- **Date:** 2026-10-31
+- **Context:** Deal cards and “$1,000 look” copy pushed explanation ahead of the chains and sounded cheap.
+- **Decision:** The storefront shows the jewelry first. Privileges are a thin announcement, a delayed courtesy popup, and a rotating side rail — not page-length cards. Orders of $500 or more include five years of replacements, cleaning, and repair. Orders of $1,000 or more include a complimentary Legacy chain of the customer’s choosing. The three-length add is the Legacy set, a package that leaves them with more ice, not a look to brag about. No invented set discount. Pay later stays on Shopify checkout.
+- **Alternatives:** Keep the conversion cards, or publish a $1,000 look headline.
+- **Consequence:** Home no longer stacks incentive cards above the collection. Shipping rates stay in policy pages. The gift chain is fulfilled after checkout when the customer names the size and length; it is not a published SKU.
+
+### ADR-016: $1,000 is the look; $500 stays a safe one-chain buy
+
+- **Status:** superseded
 - **Date:** 2026-10-30
 - **Context:** The owner wants average orders at $1,000 (one Flawless or three Legacy lengths) and wants pay later used to get there, without scaring off a $500 sale.
-- **Decision:** The storefront leads with two spends: Flawless from $979 or the 3 mm three-length Legacy kit at $1,073, with Shop Pay / Klarna / Afterpay named as the easy way to take that look today. A one-chain path stays visible and calm: US shipping is free at $500, and one chain is still a full chain. No fake urgency, no published conversion-rate claim, and checkout stays on Shopify.
+- **Decision:** Superseded by ADR-017. Do not call a $1,000 order a look, and do not explain that one chain is still a full chain.
 - **Alternatives:** Hide the $500 path, force a Shopify bundle SKU, or invent installment math on the site.
-- **Consequence:** Home, product, cart, and nav share the same kit math and spend-progress copy. Kit add uses three live Legacy variants, not a duplicate catalog product.
+- **Consequence:** See ADR-017.
 
 ### ADR-015: $1,000 international shipping, US gift necklace, and 5-year care
 
 - **Status:** accepted
 - **Date:** 2026-10-30
 - **Context:** The owner added order incentives after US $500 free shipping was already live.
-- **Decision:** Keep US free shipping at $500. International orders of $1,000 or more ship free. US orders of $1,000 or more include a free Legacy necklace. Every order includes free replacements, cleaning, and repair for up to 5 years from delivery. The site advertises only these real offers. Shopify checkout must apply the shipping thresholds; the gift necklace is fulfilled with the order and is not a published SKU.
+- **Decision:** Keep US free shipping at $500. International orders of $1,000 or more ship free. Orders of $1,000 or more include a complimentary Legacy chain of the customer’s choice. Orders of $500 or more include replacements, cleaning, and repair for 5 years from delivery. The site advertises only these real offers. Shopify checkout must apply the shipping thresholds; the gift chain is fulfilled after the customer names size and length, and is not a published SKU.
 - **Alternatives:** Replace the $500 US threshold with $1,000, or invent a specific gift variant.
 - **Consequence:** Policy pages, announcement copy, and conversion banners share the same commerce constants. Do not publish a “90% more conversions” claim.
 

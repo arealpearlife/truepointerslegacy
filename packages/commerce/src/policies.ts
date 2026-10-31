@@ -54,6 +54,7 @@ export const RETURN_WINDOW_DAYS = 15;
 export const FREE_SHIPPING_THRESHOLD = "500.00";
 export const INTERNATIONAL_FREE_SHIPPING_THRESHOLD = "1000.00";
 export const US_GIFT_NECKLACE_THRESHOLD = "1000.00";
+export const CARE_THRESHOLD = "500.00";
 export const CARE_COVERAGE_YEARS = 5;
 
 function dollars(amount: string): string {
@@ -93,7 +94,7 @@ export const storePolicies: Record<PolicySlug, StorePolicy> = {
           `We ship from ${SHIPPING_ORIGIN} to addresses in the United States and internationally. Every chain ships at the same weight, so shipping is not priced by weight.`,
           `US orders of $${dollars(FREE_SHIPPING_THRESHOLD)} or more ship free. Under that, the US rate is the distance from Richmond, Virginia to the delivery address. Closest addresses start at $10. The rate rises as the address gets farther from Richmond.`,
           `International orders of $${dollars(INTERNATIONAL_FREE_SHIPPING_THRESHOLD)} or more ship free. Under that, the international rate appears at Shopify checkout. Duties and import taxes may apply in the destination country.`,
-          `US orders of $${dollars(US_GIFT_NECKLACE_THRESHOLD)} or more include a free Legacy necklace with the order.`,
+          `Orders of $${dollars(US_GIFT_NECKLACE_THRESHOLD)} or more include a complimentary Legacy chain of your choice. After checkout, tell us the size and length.`,
           "Rates appear at Shopify checkout for your address. Taxes are extra where they apply.",
         ],
       },
@@ -124,7 +125,7 @@ export const storePolicies: Record<PolicySlug, StorePolicy> = {
         paragraphs: [
           "By buying on legacybytp.com you agree to these terms and to Shopify’s checkout terms. You must be 18 or older, or use a parent or guardian’s account.",
           "Prices are in US dollars and do not include shipping or tax until checkout. We can refuse or cancel an order if an item is unavailable, a price is wrong, or a payment does not clear.",
-          `The site and product photos are for selling the collection. Title stays with True Pointers until the order is paid and ships. US orders of $${dollars(US_GIFT_NECKLACE_THRESHOLD)} or more include a free Legacy necklace. Virginia law governs these terms.`,
+          `The site and product photos are for selling the collection. Title stays with True Pointers until the order is paid and ships. Orders of $${dollars(US_GIFT_NECKLACE_THRESHOLD)} or more include a complimentary Legacy chain of your choice. Virginia law governs these terms.`,
         ],
       },
     ],
@@ -136,7 +137,7 @@ export const storePolicies: Record<PolicySlug, StorePolicy> = {
         paragraphs: [
           "Wipe the chain with a soft dry cloth after wear. Keep it dry. Take it off for swimming, showers, and workouts.",
           "Store it flat or hanging so the stones do not rub. Do not use harsh cleaners or ultrasonic machines.",
-          `Need a clean or a repair? Email support. We cover free replacements, cleaning, and repair for up to ${CARE_COVERAGE_YEARS} years from delivery.`,
+          `Need a clean or a repair? Email support. Orders of $${dollars(CARE_THRESHOLD)} or more include ${CARE_COVERAGE_YEARS} years of replacements, cleaning, and repair from delivery.`,
         ],
       },
     ],
@@ -146,7 +147,7 @@ export const storePolicies: Record<PolicySlug, StorePolicy> = {
     sections: [
       {
         paragraphs: [
-          `If the ice fails, we replace it. Free replacements, cleaning, and repair for up to ${CARE_COVERAGE_YEARS} years from delivery. Contact support with photos and your order number.`,
+          `If the ice fails, we replace it. Orders of $${dollars(CARE_THRESHOLD)} or more include ${CARE_COVERAGE_YEARS} years of replacements, cleaning, and repair from delivery. Contact support with photos and your order number.`,
           "This covers a failed stone or setting from normal wear, plus cleaning and repair during that window. It does not cover loss, theft, or damage from misuse. The 15-day return rules still apply to change-of-mind returns.",
         ],
       },
