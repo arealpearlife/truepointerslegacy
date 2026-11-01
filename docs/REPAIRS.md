@@ -2,6 +2,15 @@
 
 Use this changelog for defects corrected after development begins.
 
+## Copy made the wearer sound unfinished
+
+- **Date:** 2026-10-31
+- **Area:** Home, product, fit, collection lede
+- **Symptom:** Lines like “raises you” and “feel more valuable” talked down to the audience. The early-2000s tennis-chain story was missing.
+- **Fix:** Hero tells the Y2K extended-chain story. Collection says 3 sizes, 3 lengths, pick one or mix n match to unlock a free gift. Fit says complete the fit with a Legacy chain and watch them remember. Desire beats speak flash and self-love. The gift still sits on the $1,000 mix path, not on a single under-threshold chain.
+- **Verification:** Commerce copy tests. Format, lint, typecheck, and test run after the change.
+- **Release or commit:** Voice repair.
+
 ## Storefront sold explanation instead of desire
 
 - **Date:** 2026-10-31

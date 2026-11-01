@@ -88,10 +88,14 @@ describe("commerce rules", () => {
     expect(`${marketing.mottoLead} ${marketing.motto}`).not.toMatch(/era that left a mark/i);
     expect(marketing.collectionTitle).toBe("THE LEGACY COLLECTION");
     expect(marketing.collectionTitle).not.toMatch(/nine ways/i);
-    expect(marketing.desireCollection).toMatch(/THE ROOM NOTICES/);
+    expect(marketing.desireCollection).toMatch(/FLASH\. SELF LOVE/);
+    expect(marketing.collectionLede).toMatch(/mix n match to unlock a free gift/i);
+    expect(marketing.fitLead).toMatch(/Complete the fit with a Legacy chain/i);
+    expect(marketing.heroBody).toMatch(/Y2K fit/i);
+    expect(marketing.heroBody).not.toMatch(/more valuable/i);
     expect(marketing.navChain).toBe("The Chain");
     expect(`${marketing.desireWear} ${marketing.trayTitle} ${marketing.fitLead}`).not.toMatch(
-      /\$1,000 look|full chain/i,
+      /\$1,000 look|full chain|raises you/i,
     );
     expect(PAY_LATER_METHODS.map((method) => method.label)).toEqual([
       "Shop Pay",
