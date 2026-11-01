@@ -1,4 +1,11 @@
-export const metadata = { title: "Support" };
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata = pageMetadata({
+  title: "Support",
+  description:
+    "Support for True Pointers Legacy extra-long tennis necklaces. Shop at legacybytp.com.",
+  path: "/support",
+});
 
 export default function SupportPage() {
   return (

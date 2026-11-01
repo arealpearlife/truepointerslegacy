@@ -21,7 +21,7 @@ export function SiteFooter() {
               <Link href="/flawless">Flawless Upgrade</Link>
             </li>
             <li>
-              <Link href={`${legacy}#fit`}>{marketing.navDrop}</Link>
+              <Link href="/the-drop">{marketing.navDrop}</Link>
             </li>
             <li>
               <Link href="/cart">{marketing.navTray}</Link>

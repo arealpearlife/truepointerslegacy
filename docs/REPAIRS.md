@@ -2,6 +2,15 @@
 
 Use this changelog for defects corrected after development begins.
 
+## Google could not find Legacybytp for the extra-long tennis necklace
+
+- **Date:** 2026-11-01
+- **Area:** Search metadata, The Drop, sitemap
+- **Symptom:** Home titles named the house, not the extra-long tennis necklace, and crawlers had no sitemap or discovery page for Y2K, men's jewelry, or hip-hop jewelry.
+- **Fix:** Titles and descriptions now lead with Legacybytp and the extra-long tennis necklace. `/the-drop` is a public landing for those searches. Sitemap and robots point crawlers at the shop. JSON-LD names the jewelry house. GLD shop and Icey Pyramid are named once, in the open, as the shops people already compare.
+- **Verification:** Discovery copy scan, sitemap/robots tests, header/footer Drop links, Drop page headings.
+- **Release or commit:** Search visibility.
+
 ## Store type ices from cherry to readable blue as the room freezes
 
 - **Date:** 2026-10-31

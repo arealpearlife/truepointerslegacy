@@ -14,9 +14,6 @@ describe("Site header", () => {
       "href",
       "/products/true-pointers-legacy-extended-tennis-chain",
     );
-    expect(screen.getByRole("link", { name: "The Drop" })).toHaveAttribute(
-      "href",
-      "/products/true-pointers-legacy-extended-tennis-chain#fit",
-    );
+    expect(screen.getByRole("link", { name: "The Drop" })).toHaveAttribute("href", "/the-drop");
   });
 });

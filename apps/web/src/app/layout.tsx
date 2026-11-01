@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Anton, Graduate, Lato, Tenor_Sans } from "next/font/google";
+import { discovery } from "@truepointers/commerce";
 import { cssVariables } from "@truepointers/tokens";
 import { AnnouncementBar } from "@/components/announcement-bar";
 import { HouseCourtesy } from "@/components/house-courtesy";
@@ -8,6 +9,7 @@ import { IceClimate } from "@/components/ice-climate";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { getCart } from "@/lib/cart";
+import { organizationGraph, pageMetadata } from "@/lib/seo";
 import { PUBLIC_INDEXING, publicSiteUrl } from "@/lib/site";
 import { stripCursorRefScript } from "@/lib/strip-cursor-refs";
 import "./globals.css";
@@ -39,15 +41,12 @@ const body = Lato({
 
 export const metadata: Metadata = {
   metadataBase: publicSiteUrl(),
-  title: { default: "True Pointers Legacy", template: "%s · True Pointers" },
-  description:
-    "True Pointers presents Legacy, an extended tennis chain. Flawless Upgrade for the elevated version.",
-  alternates: { canonical: "/" },
-  openGraph: {
-    type: "website",
-    url: "/",
-    siteName: "True Pointers Legacy",
-  },
+  ...pageMetadata({
+    title: discovery.homeTitle,
+    description: discovery.homeDescription,
+    path: "/",
+  }),
+  title: { default: discovery.homeTitle, template: discovery.titleTemplate },
   robots: PUBLIC_INDEXING,
 };
 
@@ -70,6 +69,10 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
       <body
         className={`ice-house ${poster.variable} ${varsity.variable} ${display.variable} ${body.variable}`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationGraph()) }}
+        />
         <a className="skip-link" href="#main">
           Skip to content
         </a>

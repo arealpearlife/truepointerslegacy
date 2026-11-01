@@ -1,3 +1,4 @@
+import { discoveryEntries } from "./discovery";
 import { announcementIncentives, housePrivileges } from "./incentives";
 
 export const marketing = {
@@ -107,6 +108,7 @@ export function marketingViolations(): string[] {
   return [
     ...Object.entries(marketing),
     ...Object.entries(publicDetails),
+    ...discoveryEntries(),
     ...housePrivileges.flatMap((item) => [
       [`${item.id}.offer`, item.offer] as const,
       [`${item.id}.whisper`, item.whisper] as const,

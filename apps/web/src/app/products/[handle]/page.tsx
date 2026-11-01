@@ -5,6 +5,7 @@ import {
   APPROVED_STONE_SIZES,
   CHAIN_LENGTH,
   STONE_SIZE,
+  discovery,
   editionFromHandle,
   marketing,
   optionValues,
@@ -15,6 +16,7 @@ import {
 import { ProductExperience } from "@/components/product-experience";
 import { addToCart } from "@/app/cart/actions";
 import { getCatalog } from "@/lib/catalog";
+import { breadcrumbGraph, pageMetadata } from "@/lib/seo";
 import { publicSiteOrigin } from "@/lib/site";
 
 type PageProps = {
@@ -26,7 +28,18 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { handle } = await params;
   const edition = editionFromHandle(handle);
   if (!edition) return { title: "Product" };
-  return { title: edition === "legacy" ? "Legacy Tennis Chain" : "Flawless Tennis Chain" };
+  const path = `/products/${handle}`;
+  return edition === "legacy"
+    ? pageMetadata({
+        title: discovery.chainTitle,
+        description: discovery.chainDescription,
+        path,
+      })
+    : pageMetadata({
+        title: discovery.flawlessTitle,
+        description: discovery.flawlessDescription,
+        path,
+      });
 }
 
 export default async function ProductPage({ params, searchParams }: PageProps) {
@@ -44,7 +57,18 @@ export default async function ProductPage({ params, searchParams }: PageProps) {
       {product ? (
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd(product)) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify([
+              productJsonLd(product),
+              breadcrumbGraph([
+                { name: discovery.siteName, path: "/" },
+                {
+                  name: edition === "legacy" ? marketing.legacyName : marketing.flawlessName,
+                  path: `/products/${handle}`,
+                },
+              ]),
+            ]),
+          }}
         />
       ) : null}
       <ProductExperience
@@ -79,7 +103,9 @@ function productJsonLd(product: Product) {
     description:
       publicDetails[editionFromHandle(product.handle) ?? "legacy"] || marketing.collectionStory,
     url: `${publicSiteOrigin()}/products/${product.handle}`,
-    brand: { "@type": "Brand", name: "True Pointers" },
+    brand: { "@type": "Brand", name: discovery.siteName, alternateName: discovery.brandShort },
+    category: "Tennis necklace",
+    ...(product.images[0]?.url ? { image: product.images[0].url } : {}),
   };
   if (currencies.size !== 1 || product.variants.length === 0) return base;
   const low = Math.min(...product.variants.map((variant) => variant.price.cents));

@@ -19,6 +19,13 @@ export {
   marketingViolations,
   publicDetails,
 } from "./brand";
+export {
+  SEARCH_KEYWORDS,
+  discovery,
+  discoveryEntries,
+  discoveryText,
+  searchTopics,
+} from "./discovery";
 export { formatMoney, parseMoney } from "./money";
 export {
   APPROVED_CHAIN_LENGTHS,

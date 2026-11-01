@@ -7,7 +7,7 @@ import { PrivilegeMark } from "@/components/privilege-mark";
 import { getCart } from "@/lib/cart";
 import { REPRESENTATIVE_CAPTION, keyedPreviewVideo } from "@/lib/local-media";
 
-export const metadata = { title: "Cart" };
+export const metadata = { title: "Cart", robots: { index: false, follow: false } };
 
 export default async function CartPage() {
   const cart = await getCart();

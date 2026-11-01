@@ -7,6 +7,7 @@ import {
   marketingViolations,
   publicDetails,
 } from "../src/brand";
+import { discovery, discoveryText } from "../src/discovery";
 import {
   CARE_COVERAGE_YEARS,
   CARE_THRESHOLD,
@@ -156,6 +157,13 @@ describe("commerce rules", () => {
 
   it("keeps stone names off every customer-facing line", () => {
     expect(marketingViolations()).toEqual([]);
+    expect(hasBannedPublicLanguage(discoveryText())).toBe(false);
+    expect(discovery.homeTitle).toMatch(/Legacybytp/);
+    expect(discovery.homeDescription).toMatch(/tennis necklace/i);
+    expect(discovery.comparison).toMatch(/GLD shop/);
+    expect(discovery.comparison).toMatch(/Icey Pyramid/);
+    expect(discovery.comparison.match(/GLD shop/g)).toHaveLength(1);
+    expect(discovery.comparison.match(/Icey Pyramid/g)).toHaveLength(1);
     const tainted = catalogProduct("legacy");
     tainted.description = "Stone material: cubic zirconia. Also moissanite.";
     expect(materialStatement("legacy", tainted)).toBe(publicDetails.legacy);

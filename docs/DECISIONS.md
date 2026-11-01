@@ -15,6 +15,15 @@ Record decisions here before they become expensive to reverse.
 
 ## Accepted decisions
 
+### ADR-021: Search finds Legacybytp, not a stuffed catalog
+
+- **Status:** accepted
+- **Date:** 2026-11-01
+- **Context:** The shop needed to appear for Y2K, fashion, tennis necklace, men's fashion, men's jewelry, and hip-hop jewelry, and to be the house people find when they already search extra-long tennis-chain shops.
+- **Decision:** Titles, descriptions, `/the-drop`, sitemap, robots, and Organization/WebSite JSON-LD name Legacybytp and the extra-long tennis necklace in house voice. Competitor names (GLD shop, Icey Pyramid) appear once, in visible comparison copy, never in titles, hidden text, or a second catalog. Cart stays out of the sitemap. Checkout stays on Shopify.
+- **Alternatives:** Keyword-stuff competitor brands into every meta tag, or buy ads on those queries.
+- **Consequence:** Index `https://www.legacybytp.com` in Google Search Console. Do not add a Facebook Shop catalog or a custom search engine. Do not invent reviews, addresses, or stone chemistry to rank.
+
 ### ADR-020: The house gets colder after ten seconds of shopping
 
 - **Status:** accepted

@@ -4,17 +4,19 @@ import {
   APPROVED_STONE_SIZES,
   CHAIN_LENGTH,
   STONE_SIZE,
-  marketing,
+  discovery,
   optionValues,
 } from "@truepointers/commerce";
 import { addToCart } from "@/app/cart/actions";
 import { ProductExperience } from "@/components/product-experience";
 import { getCatalog } from "@/lib/catalog";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Flawless · Buy now, pay later",
-  description: marketing.payLaterBody,
-};
+export const metadata: Metadata = pageMetadata({
+  title: discovery.flawlessTitle,
+  description: discovery.flawlessDescription,
+  path: "/flawless",
+});
 
 type PageProps = {
   searchParams: Promise<{ stone?: string; length?: string }>;
