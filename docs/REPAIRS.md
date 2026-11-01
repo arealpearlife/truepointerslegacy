@@ -2,6 +2,15 @@
 
 Use this changelog for defects corrected after development begins.
 
+## Hero passage replaced with the era-in-time line
+
+- **Date:** 2026-10-31
+- **Area:** Home hero
+- **Symptom:** The hero body still sold a Y2K pep talk instead of the house story.
+- **Fix:** Hero now reads: with a growing demand for classic styles and brands, we came to deliver the final touch — the ice that froze an era in time.
+- **Verification:** Commerce copy tests.
+- **Release or commit:** Hero passage commit.
+
 ## Copy made the wearer sound unfinished
 
 - **Date:** 2026-10-31

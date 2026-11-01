@@ -11,7 +11,7 @@ export const marketing = {
   plateMotto: "LAST FOREVER.",
   iceLine: "THE EARLY 2000s. REIMAGINED.",
   heroBody:
-    "The extended tennis chain that ran the era — extra long, built to flash. Take any Y2K fit to the next level. You already got the value. This is the ice you wanted.",
+    "With a growing demand for classic styles and brands, we came to deliver the final touch — the ice that froze an era in time.",
   shopLegacy: "WEAR LEGACY",
   shopKit: "THE LEGACY SET",
   navChain: "The Chain",

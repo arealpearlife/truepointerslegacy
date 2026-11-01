@@ -91,7 +91,7 @@ describe("commerce rules", () => {
     expect(marketing.desireCollection).toMatch(/FLASH\. SELF LOVE/);
     expect(marketing.collectionLede).toMatch(/mix n match to unlock a free gift/i);
     expect(marketing.fitLead).toMatch(/Complete the fit with a Legacy chain/i);
-    expect(marketing.heroBody).toMatch(/Y2K fit/i);
+    expect(marketing.heroBody).toMatch(/the ice that froze an era in time/i);
     expect(marketing.heroBody).not.toMatch(/more valuable/i);
     expect(marketing.navChain).toBe("The Chain");
     expect(`${marketing.desireWear} ${marketing.trayTitle} ${marketing.fitLead}`).not.toMatch(
