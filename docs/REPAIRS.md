@@ -2,6 +2,15 @@
 
 Use this changelog for defects corrected after development begins.
 
+## Store type ices from cherry to readable blue as the room freezes
+
+- **Date:** 2026-10-31
+- **Area:** Global type, prices, surfaces
+- **Symptom:** The climate frosted the room, but letters and prices stayed cherry while the ice rose.
+- **Fix:** `--ice-depth` now mixes prices, eyebrows, accents, body copy, and notes from cherry/ink into ice blues that stay readable on frost. Header, hero, footer, and rails cool with the type. Alerts and primary checkout buttons stay cherry.
+- **Verification:** Climate hue tests plus existing climate math and widget tests.
+- **Release or commit:** Ice type climate.
+
 ## House climate frosts after ten seconds of shopping
 
 - **Date:** 2026-10-31

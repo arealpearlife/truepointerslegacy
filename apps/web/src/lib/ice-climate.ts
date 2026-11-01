@@ -22,6 +22,21 @@ export function climateAt(elapsedMs: number): IceClimate {
   return { started: true, intensity, celsius };
 }
 
+export const CLIMATE_PRICE_ICE = "#0077b3";
+export const CLIMATE_INK_ICE = "#0a3a52";
+export const CLIMATE_SOFT_ICE = "#006890";
+
+export function climateHue(intensity: number) {
+  const cold = Math.min(1, Math.max(0, intensity));
+  return {
+    hot: 1 - cold,
+    cold,
+    priceIce: CLIMATE_PRICE_ICE,
+    inkIce: CLIMATE_INK_ICE,
+    softIce: CLIMATE_SOFT_ICE,
+  };
+}
+
 export function formatTrayTemp(celsius: number): string {
   return `${celsius}°C`;
 }

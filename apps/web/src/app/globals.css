@@ -11,6 +11,30 @@
 
 html {
   scroll-behavior: smooth;
+  --ice-depth: 0;
+  --ice-hot: calc((1 - var(--ice-depth)) * 100%);
+  --ice-cold: calc(var(--ice-depth) * 100%);
+  --climate-accent: color-mix(
+    in srgb,
+    var(--color-cherry-signal) var(--ice-hot),
+    var(--color-ice-signal) var(--ice-cold)
+  );
+  --climate-price: color-mix(
+    in srgb,
+    var(--color-cherry-signal) var(--ice-hot),
+    #0077b3 var(--ice-cold)
+  );
+  --climate-ink: color-mix(in srgb, var(--color-ink) var(--ice-hot), #0a3a52 var(--ice-cold));
+  --climate-soft: color-mix(
+    in srgb,
+    var(--color-blood-diamond) var(--ice-hot),
+    #006890 var(--ice-cold)
+  );
+  --climate-light: color-mix(
+    in srgb,
+    var(--color-crystal-white) var(--ice-hot),
+    var(--color-ice-glow) var(--ice-cold)
+  );
 }
 
 body {
@@ -21,15 +45,23 @@ body {
   padding-left: env(safe-area-inset-left);
   padding-right: env(safe-area-inset-right);
   background:
-    radial-gradient(circle at 88% 6%, rgb(0 180 255 / 20%), transparent 26%),
-    radial-gradient(circle at 8% 72%, rgb(189 235 255 / 48%), transparent 30%),
+    radial-gradient(
+      circle at 88% 6%,
+      rgb(0 180 255 / calc(20% + var(--ice-depth) * 22%)),
+      transparent 26%
+    ),
+    radial-gradient(
+      circle at 8% 72%,
+      rgb(189 235 255 / calc(48% + var(--ice-depth) * 18%)),
+      transparent 30%
+    ),
     linear-gradient(
       180deg,
       var(--color-clear-crystal),
       var(--color-diamond-frost) 36%,
       var(--color-diamond-frost)
     );
-  color: var(--color-ink);
+  color: var(--climate-ink);
   font-family: var(--font-body), sans-serif;
   font-size: 15px;
   font-weight: 400;
@@ -46,6 +78,32 @@ h3 {
   line-height: 1.12;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+}
+
+body,
+.price,
+.card-price,
+.from-price,
+.accent,
+.eyebrow,
+.panel-label,
+.note,
+.caption,
+.hero,
+.hero-copy,
+.site-header,
+.site-footer,
+.fit-head h2,
+.buy-box .product-name,
+.collection-head h2,
+.tile-headline,
+.ring,
+.modal h2,
+.tray > h1,
+.tray-temp strong {
+  transition:
+    color 0.4s linear,
+    text-shadow 0.4s linear;
 }
 
 .poster {
@@ -119,7 +177,7 @@ main:not(.home) {
   font-weight: 900;
   letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: var(--color-cherry-signal);
+  color: var(--climate-accent);
 }
 
 /* Announcement marquee */
@@ -177,7 +235,7 @@ main:not(.home) {
   z-index: 16;
   width: min(19.5rem, calc(100vw - 1.6rem));
   padding: 1rem 1.05rem 1.05rem;
-  color: var(--color-ink);
+  color: var(--climate-ink);
   background:
     radial-gradient(circle at 90% 0%, rgb(189 235 255 / 70%), transparent 42%),
     var(--color-crystal-white);
@@ -249,8 +307,12 @@ main:not(.home) {
   display: grid;
   gap: 0.28rem;
   padding: 0.8rem 0.75rem 0.85rem;
-  color: var(--color-crystal-white);
-  background: linear-gradient(165deg, var(--color-deep-blood), var(--color-blood-diamond));
+  color: var(--climate-light);
+  background: linear-gradient(
+    165deg,
+    var(--color-deep-blood),
+    color-mix(in srgb, var(--color-blood-diamond) var(--ice-hot), #2c1420 var(--ice-cold))
+  );
   border: 1px solid rgb(189 235 255 / 38%);
   box-shadow: 0 14px 30px rgb(20 6 10 / 24%);
   text-decoration: none;
@@ -349,9 +411,17 @@ main:not(.home) {
 .site-header {
   padding-top: env(safe-area-inset-top);
   background:
-    radial-gradient(circle at 82% 0%, rgb(0 180 255 / 30%), transparent 34%),
-    linear-gradient(180deg, var(--color-deep-blood), var(--color-blood-diamond));
-  color: var(--color-crystal-white);
+    radial-gradient(
+      circle at 82% 0%,
+      rgb(0 180 255 / calc(30% + var(--ice-depth) * 22%)),
+      transparent 34%
+    ),
+    linear-gradient(
+      180deg,
+      var(--color-deep-blood),
+      color-mix(in srgb, var(--color-blood-diamond) var(--ice-hot), #3a0d22 var(--ice-cold))
+    );
+  color: var(--climate-light);
   border-bottom: 3px solid var(--color-ice-signal);
   box-shadow:
     0 0 40px rgb(0 180 255 / 22%),
@@ -452,7 +522,7 @@ main:not(.home) {
   letter-spacing: 0.06em;
   text-shadow:
     0 0 18px rgb(0 180 255 / 65%),
-    0 2px 0 var(--color-cherry-signal);
+    0 2px 0 var(--climate-accent);
 }
 
 .wordmark-sub {
@@ -571,7 +641,7 @@ button.primary {
 .button.solid-white {
   background: var(--color-crystal-white);
   border-color: var(--color-crystal-white);
-  color: var(--color-cherry-signal);
+  color: var(--climate-accent);
   box-shadow: 0 12px 34px rgb(74 4 20 / 45%);
 }
 
@@ -617,14 +687,18 @@ button:disabled {
 .hero {
   position: relative;
   overflow: hidden;
-  color: var(--color-crystal-white);
+  color: var(--climate-light);
   background:
-    radial-gradient(circle at 82% 18%, rgb(0 180 255 / 55%), transparent 34%),
+    radial-gradient(
+      circle at 82% 18%,
+      rgb(0 180 255 / calc(55% + var(--ice-depth) * 20%)),
+      transparent 34%
+    ),
     radial-gradient(circle at 8% 92%, rgb(255 255 255 / 18%), transparent 30%),
     linear-gradient(
       128deg,
       var(--color-deep-blood) 0%,
-      var(--color-cherry-signal) 52%,
+      color-mix(in srgb, var(--color-cherry-signal) var(--ice-hot), #6a1430 var(--ice-cold)) 52%,
       var(--color-pope-cherry) 100%
     );
 }
@@ -686,6 +760,7 @@ button:disabled {
   margin: 1.1rem 0 1.6rem;
   font-size: 1.05rem;
   font-weight: 300;
+  color: var(--climate-light);
 }
 
 .hero-visual-wrap {
@@ -765,7 +840,7 @@ button:disabled {
   min-height: 18rem;
   padding: 1.5rem;
   text-align: center;
-  color: var(--color-ink);
+  color: var(--climate-ink);
   background:
     radial-gradient(circle at 30% 22%, var(--color-crystal-white), transparent 40%),
     radial-gradient(circle at 75% 80%, rgb(0 180 255 / 35%), transparent 45%),
@@ -780,7 +855,7 @@ button:disabled {
 
 .tile-headline {
   font-size: clamp(3rem, 8vw, 5.5rem);
-  color: var(--color-cherry-signal);
+  color: var(--climate-accent);
   text-shadow: 0 0 26px rgb(255 255 255 / 90%);
 }
 
@@ -841,7 +916,7 @@ button:disabled {
   height: 5rem;
   border: 3px solid var(--color-ice-signal);
   border-radius: 50%;
-  color: var(--color-cherry-signal);
+  color: var(--climate-accent);
   font-size: 1.4rem;
   background: radial-gradient(
     circle at 30% 25%,
@@ -851,7 +926,7 @@ button:disabled {
   );
   box-shadow:
     0 0 0 3px var(--color-crystal-white),
-    0 0 0 5px var(--color-cherry-signal),
+    0 0 0 5px var(--climate-accent),
     0 10px 24px rgb(0 180 255 / 40%);
   transition: transform 0.2s ease;
 }
@@ -883,6 +958,7 @@ button:disabled {
   margin: 0 0 0.2em;
   font-size: clamp(2.6rem, 9vw, 4.4rem);
   line-height: 0.88;
+  color: var(--climate-ink);
 }
 
 .collection-head p {
@@ -901,11 +977,11 @@ button:disabled {
   margin: 1.1rem 0 2rem;
   padding: 1.15rem 1.2rem 1.2rem;
   text-align: left;
-  color: var(--color-crystal-white);
+  color: var(--climate-light);
   background: linear-gradient(
     108deg,
     var(--color-deep-blood),
-    var(--color-cherry-signal) 62%,
+    color-mix(in srgb, var(--color-cherry-signal) var(--ice-hot), #5a1a30 var(--ice-cold)) 62%,
     var(--color-deep-blood)
   );
   transform: rotate(0.5deg);
@@ -1106,7 +1182,7 @@ button:disabled {
   left: 0.7rem;
   padding: 0.35rem 0.6rem;
   background: var(--color-crystal-white);
-  color: var(--color-ink);
+  color: var(--climate-ink);
   border: 1px solid var(--color-platinum-silver);
   font-size: 0.62rem;
   font-weight: 900;
@@ -1125,13 +1201,13 @@ button:disabled {
 
 .card-price {
   margin: 0;
-  color: var(--color-cherry-signal);
+  color: var(--climate-price);
   font-size: 1rem;
   font-weight: 900;
 }
 
 .card-price.pending {
-  color: var(--color-blood-diamond);
+  color: var(--climate-soft);
   font-size: 0.74rem;
   font-weight: 700;
   letter-spacing: 0.14em;
@@ -1200,6 +1276,7 @@ button:disabled {
 .from-price {
   font-weight: 900;
   letter-spacing: 0.14em;
+  color: var(--climate-price);
 }
 
 @media (min-width: 900px) {
@@ -1234,10 +1311,18 @@ button:disabled {
 /* Footer */
 
 .site-footer {
-  color: var(--color-crystal-white);
+  color: var(--climate-light);
   background:
-    radial-gradient(circle at 12% 0%, rgb(0 180 255 / 22%), transparent 32%),
-    linear-gradient(180deg, var(--color-blood-diamond), var(--color-deep-blood));
+    radial-gradient(
+      circle at 12% 0%,
+      rgb(0 180 255 / calc(22% + var(--ice-depth) * 20%)),
+      transparent 32%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--color-blood-diamond) var(--ice-hot), #2a1a28 var(--ice-cold)),
+      var(--color-deep-blood)
+    );
   border-top: 4px solid var(--color-ice-signal);
   padding-bottom: env(safe-area-inset-bottom);
 }
@@ -1391,12 +1476,12 @@ button:disabled {
 }
 
 .accent {
-  color: var(--color-cherry-signal);
+  color: var(--climate-accent);
 }
 
 .price {
   margin: 0.6rem 0 0.1rem;
-  color: var(--color-cherry-signal);
+  color: var(--climate-price);
   font-family: var(--font-poster), sans-serif;
   font-size: 2.9rem;
   letter-spacing: 0.02em;
@@ -1416,7 +1501,7 @@ button:disabled {
 .note,
 .caption {
   font-size: 0.82rem;
-  color: var(--color-blood-diamond);
+  color: var(--climate-soft);
 }
 
 .choices {
@@ -1592,7 +1677,7 @@ button:disabled {
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--color-blood-diamond);
+  color: var(--climate-soft);
 }
 
 .pay-later-methods {
@@ -1943,7 +2028,7 @@ main[data-surface="flawless"] .buy-box .product-name {
 
 .fit-head h2 {
   font-size: clamp(2.6rem, 7vw, 4.6rem);
-  color: var(--color-cherry-signal);
+  color: var(--climate-accent);
   text-shadow: 0 4px 0 var(--color-glacier-blue);
 }
 
@@ -2030,11 +2115,11 @@ main[data-surface="flawless"] .buy-box .product-name {
 
 .chain-0 path,
 .chain-0 line {
-  stroke: var(--color-cherry-signal);
+  stroke: var(--climate-accent);
 }
 
 .chain-0 text {
-  fill: var(--color-cherry-signal);
+  fill: var(--climate-accent);
 }
 
 .chain-1 path,
@@ -2074,7 +2159,7 @@ main[data-surface="flawless"] .buy-box .product-name {
   padding: 1rem 1.1rem;
   border: 2px solid var(--color-platinum-silver);
   background: var(--color-crystal-white);
-  color: var(--color-ink);
+  color: var(--climate-ink);
   font-weight: 400;
   letter-spacing: normal;
   text-align: left;
@@ -2094,7 +2179,7 @@ main[data-surface="flawless"] .buy-box .product-name {
 }
 
 .fit-swatch.chain-0 {
-  color: var(--color-cherry-signal);
+  color: var(--climate-accent);
 }
 
 .fit-swatch.chain-1 {
@@ -2125,7 +2210,7 @@ main[data-surface="flawless"] .buy-box .product-name {
   margin-top: 1.25rem;
   font-size: 0.8rem;
   text-align: left;
-  color: var(--color-blood-diamond);
+  color: var(--climate-soft);
 }
 
 @media (min-width: 900px) {
@@ -2137,7 +2222,7 @@ main[data-surface="flawless"] .buy-box .product-name {
 .buy-box .product-name {
   margin: 0.1rem 0 0.4rem;
   font-size: clamp(2.4rem, 5vw, 3.6rem);
-  color: var(--color-ink);
+  color: var(--climate-ink);
 }
 
 /* Flawless modal */
@@ -2149,7 +2234,11 @@ main[data-surface="flawless"] .buy-box .product-name {
   display: grid;
   place-items: center;
   padding: 1rem;
-  background: rgb(74 4 20 / 55%);
+  background: color-mix(
+    in srgb,
+    rgb(74 4 20 / 55%) var(--ice-hot),
+    rgb(6 40 58 / 55%) var(--ice-cold)
+  );
   backdrop-filter: blur(4px);
 }
 
@@ -2174,7 +2263,7 @@ main[data-surface="flawless"] .buy-box .product-name {
   font-family: var(--font-poster), sans-serif;
   font-size: clamp(2.2rem, 6vw, 3.4rem);
   letter-spacing: 0.02em;
-  color: var(--color-cherry-signal);
+  color: var(--climate-accent);
 }
 
 .modal .modal-actions .button.primary {
@@ -2219,7 +2308,7 @@ main:not(.home) > h1,
 }
 
 .tray > h1 {
-  color: var(--color-ink);
+  color: var(--climate-ink);
   text-shadow: 0 0 18px rgb(0 180 255 / 28%);
 }
 
@@ -2402,7 +2491,7 @@ input[type="number"] {
   margin: 0;
   padding: 0.55rem 0.7rem 0.6rem;
   pointer-events: none;
-  color: var(--color-ink);
+  color: var(--climate-ink);
   background:
     radial-gradient(circle at 100% 0%, rgb(189 235 255 / 70%), transparent 46%),
     var(--color-crystal-white);
@@ -2424,6 +2513,7 @@ input[type="number"] {
   font-weight: 400;
   letter-spacing: 0.04em;
   line-height: 1;
+  color: var(--climate-price);
 }
 
 html[data-ice="cold"] .hero-title,
@@ -2434,9 +2524,15 @@ html[data-ice="cold"] .motto-shine {
     0 0 calc(18px + var(--ice-depth, 0) * 16px) rgb(0 180 255 / 70%);
 }
 
-html[data-ice="cold"] .hero-copy,
 html[data-ice="cold"] .price,
 html[data-ice="cold"] .card-price,
+html[data-ice="cold"] .from-price,
+html[data-ice="cold"] .accent,
+html[data-ice="cold"] .eyebrow {
+  text-shadow: 0 0 calc(8px + var(--ice-depth) * 10px) rgb(0 180 255 / 38%);
+}
+
+html[data-ice="cold"] .hero-copy,
 html[data-ice="cold"] .buy-box,
 html[data-ice="cold"] .collection-head p {
   text-shadow: none;
