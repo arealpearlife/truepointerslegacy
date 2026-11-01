@@ -2,6 +2,15 @@
 
 Use this changelog for defects corrected after development begins.
 
+## House climate frosts after ten seconds of shopping
+
+- **Date:** 2026-10-31
+- **Area:** Global atmosphere, tray widget
+- **Symptom:** Time on site had no lasting ice impression.
+- **Fix:** After 10 seconds, frost rises from the edges and Tray temp falls from 16°C to −8°C. Product, copy, and prices stay readable. The cold clears when the shop session ends.
+- **Verification:** Climate math tests and widget timer tests.
+- **Release or commit:** Ice climate commit.
+
 ## Flash self-love line replaced with ice atmosphere
 
 - **Date:** 2026-10-31

@@ -2365,6 +2365,83 @@ input[type="number"] {
   }
 }
 
+.ice-rise {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 4;
+  height: calc(var(--ice-depth, 0) * 34vh);
+  pointer-events: none;
+  background: linear-gradient(
+    to top,
+    rgb(189 235 255 / 26%),
+    rgb(232 246 252 / 10%) 46%,
+    transparent 100%
+  );
+}
+
+.ice-pane {
+  position: fixed;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  box-shadow:
+    inset 0 calc(var(--ice-depth, 0) * -42px) 48px rgb(189 235 255 / 18%),
+    inset calc(var(--ice-depth, 0) * 28px) 0 36px rgb(0 180 255 / 8%),
+    inset calc(var(--ice-depth, 0) * -28px) 0 36px rgb(0 180 255 / 8%);
+}
+
+.tray-temp {
+  position: fixed;
+  left: max(0.85rem, env(safe-area-inset-left));
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  z-index: 13;
+  display: grid;
+  gap: 0.15rem;
+  margin: 0;
+  padding: 0.55rem 0.7rem 0.6rem;
+  pointer-events: none;
+  color: var(--color-ink);
+  background:
+    radial-gradient(circle at 100% 0%, rgb(189 235 255 / 70%), transparent 46%),
+    var(--color-crystal-white);
+  border: 1px solid rgb(189 235 255 / 80%);
+  box-shadow: 0 10px 24px rgb(0 180 255 / 14%);
+}
+
+.tray-temp span {
+  font-size: 0.58rem;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-ice-signal);
+}
+
+.tray-temp strong {
+  font-family: var(--font-poster), sans-serif;
+  font-size: 1.35rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+html[data-ice="cold"] .hero-title,
+html[data-ice="cold"] .wordmark-main,
+html[data-ice="cold"] .motto-shine {
+  text-shadow:
+    0 6px 0 var(--color-deep-blood),
+    0 0 calc(18px + var(--ice-depth, 0) * 16px) rgb(0 180 255 / 70%);
+}
+
+html[data-ice="cold"] .hero-copy,
+html[data-ice="cold"] .price,
+html[data-ice="cold"] .card-price,
+html[data-ice="cold"] .buy-box,
+html[data-ice="cold"] .collection-head p {
+  text-shadow: none;
+}
+
 @keyframes frost-bloom {
   0% {
     opacity: 0;
@@ -2463,7 +2540,10 @@ input[type="number"] {
   }
   .ice-flurry,
   .ice-gust::after,
-  .frost-splash {
+  .frost-splash,
+  .ice-rise,
+  .ice-pane,
+  .tray-temp {
     display: none;
   }
 }

@@ -15,6 +15,15 @@ Record decisions here before they become expensive to reverse.
 
 ## Accepted decisions
 
+### ADR-020: The house gets colder after ten seconds of shopping
+
+- **Status:** accepted
+- **Date:** 2026-10-31
+- **Context:** The storefront needed a premium climate that rewards time on site without hiding the jewelry.
+- **Decision:** After 10 seconds, frost climbs from the edges and a Tray temp widget drops from 16°C to −8°C over the next 50 seconds. Overlays are pointer-events none and never sit on product media, body copy, or prices. The start time lives in sessionStorage, so closing the shop clears the cold. Reduced motion turns the climate off.
+- **Alternatives:** A full-screen freeze, or frosting the product cards themselves.
+- **Consequence:** Keep `--ice-depth` on the document element only. Do not blur or dim `.price`, `.card-price`, or product media.
+
 ### ADR-019: Ice atmosphere instead of slogan beats
 
 - **Status:** accepted

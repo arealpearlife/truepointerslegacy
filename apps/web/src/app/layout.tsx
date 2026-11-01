@@ -4,6 +4,7 @@ import { cssVariables } from "@truepointers/tokens";
 import { AnnouncementBar } from "@/components/announcement-bar";
 import { HouseCourtesy } from "@/components/house-courtesy";
 import { IceAtmosphere } from "@/components/ice-atmosphere";
+import { IceClimate } from "@/components/ice-climate";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { getCart } from "@/lib/cart";
@@ -75,6 +76,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         <AnnouncementBar />
         <SiteHeader cartCount={cart?.totalQuantity ?? 0} />
         <IceAtmosphere />
+        <IceClimate />
         {children}
         <HouseCourtesy />
         <SiteFooter />
