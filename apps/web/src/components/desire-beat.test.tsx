@@ -5,8 +5,9 @@ import { DesireBeat } from "./desire-beat";
 
 describe("Desire beat", () => {
   it("places a short want line without a $1,000 look lecture", () => {
-    render(<DesireBeat line={marketing.desireCollection} />);
-    expect(screen.getByText(marketing.desireCollection)).toBeInTheDocument();
+    render(<DesireBeat line={marketing.desireFit} />);
+    expect(screen.getByText(marketing.desireFit)).toBeInTheDocument();
+    expect(screen.queryByText(/FLASH\. SELF LOVE/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/\$1,000 look/i)).not.toBeInTheDocument();
   });
 });

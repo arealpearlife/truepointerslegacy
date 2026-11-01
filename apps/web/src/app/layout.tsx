@@ -3,6 +3,7 @@ import { Anton, Graduate, Lato, Tenor_Sans } from "next/font/google";
 import { cssVariables } from "@truepointers/tokens";
 import { AnnouncementBar } from "@/components/announcement-bar";
 import { HouseCourtesy } from "@/components/house-courtesy";
+import { IceAtmosphere } from "@/components/ice-atmosphere";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { getCart } from "@/lib/cart";
@@ -73,6 +74,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         </a>
         <AnnouncementBar />
         <SiteHeader cartCount={cart?.totalQuantity ?? 0} />
+        <IceAtmosphere />
         {children}
         <HouseCourtesy />
         <SiteFooter />

@@ -2275,6 +2275,108 @@ input[type="number"] {
   text-shadow: 0 0 18px rgb(0 180 255 / 45%);
 }
 
+.ice-flurry {
+  position: fixed;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.ice-flurry-field,
+.ice-gust-field {
+  position: absolute;
+  inset: 0;
+}
+
+.ice-flurry-field i,
+.ice-gust-field i {
+  position: absolute;
+  top: -8%;
+  background: var(--color-crystal-white);
+  clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%);
+  filter: drop-shadow(0 0 6px var(--color-ice-glow));
+  animation-name: ice-fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.ice-gust {
+  position: relative;
+  height: 5.6rem;
+  overflow: hidden;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgb(189 235 255 / 28%) 46%, transparent);
+}
+
+.ice-gust::after {
+  content: "";
+  position: absolute;
+  inset: 18% -20%;
+  background: linear-gradient(
+    100deg,
+    transparent 10%,
+    rgb(232 246 252 / 55%) 48%,
+    rgb(0 180 255 / 22%) 62%,
+    transparent 88%
+  );
+  animation: ice-gust 7.5s ease-in-out infinite;
+}
+
+.frost-splash {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+  opacity: 0;
+  background:
+    radial-gradient(
+      circle at 50% 38%,
+      rgb(255 255 255 / 78%),
+      rgb(232 246 252 / 62%) 28%,
+      rgb(189 235 255 / 28%) 58%,
+      transparent 76%
+    ),
+    linear-gradient(180deg, rgb(189 235 255 / 22%), transparent 42%);
+}
+
+.frost-splash.is-on {
+  animation: frost-bloom 0.72s ease forwards;
+}
+
+@keyframes ice-fall {
+  from {
+    transform: translate3d(0, -8vh, 0);
+  }
+  to {
+    transform: translate3d(var(--ice-drift, 24px), 110vh, 0);
+  }
+}
+
+@keyframes ice-gust {
+  0%,
+  100% {
+    transform: translate3d(-12%, 0, 0);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translate3d(14%, 0, 0);
+    opacity: 0.85;
+  }
+}
+
+@keyframes frost-bloom {
+  0% {
+    opacity: 0;
+  }
+  18% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 .reveal {
   opacity: 0;
   transform: translate3d(0, 1.1rem, 0);
@@ -2358,5 +2460,10 @@ input[type="number"] {
   .reveal {
     opacity: 1;
     transform: none;
+  }
+  .ice-flurry,
+  .ice-gust::after,
+  .frost-splash {
+    display: none;
   }
 }

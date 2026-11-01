@@ -2,6 +2,7 @@ import Link from "next/link";
 import { HANDLES, flawlessStartingOffer, marketing } from "@truepointers/commerce";
 import { CollectionGrid } from "@/components/collection-grid";
 import { DesireBeat } from "@/components/desire-beat";
+import { IceGust } from "@/components/ice-atmosphere";
 import { FitGuide } from "@/components/fit-guide";
 import { MediaFill } from "@/components/media-fill";
 import { Motto } from "@/components/motto";
@@ -66,7 +67,7 @@ export default async function HomePage() {
 
       <Tape />
       <ShortcutRings />
-      <DesireBeat line={marketing.desireCollection} />
+      <IceGust />
 
       <Reveal>
         <section className="container collection" aria-labelledby="collection-title">

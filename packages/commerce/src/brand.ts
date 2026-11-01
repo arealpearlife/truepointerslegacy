@@ -20,7 +20,6 @@ export const marketing = {
   navFlawless: "Flawless",
   navTray: "Tray",
   wearThisIce: "Wear this ice",
-  desireCollection: "FLASH. SELF LOVE. THE ICE.",
   desireFit: "COMPLETE THE FIT WITH A LEGACY CHAIN. WATCH THEM REMEMBER.",
   desireFlawless: "HARDER ICE. SAME DROP.",
   desireWear: "Take any Y2K fit to the next level.",

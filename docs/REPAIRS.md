@@ -2,6 +2,15 @@
 
 Use this changelog for defects corrected after development begins.
 
+## Flash self-love line replaced with ice atmosphere
+
+- **Date:** 2026-10-31
+- **Area:** Home, global layout
+- **Symptom:** “FLASH. SELF LOVE. THE ICE.” sat as a text beat. The house needed atmosphere, not a slogan.
+- **Fix:** That line is gone. A looping flurry runs across the storefront. A frost splash blooms on route change and never captures clicks. Reduced-motion visitors see neither.
+- **Verification:** Ice-atmosphere tests and commerce copy tests. Format, lint, typecheck, and test run after the change.
+- **Release or commit:** Ice atmosphere commit.
+
 ## Hero passage replaced with the era-in-time line
 
 - **Date:** 2026-10-31

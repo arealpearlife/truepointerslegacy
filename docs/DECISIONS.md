@@ -15,6 +15,15 @@ Record decisions here before they become expensive to reverse.
 
 ## Accepted decisions
 
+### ADR-019: Ice atmosphere instead of slogan beats
+
+- **Status:** accepted
+- **Date:** 2026-10-31
+- **Context:** A “FLASH. SELF LOVE. THE ICE.” line read as a slogan. The house needed premium atmosphere.
+- **Decision:** Remove that line. A looping, pointer-events-none flurry lives on every page. A frost splash plays on client route change and never blocks a tap. Reduced motion turns both off.
+- **Alternatives:** Keep the slogan, or a blocking loading screen.
+- **Consequence:** Navigation still uses Next.js links. Checkout stays on Shopify. The flurry must stay decorative.
+
 ### ADR-018: Desire at every move, never an interrupt
 
 - **Status:** accepted

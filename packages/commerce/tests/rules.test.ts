@@ -88,7 +88,7 @@ describe("commerce rules", () => {
     expect(`${marketing.mottoLead} ${marketing.motto}`).not.toMatch(/era that left a mark/i);
     expect(marketing.collectionTitle).toBe("THE LEGACY COLLECTION");
     expect(marketing.collectionTitle).not.toMatch(/nine ways/i);
-    expect(marketing.desireCollection).toMatch(/FLASH\. SELF LOVE/);
+    expect(`${Object.values(marketing).join(" ")}`).not.toMatch(/FLASH\. SELF LOVE/i);
     expect(marketing.collectionLede).toMatch(/mix n match to unlock a free gift/i);
     expect(marketing.fitLead).toMatch(/Complete the fit with a Legacy chain/i);
     expect(marketing.heroBody).toMatch(/the ice that froze an era in time/i);
